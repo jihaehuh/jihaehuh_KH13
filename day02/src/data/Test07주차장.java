@@ -23,7 +23,7 @@ public class Test07주차장 {
 		
 		//출력 부분
 		
-		System.out.println("총 주차 시간은 "+ TotalTime/60 +"시간"+TotalTime%60+"분, 요금은 " + parkingPrice+"원 입니다.");
+		System.out.println("요금은 " + parkingPrice+"원 입니다.");
 		
 				
 	}

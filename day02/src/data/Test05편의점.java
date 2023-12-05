@@ -31,5 +31,8 @@ public class Test05편의점 {
 		System.out.println(Free+"개");
 		System.out.println(Total+"원");
 		
+		//2+1은 3으로 나누면 된다.
+		
+		
 	}
 }

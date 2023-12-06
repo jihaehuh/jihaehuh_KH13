@@ -11,7 +11,7 @@ KH주차장은 10분당 1500원의 요금을 받고 있습니다.
 30 : 4500원
 
 요금=시간/10*1500
-
+*/
 package data;
 
 public class Test07주차장 {
@@ -33,7 +33,5 @@ public class Test07주차장 {
 		
 				
 	}
-}*/
-
-
+}
 

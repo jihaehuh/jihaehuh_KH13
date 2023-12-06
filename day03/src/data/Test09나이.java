@@ -23,3 +23,23 @@ public class Test09나이 {
 	}
 }
 
+/*
+package data;
+public class Test09나이 {
+	public static void main(String[] args) {
+				int nY =2023,nM =12;
+				int aY=2000,aM=1;
+				int oneY=12;
+				
+				int y =nY-aY;
+				int m =nM-aM;
+				int tM=y*oneY+m;
+				int age = tM/12;
+				
+				System.out.println("만"+age+"살");
+				
+				
+	
+ }	
+}
+*/

@@ -12,18 +12,18 @@ public class Test07주차장 {
 	public static void main(String[]args) {
 		
 		//입력 부분
-		int minute = 10;
-		int minutePrice =1500;
-		int dminute = 20; 
-		int dminutePrice = 3000;
+		int PkinH = 11 ,PkinM = 50;
+		int PkoutH = 17 ,PkoutM = 25;
+		int Price = 1500;
 		
 		//계산 부분
 		
-		
+		int TotalTime = (PkoutH*60+PkoutM) - (PkinH*60+PkinM);
+		int parkingPrice = (TotalTime/10)*Price;
 		
 		//출력 부분
 		
-		
+		System.out.println("요금은 " + parkingPrice+"원 입니다.");
 		
 				
 	}

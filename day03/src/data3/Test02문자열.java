@@ -28,8 +28,33 @@ public class Test02문자열 {
 				System.out.println(e);  // 줄바꿈이 안된다.
 				
 				String f = "안\n녕\n하\n세\n요\n";
-				System.out.println(f);
+				System.out.println(f);    //줄바꿈이 잘된다.
 		
+				//가격:10000원
+				String  k ="가격:\\10000원"; //'\\'하면 '\ '출력 됨
+				System.out.println(k);
+				
+				//(특징)덧셈은 가능하다.(연결해준다)
+				System.out.println("e="+2);
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 		
 	}
 }

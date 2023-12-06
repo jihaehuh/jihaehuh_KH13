@@ -1,6 +1,6 @@
 package data;
 
-public class Test09만나이계산 {
+public class Test09나이 {
 	public static void main(String[] args) {
 		//입력
 		int current = 20231206;

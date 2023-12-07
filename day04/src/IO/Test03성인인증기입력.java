@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class Test03성인인증기입력 {
 	public static void main(String[]args) {
 		//입력
-		Scanner SC =new Scanner(System.in);
+		Scanner sc =new Scanner(System.in);
 		
-		int birth =SC.nextInt();
+		int birth =sc.nextInt();
 		
 		
 		//계산
@@ -16,9 +16,8 @@ public class Test03성인인증기입력 {
 		
 		//출력
 		
-		System.out.println("나이= "+ age);
-		
-		System.out.println("성인= "+ adult);
+		System.out.println("나이 = " + age);
+		System.out.println("성인 = " + adult);
 		
 		
 	}

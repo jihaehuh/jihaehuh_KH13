@@ -69,12 +69,6 @@ public class Test06건강검진 {
 		System.out.println("건강검진 대상자?"+result );
 		
 		
-		
-		
-		
-		
-		
-		
 	}
 }
 

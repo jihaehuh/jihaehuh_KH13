@@ -35,7 +35,7 @@ public class Test06건강검진 {
 	}
 }
 */
-
+//강사님 풀이
 package data4;
 
 public class Test06건강검진 {
@@ -57,7 +57,7 @@ public class Test06건강검진 {
 		
 		boolean first = age >=30;                         //30세 이상; 
 		boolean second = current %2 ==0 && birth %2 ==0;   //올해가 짝수 && 출생년도도 짝수;
-		boolean third =current %2 !=0 && birth %2 !=0 ;                                                      //올해가 홀수&& 출생년도도 홀수;
+		boolean third =current %2 !=0 && birth %2 !=0 ;        //올해가 홀수&& 출생년도도 홀수;
 		//boolean third =current %2==1 && birth %2 ==1 ; 위 식과 같음
 		boolean result = (first && second ) || (first &&third);
 	

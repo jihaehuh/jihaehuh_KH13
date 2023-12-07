@@ -20,7 +20,7 @@ public class test07윤년 {
 	public static void main(String[]args) {
 		//입력
 		int year =2100;
-		int cycle =4;
+		
 		//계산
 		/*
 		 [1] 4의 배수인가요?    
@@ -31,7 +31,7 @@ public class test07윤년 {
 		 400의 배수 이면서 100의 배수 여야함 
 		 */
 /*
-		boolean leapyYear1 = year %  cycle ==0 && year % 100 !=0;          //4의 배수여야한다 && 100의 배수가 아님;
+		boolean leapyYear1 = year %  4 ==0 && year % 100 !=0;          //4의 배수여야한다 && 100의 배수가 아님;
 		boolean leapYear2 = year % 400 ==0 &&  year % 100 ==0;     //400의 배수&& 100의 배수임
 		boolean resultYear = 	leapyYear1&& leapYear2;                      // 연도 1 && 연도 2 를 모두 만족하는가?
 				

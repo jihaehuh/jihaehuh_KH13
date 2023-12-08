@@ -47,3 +47,105 @@ public class Test04여행사 {
 		}	
 	}
 }
+//강사님 풀이 
+/*
+ * package condition;
+
+public class Test04여행사 {
+	public static void main(String[] args) {
+		//입력
+		int month = 9;
+
+		//계산
+		//boolean summer = 6 <= month <= 8;
+		//boolean summer = 6 <= month && month <= 8;
+		//boolean summer = 5 < month && month < 9;
+		boolean summer = month == 6 || month == 7 || month == 8;
+		//boolean summer = month / 3 == 2;
+
+		//출력
+		if(summer) {
+			System.out.println("어머! 여름에 여행가시네요?");
+		}
+		else {
+			System.out.println("아쉽지만 행사 대상은 아닙니다");
+		}
+	}
+}
+ */
+/*
+ * package condition;
+
+public class Test04여행사2 {
+	public static void main(String[] args) {
+		//입력
+		//할인과 관련된 데이터
+		int month = 3;
+
+		//금액과 관련된 데이터
+		int people = 1;
+		int day = 1;
+		int price = 100000;
+
+		//계산
+		boolean summer = month == 6 || month == 7 || month == 8;
+
+		//출력
+		if(summer) {
+			int total = people * day * price;//원래금액
+			int discount = total * 20 / 100;//할인금액
+			int result = total - discount;//예상금액
+			System.out.println("어머! 여름에 여행가시네요?");
+			System.out.println("예상 금액 = " + total + "원");
+			System.out.println("할인 금액 = " + discount + "원");
+			System.out.println("최종 금액 = " + result + "원");
+		}
+		else {
+			int total = people * day * price;
+			System.out.println("아쉽지만 행사 대상은 아닙니다");
+			System.out.println("예상 금액 = " + total + "원");
+		}
+	}
+}
+ */
+/*
+ * package condition;
+
+import java.util.Scanner;
+
+public class Test04여행사3 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		//입력
+		//할인과 관련된 데이터
+		System.out.print("여행가는 달(1~12) 입력 : ");
+		int month = sc.nextInt();
+
+		//금액과 관련된 데이터
+		System.out.print("인원 수 입력 : ");
+		int people = sc.nextInt();
+		System.out.print("여행 기간(일) 입력 : ");
+		int day = sc.nextInt();
+		int price = 100000;
+
+		//계산
+		boolean summer = month == 6 || month == 7 || month == 8;
+
+		//출력
+		if(summer) {
+			int total = people * day * price;//원래금액
+			int discount = total * 20 / 100;//할인금액
+			int result = total - discount;//예상금액
+			System.out.println("어머! 여름에 여행가시네요?");
+			System.out.println("예상 금액 = " + total + "원");
+			System.out.println("할인 금액 = " + discount + "원");
+			System.out.println("최종 금액 = " + result + "원");
+		}
+		else {
+			int total = people * day * price;
+			System.out.println("아쉽지만 행사 대상은 아닙니다");
+			System.out.println("예상 금액 = " + total + "원");
+		}
+	}
+}
+ */

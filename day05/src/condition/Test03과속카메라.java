@@ -8,10 +8,10 @@ KH전자에서 개발한 과속단속 카메라는 다음 규칙에 따라 벌�
 
 자동차 속도를 입력받아 예상되는 벌금을 출력하세요
 (벌금이 없으면 0원이라고 출력하면 됩니다)
+*/
 
 
-
-
+/*
 package condition;
 
 public class Test03과속카메라 {
@@ -32,7 +32,9 @@ public class Test03과속카메라 {
 
 	}
 }
+*/
 
+/*
 package condition;
 
 public class Test03과속카메라2 {
@@ -82,15 +84,3 @@ public class Test03과속카메라 {
 
 	}
 }
-
-
-
-
-
-
-
-			
-			
-			
-			
-			

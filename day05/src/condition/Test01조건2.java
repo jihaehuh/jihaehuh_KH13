@@ -16,8 +16,8 @@ public class Test01조건2 {
 		if(odd) {   //==true 는 지워도 된다
 			System.out.println("홀수입니다.");
 		}
-		if(!odd) {   // != 는 !를 앞에 붙여서 false를 나타내준다)
-			System.out.println("짝수입니다.");
+		if(odd == false) {
+			System.out.println("짝수입니다");
 		}
 		
 		//System.out.println("홀수입니다."); 

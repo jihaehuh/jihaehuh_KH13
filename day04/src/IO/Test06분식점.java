@@ -9,7 +9,7 @@ KH분식점의 메뉴판은 다음과 같습니다.
 순대 2000원
 */
 
-package IO;
+/*package IO;
 
 import java.util.Scanner;//백준 자바 11
 
@@ -44,3 +44,70 @@ public class Test06분식점 {
 		
 	}
 }
+*/
+package IO;
+
+import java.util.Scanner;//백준 자바 11
+
+public class Test06분식점 {
+	public static void main(String[]args) {
+		Scanner sc =new Scanner(System.in);
+		//입력 
+		System.out.print("떡볶이 수량: ");
+		int ddeokCount =sc.nextInt();
+		System.out.print("튀김 수량: ");
+		int friedCount =sc.nextInt();
+		System.out.print("순대 수량: ");
+		int soondaeCount =sc.nextInt();
+		
+		int ddeok =3000;
+		int fried =500;
+		int soondae =2000;
+		int rate =10;
+		
+		
+		//계산
+		int ddeokTotal = ddeok *ddeokCount ;
+		int friedtotal = fried* friedCount ;
+		int soondaeTotal = soondae*soondaeCount ;
+		
+		int total = ddeokTotal +friedtotal+soondaeTotal;
+		
+		//int discount = (int) (total * 0.1);       //별로 좋지 않은 식 : int 와 더블이라 변수가 안맞아서
+		int discount = total * 10/100;         //rate 10/100 =0
+		int result = total -discount;
+		
+		
+		//출력
+		System.out.println("총 금액"+ total + "원");
+		System.out.println(rate+"% 할인금액"+ discount+ "원");
+		System.out.println("결제금액"+ total + "원");
+		
+		
+		
+		}
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

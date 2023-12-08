@@ -54,7 +54,7 @@ public class Test06건강검진 {
 		*/
 		int age = current-birth +1;
 		
-		
+		//and = &&,  not =!,  or =||
 		boolean first = age >=30;                         //30세 이상; 
 		boolean second = current %2 ==0 && birth %2 ==0;   //올해가 짝수 && 출생년도도 짝수;
 		boolean third =current %2 !=0 && birth %2 !=0 ;        //올해가 홀수&& 출생년도도 홀수;

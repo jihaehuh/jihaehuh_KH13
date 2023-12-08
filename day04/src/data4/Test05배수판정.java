@@ -1,6 +1,6 @@
 package data4;
 
-public class Test05보충부정연산 {
+public class Test05배수판정 {
 	public static void main(String[]args) {
 		// 배수란? b를a로 나눈 나머지가 0인경우  , b는 a의 배수라 부른다.
 		int num =5;

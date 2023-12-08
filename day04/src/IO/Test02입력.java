@@ -19,5 +19,12 @@ public class Test02입력 {
 		System.out.println("b = "+ b);
 		System.out.println("c = "+ c);
 		
+		//라이브러리는 냉동떡볶이 /프레임워크는 분식집
+		//차이점은 냉동은 자율이 있지만, 분식집은 자율점이 없이 주는 대로 먹어야함
+		
+		
+		
+		
+		
 	}
 }

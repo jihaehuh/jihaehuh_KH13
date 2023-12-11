@@ -10,7 +10,7 @@
 2월- 윤년일 경우 29일, 아닐 경우 28일 까지 존재
  */
 
-
+/*
 package condition2;
 
 import java.util.Scanner;
@@ -58,3 +58,56 @@ public class Test06날짜계산 {
 		
 	}
 }
+*/
+//강사님 풀이
+package condition2;
+
+import java.util.Scanner;
+
+public class Test06날짜계산 {
+	public static void main(String[]args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("연도 입력: ");
+		int year= sc.nextInt();
+		System.out.println("월 입력: ");
+		int month= sc.nextInt();
+		
+		//입력
+		
+		//계산
+		//int day =28 or29or30or31; //조건이 길수록 else로 빠지게 하기
+		int day;
+		if (month ==2) {
+			day =31;
+			//윤년인지 아닌지  판정
+			boolean leap = year % 400 ==0||( year %4 ==0 && year %100 !=0);
+		}
+		else if(month ==4 || month == 6 || month == 9 || month == 11) {
+			day =30;
+		}
+		else {
+			day =31;
+		}
+		
+		
+		//출력
+		System.out.println(year +"년"+month +"월은"+day+"일까지 있습니다");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

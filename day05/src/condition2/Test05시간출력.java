@@ -9,6 +9,7 @@ SNS에서는 작성한 글이 몇 초 전에 작성되었는지에 따라 다음
 ?시간전 = 작성한지 1시간이상 1일미만이 되지 않은 글
 ?일전 = 작성한지1일이상인 글
  */
+/*
 package condition2;
 
 import java.util.Scanner;
@@ -45,4 +46,74 @@ public class Test05시간출력{
 
 	}
 }	
+*/
+//강사님 풀이
+package condition2;
+
+import java.util.Scanner;
+
+public class Test05시간출력{  //현재시각 - 작성시각 = 얼마나 지났는지   (가장 작은 단위는 초)
+	public static void main(String[]args){
+		Scanner sc = new Scanner(System.in);
+		//입력
+		System.out.println("초를 입력해주세요: ");
+		int time= sc.nextInt();
+		
+		//계산
+		
+		//계산+출력
+		String timeText;
+		if(time <10) {
+			timeText ="방금 전";
+		}
+		else if(time <60) {
+			int second =time;
+		timeText =second  +"분 전 ";
+		}
+		else if(time < 60*60) {
+			int minute =time/60;
+			timeText =minute +"분 전";
+		}
+		else if (time<24*60*60) {
+			int hour =time/60/60;
+			timeText =hour +"시간 전";
+		}
+		else {
+			int day =time /24/60/60;
+			timeText =day +"일 전 ";
+		}
+		//출력
+		System.out.println("작성 시각 :"+timeText);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

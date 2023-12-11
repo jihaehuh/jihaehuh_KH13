@@ -40,6 +40,14 @@ public class Test09타이머 {
 					System.out.println(m+"분"+s+"초 후 알림이 울립니다.");
 			}
 					System.out.println("띠링!");
+					try {
+			            // 1000 밀리초(1초) 동안 스레드를 일시 중지
+			            Thread.sleep(1000);
+			        } catch (InterruptedException e) {
+			            // InterruptedException은 sleep 중에 다른 스레드가 현재 스레드를 중단할 때 발생할 수 있는 예외입니다.
+			            e.printStackTrace();
+			        }
+				}
 			}	
-		}
+		
 	

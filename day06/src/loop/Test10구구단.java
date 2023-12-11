@@ -30,10 +30,17 @@ public class Test10구구단 {
 		
 			for(int i =1;i <=9;i++) {
 				System.out.println(num1 +"X"+i+"=");
-				int total =sc.nextInt();
-				//정답인지 아닌지 나와야함
-				//계속 끝까지 실행되고 나가기
-			}
+				
+				int answer =sc.nextInt();
+				boolean correct =num1*i==answer;
+				//계산
+				if(correct){
+					System.out.println("정답");
+				}
+				else {
+					System.out.println("땡");
+				}
+			}		
 	}
 }
 //int num1 =1,2,3,4,5,6,7,8,9;

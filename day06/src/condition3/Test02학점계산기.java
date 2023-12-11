@@ -66,14 +66,14 @@ public class Test02학점계산기 {
 		int ten =score/10;
 		int grade =ten*10;
 		//출력
-		
+		//string grade;
 		switch (grade){//좋은 풀이는 아님.
 		//case 90:case 91: case 92: case 93:case 94:case 95:case 96:
 		//case 97:case 98:case 99:case 100:
 		case 90,100:
 			System.out.println("A+ ");
 			break;
-		//자바 13이상부터는 , 사용이 가능하다
+		//자바 13이상부터는' , '사용이 가능하다
 			case 89,88,87,86,85,84,83,82,81,80:
 			System.out.println("A");
 			break;
@@ -88,7 +88,7 @@ public class Test02학점계산기 {
 				System.out.println("F");
 			break;
 			
-			//System.out.println("당신의 학점은 :"+ grade );
+			//System.out.println("당신의 학점:"+ grade );
 		}
 	}
 }

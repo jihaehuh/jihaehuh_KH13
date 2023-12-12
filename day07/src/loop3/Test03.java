@@ -11,9 +11,13 @@ package loop3;
 public class Test03 {
 	public static void main(String[]args) {
 		
+		int value =100;
+		int repeat =10;
+		
 		for (int i =0; i <=29; i++) {
-			int total = 100 +(i *10);
+			int total = value +(i *repeat);
 			System.out.println(total);
+			
 		}
 	}
 }

@@ -27,7 +27,7 @@ public class Test02누적합계 {
         */
 		
 			for(int i =1; i <=100;i++) {
-			if(i %7==0) {//7의 배수 구하기
+			if(i %7==0) {//7의 배수 구하기  
 				total2 += i;
 			}
 		}

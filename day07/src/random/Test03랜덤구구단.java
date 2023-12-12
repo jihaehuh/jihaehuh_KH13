@@ -30,6 +30,9 @@ public class Test03랜덤구구단 {
 		Random num =new Random(); 
 		int total=0; //정답 개수 변수선언
 		int score=1;
+		int easy=0;
+		int diff=0;
+		
 		for(int i=1; i <=10;i++) { //구구단 10개 뽑기
 			int danA =num.nextInt(18)+2;
 			int danB =num.nextInt(9)+1;
@@ -39,9 +42,16 @@ public class Test03랜덤구구단 {
 			
 			int result=danA *danB; //정답 유무 판정
 			if (result ==answer) {
+				
 				System.out.println("정답");
 				total ++;
 				
+				if(danA < 12) {//11단까지
+					easy +=10;
+				}
+				else {
+					diff +=15;
+				}
 			}
 			else {
 				System.out.println("오답");
@@ -49,16 +59,20 @@ public class Test03랜덤구구단 {
 			}
 			
 		}
-		System.out.println("맞은 개수 = "+ total +"개" ); //개수 세기
-		//점수 부여 
-		int totalScore =score *5;
-		System.out.println("총 점수 = "+ totalScore +"점" );
+		System.out.println("어려운 문제 ="+diff+" 점" );
+		System.out.println("쉬운 문제 ="+easy+ "점" );
+		System.out.println("맞은 개수 = "+ total +"개" );
 		
-		//2-11단 10점씩 /12-19단은 15점
-		//누적 합산
-		
-		
+		System.out.println("총 점 = "+(diff+easy)+"개" );
 		
 		
 	}
 }
+//System.out.println("어려운 문제 = "+  +"점" );
+		//System.out.println("쉬운 문제 = "+ diff +"점" );
+	
+		//System.out.println(total+"점" );
+		//개수 세기
+		//점수 부여 
+		//2-11단 10점씩 /12-19단은 15점
+		//누적 합산

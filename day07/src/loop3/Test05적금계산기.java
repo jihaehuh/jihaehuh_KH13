@@ -41,11 +41,12 @@ public class Test05적금계산기 {
 			int interest =(int) (origin *rate /100); //원금의 3%
 			int balance = origin +interest; //원금 +이자
 			
+
 			System.out.println(i+"년차 금액 :");
 			System.out.println("원금 : "+origin + "원,"+
 					"이자 : "+interest+"원, "+
 							"잔고 : " +balance+" 원");
-			System.out.println();
+			System.out.println(); //띄어쓰기 때문에 써준거임
 		//데이터 변화
 			//-다음 회차 원금은 현재 잔고에 연부금(월부금 *12) 를더한 값
 			origin =balance +money *12;

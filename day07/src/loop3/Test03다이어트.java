@@ -29,7 +29,7 @@ public class Test03 {
 //강사님 풀이
 package loop3;
 
-public class Test03 {
+public class Test03다이어트 {
 	public static void main(String[]args) {
 		//줄넘기 기준
 		//for(int i=100; i <=390; i+=10) {

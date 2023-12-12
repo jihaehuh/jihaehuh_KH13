@@ -5,6 +5,7 @@
 A등급은 85점 이상 100점 이하
 B등급은 70점 이상 85점 미만
  */
+/*
 package loop2;
 
 import java.util.Scanner;
@@ -25,8 +26,6 @@ public class Test03등급판정 {
 					System.out.println("B등급");
 					 Bcount++;
 			}
-			else {
-			}
 		}
 		int count=Acount +Bcount;
 		System.out.println("A개수 : "+Acount +"개");
@@ -34,3 +33,36 @@ public class Test03등급판정 {
 		System.out.println("총 개수: "+ count +"개");		
 	}
 }
+*/
+//강사님 풀이 
+package loop2;
+
+import java.util.Scanner;
+
+public class Test03등급판정 {
+	public static void main(String[]args) {
+		Scanner sc =new Scanner(System.in);
+		int countA =0; //count는 count만큼 변수로 만들어져야함
+		int countB =0;
+		
+		//for(int i=1; i<=10; i++){
+		for(int i=0; i<=10; i++){
+			System.out.println("시험점수 : ");
+			int score =sc.nextInt();
+			if(score >= 85) {
+				System.out.println("A등급");
+				countA++;
+			}
+			else if(score >=70) {
+				System.out.println("B등급");
+				countB++;
+			}
+			
+			}
+			System.out.println("A등급"+ countA+"개");
+			System.out.println("B등급"+ countB+"개");
+	}
+}
+
+
+

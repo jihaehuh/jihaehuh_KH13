@@ -9,6 +9,7 @@
 -어려운 문제는 15점 (나머지)
 사용자가 획득한 점수를 누적합산하여 출력
  */
+
 package random;
 
 import java.util.Random;
@@ -64,6 +65,7 @@ public class Test03랜덤구구단 {
 		System.out.println("총 점 = "+(diff+easy)+"점" );
 	}
 }
+
 //System.out.println("어려운 문제 = "+  +"점" );
 		//System.out.println("쉬운 문제 = "+ diff +"점" );
 	

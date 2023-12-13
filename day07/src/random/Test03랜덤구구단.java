@@ -41,31 +41,27 @@ public class Test03랜덤구구단 {
 			int answer =sc.nextInt();//정답 받기
 			
 			int result=danA *danB; //정답 유무 판정
-			if (result ==answer) {
-				
-				System.out.println("정답");
-				total ++;
-				
-				if(danA < 12) {//11단까지
-					easy +=10;
-				}
-				else {
-					diff +=15;
-				}
-			}
-			else {
+			if (result != answer) {
 				System.out.println("오답");
-				
+				continue;
 			}
 			
+			System.out.println("정답");
+			total ++;
+			
+			if(danA < 12) {//11단까지
+				easy +=10;
+			}
+			else {
+				diff +=15;
+			}
 		}
+		
 		System.out.println("어려운 문제 ="+diff+" 점" );
 		System.out.println("쉬운 문제 ="+easy+ "점" );
 		System.out.println("맞은 개수 = "+ total +"개" );
 		
-		System.out.println("총 점 = "+(diff+easy)+"개" );
-		
-		
+		System.out.println("총 점 = "+(diff+easy)+"점" );
 	}
 }
 //System.out.println("어려운 문제 = "+  +"점" );

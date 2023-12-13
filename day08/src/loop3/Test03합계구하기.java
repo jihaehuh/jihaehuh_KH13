@@ -7,7 +7,7 @@ public class Test03합계구하기 {
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.print("숫자 입력 : ");
-		int number = sc.nextInt();
+		int number = sc.nextInt();  
 	}
 }
 
@@ -22,7 +22,7 @@ public class Test03합계구하기 {
 		
 		while(true) {
 			System.out.print("숫자 입력 : ");
-			int number = sc.nextInt();
+			int number = sc.nextInt();//여기서 멈추면 끝없이 계속된다.
 			
 			if(number == 0) {//입력한 값이 0이라면
 				break;//그만합시다

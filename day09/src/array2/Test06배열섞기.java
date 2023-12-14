@@ -9,9 +9,29 @@ Test05와 동일한 데이터를 배열에 저장하고 다음 규칙에 따라 
  */
 package array2;
 
+import java.util.Random;
+
 public class Test06배열섞기 {
 	public static void main(String[]args) {
-		//한번씩 다 섞기
-		//
+			Random r =new Random();  //랜덤으로 돌리기
+			
+			
+				//배열준비
+				int []numbers = new int [] {30,50,20,10,40};
+				
+				for(int i =0;  i <4; i++) {  
+					int number = r.nextInt(4);
+					System.out.println("arr="+number); 	
+			}
+				int backup =numbers[0];
+				numbers[0] =numbers[3];
+				numbers[3] =backup;
+				
+				System.out.println(numbers[0]);
+				System.out.println(numbers[1]);
+				System.out.println(numbers[2]);
+				System.out.println(numbers[3]);
+				System.out.println(numbers[4]);
+		}
 	}
-}
+

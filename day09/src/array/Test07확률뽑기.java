@@ -41,7 +41,7 @@ public class Test07확률뽑기 {
 		}
 		System.out.println("p2 = "+p2);  
 		
-		System.out.println("추첨 결과 = "+items[p2]);
+		System.out.println("추첨 결과 = "+items[p2]);#
 				
 	}
 }

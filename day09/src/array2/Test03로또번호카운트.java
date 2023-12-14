@@ -146,10 +146,10 @@ public class Test03로또번호카운트 {
 			
 		Random r =new Random();
 		
-		int[] counts= new int[45];;
+		int[] counts= new int[45];;  //1-45
 		
 	
-			for(int i =0; i <1000; i++) {
+			for(int i =0; i <1000; i++) {  //0-1000번 반복
 				int number = r.nextInt(45)+1;
 				System.out.println("number ="+number);
 				

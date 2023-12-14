@@ -15,16 +15,18 @@ public class Test01배열 {
 		System.out.println("b = " + b);
 		System.out.println("c = " + c);
 		
-		//(A) 배열을 만들어서 저장 후 출력
+		//(A) 배열을 만들어서 저장 후 출력   
+		//한번에 만들어서 한번에 이름을 부여한다
 		int[] arr = new int[] {10, 20, 30};
 		
 		System.out.println(arr);//리모컨
 		System.out.println(arr[0]);//리모컨이 쳐다보는 지점에서 +0칸 이동한 곳
 		System.out.println(arr[1]);//리모컨이 쳐다보는 지점에서 +1칸 이동한 곳
 		System.out.println(arr[2]);//리모컨이 쳐다보는 지점에서 +2칸 이동한 곳
-		System.out.println(arr.length);
+		System.out.println(arr.length);  //자동계산되는 배열
 	}
 }
+//원시형 || 참조형
 
 
 

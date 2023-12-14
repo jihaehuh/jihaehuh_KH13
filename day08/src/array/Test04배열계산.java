@@ -5,9 +5,10 @@ public class Test04배열계산 {
 	
 		//점수 데이터 준비
 		int[] scores = new int[] {90, 67, 75, 88, 52, 59, 90, 92, 61, 72};
+		//데이터가 많아야 의미가 있다. (약 30개정도는 있어야함)
 		
 		//[1] 불합격자(60점 미만) 점수를 출력(+인원수, 총점, 평균)
-		for(int i=0; i < scores.length; i++) {
+		for(int i=0; i < scores.length; i++) {  //원하는데이터를 필터링
 			if(scores[i] < 60) {
 				System.out.println("불합격자 점수 = " + scores[i]);
 			}

@@ -19,7 +19,7 @@ public class Test03배열생성 {
 		
 //		for(int i=0; i <= 3; i++) {
 //		for(int i=0; i < 4; i++) {
-		for(int i=0; i < b.length; i++) {
+		for(int i=0; i < b.length; i++) {   //length 로 반복문 
 			System.out.println(b[i]);
 		}
 		

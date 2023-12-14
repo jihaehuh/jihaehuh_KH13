@@ -74,11 +74,8 @@ public class Test05배열뒤집기 {
 					//다음 턴을 위해서 left는 1 증가
 					//right은 1감소 처리
 				}
-				
-				
 				for(int i =0; i < numbers.length ; i++) {
 					System.out.println(numbers[i]);
-					
 				}
 	}
 }

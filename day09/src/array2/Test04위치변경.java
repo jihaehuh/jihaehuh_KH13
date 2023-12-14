@@ -18,10 +18,10 @@ public class Test04위치변경 {
 		numbers[3] =backup;
 		
 		
-		System.out.println(numbers[3]);
+		System.out.println(numbers[0]);
 		System.out.println(numbers[1]);
 		System.out.println(numbers[2]);
-		System.out.println(numbers[0]);
+		System.out.println(numbers[3]);
 		System.out.println(numbers[4]);
 		
 	}

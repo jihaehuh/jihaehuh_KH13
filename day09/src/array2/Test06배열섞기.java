@@ -77,6 +77,7 @@ public class Test06배열섞기 {
 				//맨 앞자리(+0지점)를 랜덤한 위치와 변경 
 				int index = r.nextInt(numbers.length);//0부터 5개_0부터 4까지
 				System.out.println("index = "+index);
+				//System.out.println("현재위치 : "+i+", 바꿀 위치 : "+ index);
 				
 				//교체 (swp)=[1] 과[index]를 교체
 				int backup =numbers[i];

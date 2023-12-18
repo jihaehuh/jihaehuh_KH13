@@ -10,7 +10,7 @@ public class SoccerTeam {
 		 //기본형태 : void 이름() {코드}
 		  void information () {
 			  //this = 현재 실행중인 객체(주인공)
-			  System.out.println("순위 : "+this.rank);
+			  	System.out.println("순위 : "+this.rank);
 				System.out.println("이름 : "+this.name);
 				System.out.println(this.win+"승 "+ this.draw + "무 "+this.lose + "패");
 		  }

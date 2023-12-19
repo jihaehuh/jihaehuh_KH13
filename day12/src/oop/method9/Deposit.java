@@ -37,14 +37,30 @@ public class Deposit {
 	int getTotalBalance() {
 		return this.getTotalDeposit() + this.getInterest();
 	}
-
+	String getOwner() {
+		return this.owner;
+	}
+	float getBaseRate() {
+		return this.baseRate;
+	}
+	float getPlusRate() {
+		return this.plusRate;
+	}
+	int getMonthly() {
+		return this.monthly;
+	}
+	int getPeriod(){
+		return this.period;
+	}
+	//모두 get.메소드로 고쳐줌
 	void information() {
 		System.out.println("<적금 계좌 정보>");
-		System.out.println("예금주 : " + this.owner);
-		System.out.print("적용이율 : 기본("+this.baseRate+"%) + ");
-		System.out.print("우대("+this.plusRate+"%) = ");
+		System.out.println("예금주 : " + this.getOwner());
+		System.out.println("예치 기간 : "+ this.getPeriod());
+		System.out.print("적용이율 : 기본("+this.getBaseRate()+"%) + ");
+		System.out.print("우대("+this.getPlusRate()+"%) = ");
 		System.out.println("총("+this.getTotalRate()+"%)");
-		System.out.println("월 입금액 : "+this.monthly+"원");
+		System.out.println("월 입금액 : "+this.getMonthly()+"원");
 		System.out.println("연 입금액 : "+this.getYearly()+"원");
 		System.out.println("총 입금액 : "+this.getTotalDeposit()+"원");
 		System.out.println("총 이자 : "+this.getInterest()+"원");

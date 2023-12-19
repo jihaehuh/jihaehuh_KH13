@@ -50,7 +50,7 @@ public class Classfee {
 		//(주의) 문자열과 객체 등은 비교연산을 쓰지 않는다
 		//			(비교연산은 원시형을 위한 연산)
 		//(해결) 별도의 비교명령을 쓰거나 switch구문을 사용
-void setType(String type){
+		void setType(String type){
 //		if(type == "온라인" || type == "오프라인" ||type == "혼합" ) {//지금은 우연히 가능함
 //			this.type=type;
 //		}

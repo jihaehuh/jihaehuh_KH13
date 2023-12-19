@@ -1,4 +1,4 @@
-package oop.constructor1.copy;
+package oop.constructor1_1;
 
 public class Test01생성자의필요성 {
 	public static void main(String[]args) {

@@ -1,4 +1,4 @@
-package oop.constructor1.copy;
+package oop.constructor1_1;
 
 public class Student {
 	private String name;

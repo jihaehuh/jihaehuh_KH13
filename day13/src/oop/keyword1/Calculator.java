@@ -19,6 +19,8 @@ public class Calculator {
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	
+	//필요한 계산 
 	public int getResolution() {
 		return this.width * this.height;
 	}

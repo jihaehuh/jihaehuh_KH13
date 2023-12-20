@@ -52,6 +52,7 @@ public class Player {
 		}
 	}
 	void setLevel(int level) {
+		//if(level ==1) 이것도 가능
 		if(level < 1) return;
 		this.level = level;
 	}
@@ -73,6 +74,7 @@ public class Player {
 	}
 
 	Player(String id, String job) {
+		//생성자 개수는 아메리카노 주문수
 		this.setId(id);
 		this.setJob(job);
 		this.setLevel(1);

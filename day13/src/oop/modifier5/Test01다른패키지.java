@@ -1,6 +1,7 @@
 package oop.modifier5;
 
 import oop.modifier4.Car;
+
 public class Test01다른패키지 {
 	public static void main(String[]args) {
 		//자바는 기본 범위가 패키지(package)이다.

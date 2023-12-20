@@ -2,7 +2,7 @@ package oop.keyword5;
 
 //회원 클래스
 //-아이디는 최초 설정 이후 " 절대로 " 변경되면 안됩니다
-public class Member {
+	public class Member {
 	private final String id; //값이 없는데 잠겨버리면 우짜누...
 	private String password;
 	

@@ -1,64 +1,52 @@
 package oop.total1;
 
 public class Time {
-	//멤버 필드
-	private int time;
-	private int hour;
-	private int minute;
-	private int second;
+	//필드 - 시간을 초로 저장할 수 있는 필드 1개만 구현
+	private long value;
 	
-	//멤버 메소드 생성
-
-	public int getHour() {
-		return hour;
+	//필드에 대한 Setter/Getter
+	public void setValue(long value) {
+		if(value < 0L) return;
+		this.value = value;
 	}
-	public void setHour(int hour) {
-		this.hour = hour;
-	}
-	public int getMinute() {
-		return minute;
-	}
-	public void setMinute(int minute) {
-		this.minute = minute;
-	}
-	public int getSecond() {
-		return second;
-	}
-	public void setSecond(int second) {
-		this.second = second;
-	}
-	public int getTime() {
-		return second;
-	}
-	public void setTime(int time) {
-		this.time = time;
-	}
-	//필요한 계산
-	public int getResultHour() {
-		return this.getTime()/3600;
-	}
-	public int getResultSecond() {
-		return this.getResultHour()%3600; 	
+	public long getValue() {
+		return value;
 	}
 	
-	
-
 	//생성자
-	public int getResultHour(int hour, int minute,int second) {
-		 return getResultSecond()/3600;
-		}
-	public int getResultSecond(int hour, int minute,int second) {
-		return getResultHour()%3600;
+	//[1] 시간/분/초를 설정할 수 있는 생성자
+	public Time(long hour, long minute, long second) {
+		long total = hour * 60 * 60 + minute * 60 + second;
+		this.setValue(total);
 	}
-	//출력
-	void information() {
-		System.out.println(" <시간 계산기 >");
-		System.out.println(this.get);
+	//[2] 분/초를 설정할 수 있는 생성자
+	public Time(long minute, long second) {
+		long total = minute * 60 + second;
+		this.setValue(total);
 	}
-
+	//[3] 초를 설정할 수 있는 생성자
+	public Time(long second) {
+		this.setValue(second);
+	}
 	
+	//가상의 Getter 메소드
+	public long getHour() {
+		return this.value / 60 / 60;
+	}
+	public long getMinute() {
+		return this.value / 60 % 60;
+	}
+	public long getSecond() {
+		return this.value % 60;
+	}
 	
-	
-	
+	public void show() {
+		System.out.print(this.getHour());
+		System.out.print("시간 ");
+		System.out.print(this.getMinute());
+		System.out.print("분 ");
+		System.out.print(this.getSecond());
+		System.out.println("초");
+	}
 	
 }

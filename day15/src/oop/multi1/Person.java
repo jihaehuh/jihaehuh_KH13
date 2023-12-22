@@ -1,4 +1,4 @@
-package oop.nulti1;
+package oop.multi1;
 
 //인터페이스는 클래스와 상속 키워드가 다르다
 public class Person implements Singer,Comedian{

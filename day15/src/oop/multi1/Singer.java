@@ -1,4 +1,4 @@
-package oop.nulti1;
+package oop.multi1;
 
 
 

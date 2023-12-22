@@ -57,7 +57,12 @@ System.out.println("안냥");
 [구글에서 짱구 검색한 결과 보러가기](https://www.google.com/search?q=%EC%A7%B1%EA%B5%AC&sca_esv=593031284&tbm=isch&sxsrf=AM9HkKnOO7Tsh2aQi5VDYcOCuTOmbajpDQ:1703232430717&source=lnms&sa=X&ved=2ahUKEwiPwoKgy6KDAxVFVt4KHWnLAGwQ_AUoAXoECAUQAw&biw=1085&bih=951&dpr=1#imgrc=PneWfyXxvsEyOM)
 
 
+#목록 표시 
 
+목록은 크게 두가지로 나눠진다.
+
+- 순서가 없는 목록(unorder list)
+- 순서가 있는 목록(order list)
 
 
 

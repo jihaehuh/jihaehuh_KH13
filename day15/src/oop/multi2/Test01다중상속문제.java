@@ -27,3 +27,16 @@ public class Test01다중상속문제 {
 		e.off();
 	}
 }
+
+
+//정리 : 할수 있는것들을 만드는 것이 interface 이고
+//그것들을 class 에서implements로 받는것이다
+
+
+
+
+
+
+
+
+

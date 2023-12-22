@@ -1,4 +1,4 @@
-#Markdown사용설명서
+# Markdown사용설명서
 
 **markdown** 이란 **markup**에 반대 개념으로 최소한의 기호로 문서를꾸밀 수 있도록 고안된 문법체계이다.
 
@@ -17,7 +17,7 @@
 # # # 소제목(# 3개)
 
 
-#코드 블록
+# 코드 블록
 
 프로그래밍 코드를 작성하고 싶다면 블록을 생성하고 블록 옆에 언어를 지정하며 작성할 수 있다.
 
@@ -33,13 +33,13 @@ for(int i=0,i <10; i++){
 System.out.println("안냥");
 ```
 
-#인용구
+# 인용구
 다른사람이 했던 말 또는 글귀를 옮겨 적을 때 사용
 
 > 사느냐 죽느냐 그것이 문제로다 -셰익스피어 
 
 
-#이미지
+# 이미지
 
 이미지는 이미지의 주소만 알 수 잇다면 문서 내 표시가 가능하다
 ```
@@ -47,7 +47,7 @@ System.out.println("안냥");
 ```
 ![짱구](https://sitem.ssgcdn.com/87/70/47/item/1000026477087_i1_750.jpg)
 
-#링크 삽입 
+# 링크 삽입 
 
 이페이지가 아닌 외부로의 연결 고리를 하이퍼링크라고 부른다
 ```
@@ -57,12 +57,17 @@ System.out.println("안냥");
 [구글에서 짱구 검색한 결과 보러가기](https://www.google.com/search?q=%EC%A7%B1%EA%B5%AC&sca_esv=593031284&tbm=isch&sxsrf=AM9HkKnOO7Tsh2aQi5VDYcOCuTOmbajpDQ:1703232430717&source=lnms&sa=X&ved=2ahUKEwiPwoKgy6KDAxVFVt4KHWnLAGwQ_AUoAXoECAUQAw&biw=1085&bih=951&dpr=1#imgrc=PneWfyXxvsEyOM)
 
 
-#목록 표시 
+# 목록 표시 
 
 목록은 크게 두가지로 나눠진다.
 
 - 순서가 없는 목록(unorder list)
 - 순서가 있는 목록(order list)
 
+순서가 있는 목록은 다음과 같다.
 
+1. 자바
+2. 데이터베이스
+3. 웹
+4. 서버
 

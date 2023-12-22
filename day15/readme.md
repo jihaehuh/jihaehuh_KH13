@@ -38,12 +38,19 @@ System.out.println("안냥");
 #이미지
 
 이미지는 이미지의 주소만 알 수 잇다면 문서 내 표시가 가능하다
-
-![설명][주소] 설명은 안써도 된다
-
+```
+![설명(주소) 설명은 안써도 된다
+```
 ![짱구](https://sitem.ssgcdn.com/87/70/47/item/1000026477087_i1_750.jpg)
 
+#링크 삽입 
 
+이페이지가 아닌 외부로의 연결 고리를 하이퍼링크라고 부른다
+```
+[보여줄 글자](주소)
+```
+
+[구글에서 짱구 검색한 결과 보러가기](https://www.google.com/search?q=%EC%A7%B1%EA%B5%AC&sca_esv=593031284&tbm=isch&sxsrf=AM9HkKnOO7Tsh2aQi5VDYcOCuTOmbajpDQ:1703232430717&source=lnms&sa=X&ved=2ahUKEwiPwoKgy6KDAxVFVt4KHWnLAGwQ_AUoAXoECAUQAw&biw=1085&bih=951&dpr=1#imgrc=PneWfyXxvsEyOM)
 
 
 

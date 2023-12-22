@@ -26,5 +26,6 @@ public class Test01캐스팅 {
 		h2.game();
 		h2.drink();
 		h2.teach();
+		//업캐스팅을 해야 다운캐스팅도 가능함
 	}
 }

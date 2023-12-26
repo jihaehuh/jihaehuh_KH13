@@ -1,27 +1,37 @@
+
+
 package api.lang.string;
 
 import java.util.Scanner;
 
 public class Test06공포의쿵쿵따 {
 	public static void main(String[] args) {
-		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("<공포의 쿵쿵따 게임 >");
-		System.out.println("바나나! 쿵쿵따");
-		String user= sc .next();
-		
-	
-		boolean isLengthOk = user.length() ==3;
-		System.out.print("쿵쿵따");
-		
 
 		
-		
-		
-		
+		String firstWord = "바나나";
+		boolean isCorrect = true;
 
+        System.out.println(firstWord + "! 쿵쿵따!");
+        while (isCorrect) {
+            String user = sc.next();
+
+            if (user.length() != 3) { //3글자
+                System.out.println("땡! 게임오버!");
+                isCorrect = false;
+            }
+            else if (user.equals(firstWord.length() - 3)) {
+                firstWord = user;
+                System.out.println(firstWord + "! 쿵쿵따!");
+            } else {
+                System.out.println("땡! 게임오버!");
+                isCorrect = false;
+            	}
+           }
+        }
 	}
-}
+
+
 
 
 /*
@@ -38,9 +48,12 @@ contains(CharSequence s)
 		boolean
 		endsWith(String suffix)
 		이 문자열이 지정된 접미사로 끝나는지 테스트합니다.
+		
+		
+package api.lang.string;
 import java.util.Scanner;
 
-public class Test06 {
+public class Test06공포의쿵쿵따 {
     public static void main(String[] args) {
         // 초기 제시어 설정
         String currentWord = "바나나";
@@ -75,6 +88,39 @@ public class Test06 {
 
         // 게임 종료
         scanner.close();
+    }
+}
+
+
+/*
+
+package api.lang.string;
+
+import java.util.Scanner;
+
+public class Test06공포의쿵쿵따 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String firstWord = "바나나";
+        boolean isCorrect = true;
+
+        System.out.println(firstWord + "! 쿵쿵따!");
+
+        while (isCorrect) {
+            String user = sc.next();
+
+            if (user.length() != 3) {
+                System.out.println("땡! 게임오버!");
+                isCorrect = false;
+            } else if (user.equals(firstWord.substring(firstWord.length() - 3))) {
+                firstWord = user;
+                System.out.println(firstWord + "! 쿵쿵따!");
+            } else {
+                System.out.println("땡! 게임오버!");
+                isCorrect = false;
+            }
+        }
     }
 }
 

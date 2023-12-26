@@ -39,5 +39,7 @@ public class Test02문자열클래스 {
 		System.out.println("d랑 e랑 같나요? "+ (d.equals(e)));
 		System.out.println("e랑 f랑 같나요? " + (e.equals(f)));
 		System.out.println("b랑 f랑 같나요? " + (b.equals(f)));
+		
+		
 	}
 }

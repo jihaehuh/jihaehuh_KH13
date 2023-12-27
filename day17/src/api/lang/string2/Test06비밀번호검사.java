@@ -12,7 +12,7 @@ public class Test06비밀번호검사 {
 		
 		
 		//8-16자리의 영문 ,숫자,특수기호
-		String password ="Student1234@";
+		String password ="Student1234!!";
 		
 		//String regex ="^[A-Za-z0-9!@#$]{8,16}$"; //반드시 1개 미구현
 		//다 스킵하고 대문자가 1개 있는지 찾아

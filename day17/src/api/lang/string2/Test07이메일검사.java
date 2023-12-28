@@ -1,3 +1,4 @@
+/*
 package api.lang.string2;
 
 import java.util.Scanner;
@@ -28,5 +29,25 @@ public static void main(String[] args) {
 		 System.out.println(eameilOrgan.matches(regexOrgan));
 		 System.out.println(emailExten.matches(regexExten));
 		 System.out.println(email.matches(regex));
+	}
+}
+*/
+package api.lang.string2;
+
+public class Test07이메일검사 {
+	public static void main(String[] args) {
+
+		String email = "hwang@khacademy.com";
+
+		//String regex = "^[a-z0-9][a-z0-9-_]{4,19}@[a-z]{3,20}(\\.co\\.kr|\\.com|\\.net|\\.org|\\.dev)$";
+		String regex = "^[a-z0-9][a-z0-9-_]{4,19}@[a-z]{3,20}(\\.[a-z]{3}|(\\.[a-z]{2}){2})$";
+
+		if(email.matches(regex)) {
+			System.out.println("올바른 이메일 입니다");
+		}
+		else {
+			System.out.println("잘못된 이메일 형식입니다 (ex : admin@khacademy.com)");
+		}
+
 	}
 }

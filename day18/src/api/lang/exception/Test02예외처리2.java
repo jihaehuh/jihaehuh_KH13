@@ -3,7 +3,7 @@ package api.lang.exception;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Test01예외처리2 {
+public class Test02예외처리2 {
 	public static void main(String[] args) {
 		//예외(Exception)
 		//-프로그램 실행 중에 발생하는 돌발 상황

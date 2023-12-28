@@ -30,7 +30,7 @@ public class Test01시스템클래스 {
 		System.out.println(System.getProperties());
 		
 		System.out.println(System.getProperty("java.specification.version"));
-		System.out.println(System.getProperty("os.name"));
+		System.out.println();
 		// ^Windows\s?[0-9.]*$        ,   ^Windows\s?[3.1|95|98|ME|NT|2000|7|8|10|11]*$   윈도우 버전 검사식
 		System.out.println(System.getProperty("user.country"));//지역
 		System.out.println(System.getProperty("user.language"));//언어

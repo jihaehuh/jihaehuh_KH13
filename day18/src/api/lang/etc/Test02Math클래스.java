@@ -35,6 +35,6 @@ public class Test02Math클래스 {
 		System.out.println(Math.min(d, e)); //작은수
 		System.out.println(Math.min(d, 1)); //d에 뭐가 들어가도 1보다 작다 (5000이 들어가도 1)_최솟값정하기할때 사용
 		
-		
+		 
 	}
 }

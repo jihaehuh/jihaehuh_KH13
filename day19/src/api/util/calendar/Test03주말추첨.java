@@ -11,7 +11,7 @@ public class Test03주말추첨 {
 		//주말은 나중에 고민하기
 		//우선 2024년 중 하루를 요일 관계없이 추첨
 		Random r = new Random();
-	//	int day = r.nextInt(365);;
+	//	int day = r.nextInt(365);
 		
 		//날짜설정 -set
 		Calendar c = Calendar.getInstance();

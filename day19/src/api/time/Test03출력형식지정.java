@@ -14,5 +14,10 @@ public class Test03출력형식지정 {
 		
 		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("y년 M월 d일 E요일");
 		System.out.println(current.format(fmt));
+		//fmt를 이용하면 형식을 알면 읽을 수 있는게 많다
+		
+		String str ="2024년 1월 1일 월";
+		LocalDate a = LocalDate.parse(str,fmt); //str을 fmt로 해석하겠다
+		System.out.println(a);
 	}
 }

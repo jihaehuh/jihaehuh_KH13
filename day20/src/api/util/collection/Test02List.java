@@ -23,7 +23,16 @@ public class Test02List {
 		a.add("루비");											//a[3] = "루비";
 		a.add("엘릭서");										//a[4] = "엘릭서";
 		
+		//데이터 개수 확인
+		System.out.println("개수 = "+a.size()); //0부터 시작
 		
+		//데이터 검색
+		//배열이였다면 반복문으로 찾았을것이다
+		//arryList에서는 메소드로 불러서 바로 찾을 수 있다.
+		System.out.println("자바가 있나요? "+ a.contains("자바"));
+		
+		//데이터 삭제
+		a.remove("파이썬");
 		
 		//출력
 		System.out.println(a);
@@ -31,3 +40,4 @@ public class Test02List {
 		
 	}
 }
+//명령어 : add , size , contains, remove

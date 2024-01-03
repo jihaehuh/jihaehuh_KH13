@@ -20,6 +20,7 @@ public class Test08사다리게임 {
 		sc.nextLine();//다음 입력에 영향을 주기 때문에_이럴때 사용하는거임
 		
 		System.out.println("이름을 " +count+" 개 입력하세요");
+		
 		for(int i =0; i<count;i++) {
 			names.add(sc.nextLine());
 		}

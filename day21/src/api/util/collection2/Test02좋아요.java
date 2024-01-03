@@ -67,11 +67,5 @@ public class Test02좋아요 {
 		System.out.println("총 시청한 영상 개수 : "+history.size());
 		}
 		
-	
-		
-		
-		
-		
-		
 	}
 }

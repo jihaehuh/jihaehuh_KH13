@@ -81,6 +81,5 @@ public class Test02사원정보수정 {
 				else {
 					System.out.println("존재하지 않는 사원번호");
 				}
-		
 	}
 }

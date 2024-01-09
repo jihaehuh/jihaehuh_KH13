@@ -21,7 +21,7 @@ public class Test01포켓몬목록 {
 		//Object[]data={};
 		
 		JdbcTemplate jdbcTemplate =JdbcHelper.getJdbcTemplate();
-		pocketmonMapper mapper = new pocketmonMapper();
+		PocketmonMapper mapper = new PocketmonMapper();
 		
 		List<PocketmonDto> list = jdbcTemplate.query(sql, mapper);
 		System.out.println("조회결과 수 : "+ list.size());

@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 //Mapper 파일
 //- 데이터베이스의 조회결과(ResultSet)를 변환객체(PocketmonDto)로 바꾸어주는 역할
 //-상속을 받아서 특정메소드를 구현해야함 (implements 사용 **주의** spring으로 선택하기***)
-public class pocketmonMapper implements RowMapper<PocketmonDto>{
+public class PocketmonMapper implements RowMapper<PocketmonDto>{
 
 	@Override
 	public PocketmonDto mapRow(ResultSet rs, int idx) throws SQLException {

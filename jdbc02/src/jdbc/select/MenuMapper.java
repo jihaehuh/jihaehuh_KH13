@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-public class MenuMapper implements RowMapper<MenuDto>{
+
+public class MenuMapper implements RowMapper<MenuDto> {
+
 	@Override
 	public MenuDto mapRow(ResultSet rs, int idx) throws SQLException {
 		MenuDto dto = new MenuDto();
@@ -14,6 +16,9 @@ public class MenuMapper implements RowMapper<MenuDto>{
 		dto.setMenuNameEng(rs.getString("menu_name_eng"));
 		dto.setMenuType(rs.getString("menu_type"));
 		dto.setMenuPrice(rs.getInt("menu_price"));
+		
+		
 		return dto;
 	}
+	
 }

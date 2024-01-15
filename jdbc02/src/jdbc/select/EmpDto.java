@@ -1,16 +1,14 @@
 package jdbc.select;
 
+
 //emp 테이블의 데이터를 옮겨담기 위한 클래스
+
 public class EmpDto {
 	private int empNo;
 	private String empName;
 	private String empDept;
 	private String empDate;
 	private int empSal;
-	
-	public EmpDto() {
-		super();
-	}
 	public int getEmpNo() {
 		return empNo;
 	}
@@ -41,4 +39,9 @@ public class EmpDto {
 	public void setEmpSal(int empSal) {
 		this.empSal = empSal;
 	}
+	public EmpDto() {
+		super();
+	}
+	
+
 }

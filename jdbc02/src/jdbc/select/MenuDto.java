@@ -6,14 +6,7 @@ public class MenuDto {
 	private String menuNameEng;
 	private String menuType;
 	private int menuPrice;
-	@Override
-	public String toString() {
-		return "MenuDto [menuNo=" + menuNo + ", menuNameKor=" + menuNameKor + ", menuNameEng=" + menuNameEng
-				+ ", menuType=" + menuType + ", menuPrice=" + menuPrice + "]";
-	}
-	public MenuDto() {
-		super();
-	}
+
 	public int getMenuNo() {
 		return menuNo;
 	}
@@ -44,4 +37,8 @@ public class MenuDto {
 	public void setMenuPrice(int menuPrice) {
 		this.menuPrice = menuPrice;
 	}
+	public MenuDto() {
+		super();
+	}
+	
 }

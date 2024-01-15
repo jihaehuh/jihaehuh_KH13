@@ -1,6 +1,6 @@
 package jdbc.connect;
 
-<<<<<<< HEAD
+
 import java.util.Scanner;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,17 +49,9 @@ public class Test05Menu등록 {
 				
 				jdbcTemplate.update(sql,data);
 				System.out.println("실행완료");
-		
-	}
-}
-=======
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-public class Test05Menu등록 {
-	public static void main(String[] args) {
-		
-		//입력
+				
+				/*
+				 * //입력
 		String menuNameKor = "아메리카노";
 		String menuNameEng = "Americano";
 		String menuType = "커피";
@@ -87,9 +79,12 @@ public class Test05Menu등록 {
 		
 		//출력
 		System.out.println("메뉴 등록이 완료되었습니다");
+				 */
+		
+	
 		
 	}
 }
 
 
->>>>>>> branch 'main' of https://github.com/jihaehuh/jihaehuh_KH13.git
+

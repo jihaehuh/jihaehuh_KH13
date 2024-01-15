@@ -1,6 +1,6 @@
 package jdbc.connect;
 
-<<<<<<< HEAD
+
 import java.util.Scanner;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -43,17 +43,9 @@ public class Test04Emp등록 {
 		
 		jdbcTemplate.update(sql,data);
 		System.out.println("실행완료");
-	}
-}
-
-=======
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-
-public class Test04Emp등록 {
-	public static void main(String[] args) {
 		
-		//입력
+		/*
+		 * //입력
 		String empName = "어쩌구";
 		String empDept = "저쩌구";
 		String empDate = "2001-01-01";
@@ -77,7 +69,12 @@ public class Test04Emp등록 {
 		
 		//출력
 		System.out.println("사원 등록 완료");
+		 */
+
+
+		
+		
 		
 	}
 }
->>>>>>> branch 'main' of https://github.com/jihaehuh/jihaehuh_KH13.git
+

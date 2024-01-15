@@ -28,5 +28,18 @@ public class PocketmonDao {
 		jdbcTemplate.update(sql,data);
 	}
 	
+	//수정
+	public boolean update(PocketmonDto dto) {
+		String sql = "update pocketmon "
+						+ "set pocketmon_name=?, pocketmon_type=? "
+						+ "where pocketmon_no=?";
+		Object[] data = {
+			dto.getPocketmonName(), dto.getPocketmonType(),
+			dto.getPocketmonNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	//등록주소 
+	//http://localhost:8080/pocketmon/edit?pocketmonNo=1&pocketmonName=바꾼이름&pocketmonType=바꿨음
 	
 }

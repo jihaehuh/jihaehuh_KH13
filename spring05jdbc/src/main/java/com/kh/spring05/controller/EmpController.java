@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring05.dao.EmpDao;
 import com.kh.spring05.dto.EmpDto;
+import com.kh.spring05.dto.PocketmonDto;
 
 @RestController
 @RequestMapping("/emp")
@@ -33,5 +34,19 @@ public class EmpController {
 		dao.insert(dto);
 		return "사원 등록 완료";
 	}
+	//수정
 
+			@RequestMapping("/edit")
+			public String edit(@ModelAttribute EmpDto dto) {
+				boolean result = dao.update(dto);
+				if(result) {
+					return "사원정보 수정";
+				}
+				else {
+					return "존재하지 않는 사원 번호";
+				}
+			}
+	//http://localhost:8080/emp/edit?empNo=1&empName=바꾼이름&empDept=무소속&empDate=2024-01-01&empSal=0
+	
+	
 }

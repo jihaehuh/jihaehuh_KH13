@@ -8,6 +8,6 @@ public class Spring04parameteApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Spring04parameteApplication.class, args);
-	}
+	} //
 
 }

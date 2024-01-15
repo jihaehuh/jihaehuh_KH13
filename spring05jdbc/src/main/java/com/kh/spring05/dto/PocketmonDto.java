@@ -22,11 +22,9 @@ public class PocketmonDto {
 	public void setPocketmonType(String pocketmonType) {
 		this.pocketmonType = pocketmonType;
 	}
-	public PocketmonDto(int pocketmonNo, String pocketmonName, String pocketmonType) {
+	
+	public PocketmonDto() {
 		super();
-		this.pocketmonNo = pocketmonNo;
-		this.pocketmonName = pocketmonName;
-		this.pocketmonType = pocketmonType;
 	}
 	
 	

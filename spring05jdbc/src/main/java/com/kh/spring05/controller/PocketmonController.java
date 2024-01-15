@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.spring05.dao.PocketmonDao;
 import com.kh.spring05.dto.PocketmonDto;
 
+
 @RestController
+@RequestMapping("/pocketmon") //공용주소
 public class PocketmonController {
 	
 	//***(중요)***
@@ -51,9 +54,16 @@ public class PocketmonController {
 		jdbcTemplate.update(sql,data);
 		return "포켓몬 등록";
 	}
-	
-	
-	
-	
+	//업그레이드 
+		//-DB 처리를 DAO에게 전담하여 처리
+		@Autowired
+		private PocketmonDao dao;
+		
+		@RequestMapping("/insert3")
+		//public Stting insert3(PocketmonDto dto){
+		public String insert3(@ModelAttribute PocketmonDto dto) {
+			dao.insert(dto);
+			return "포켓몬스터 등록 완료";
+		}
 	
 }

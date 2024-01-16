@@ -37,16 +37,20 @@ public class PocketmonDao {
 			dto.getPocketmonName(), dto.getPocketmonType(),
 			dto.getPocketmonNo()
 		};
-		return jdbcTemplate.update(sql, data) > 0;
+		return jdbcTemplate.update(sql, data) >0;
 	}
 	//등록주소 
-	//http://localhost:8080/pocketmon/edit?pocketmonNo=1&pocketmonName=바꾼이름&pocketmonType=바꿨음
+	//http://localhost:8080/pocketmon/edit?pocketmonNo=&pocketmonName=바꾼이름&pocketmonType=바꿨음
 	
 	//삭제
 	public boolean delete(int pocketmonNo) { //삭제는 프라이머리 키로 한다(상세 검색과 비슷)
 		String sql ="delete pocketmon where pocketmon_no=?";
 		Object[]data = {pocketmonNo};
 		return jdbcTemplate.update(sql,data)>0;
+		//왜 부등호를 쓰는가? 
+		//- 데이터를 지우던 업데이트를 하던 하면 실행횟수가 생기기때문에 0으로 해놓으면 횟수가 올라가면 실행이되었다고 알려주고
+		//-없거나 업데이트를 할 사항이 없을때도 실행은 되기때문에 0일때 출력하도록 한다 
+		//- 결론 -> 업데이트 Row가 숫자여서 저렇게 부등호를 사용해서 쓸 수 있는것임
 		
 	}
 	//삭제 주소

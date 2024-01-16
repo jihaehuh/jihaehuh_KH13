@@ -13,6 +13,8 @@ EmpController : 사원 관련 처리 페이지 제공 클래스
  */
 package com.kh.spring05.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring05.dao.EmpDao;
 import com.kh.spring05.dto.EmpDto;
-import com.kh.spring05.dto.PocketmonDto;
+
 
 @RestController
 @RequestMapping("/emp")
@@ -48,17 +50,38 @@ public class EmpController {
 				}
 			}
 	//http://localhost:8080/emp/edit?empNo=1&empName=바꾼이름&empDept=무소속&empDate=2024-01-01&empSal=0
-	
-	//삭제
-			@RequestMapping("/delete")
-			public String delete(@RequestParam int empNo) {
-				if(dao.delete(empNo)) {
-					return "사원 정보 삭제 완료";
+			
+			
+			
+			//목록 조회
+			@RequestMapping("/list")
+			public String list(
+					@RequestParam(required = false, defaultValue = "") String column,
+					@RequestParam(required = false, defaultValue = "") String keyword
+				) {
+//				boolean isSearch = column != null && keyword != null;
+				boolean isSearch = !column.equals("") && !keyword.equals("");
+				
+//				List<EmpDto> list;
+//				if(isSearch) {
+//					list = dao.selectList(column, keyword);
+//				}
+//				else {
+//					list = dao.selectList();
+//				}
+				List<EmpDto> list = isSearch ? dao.selectList(column, keyword) : dao.selectList();
+				
+				StringBuffer buffer = new StringBuffer();
+				for(EmpDto dto : list) {
+//					buffer.append(dto.getEmpName());
+//					buffer.append("/");
+//					buffer.append(dto.getEmpDept());
+//					buffer.append("/");
+//					buffer.append(dto.getEmpDate());
+					buffer.append(dto.toString());
+					buffer.append("<br>");
 				}
-				else{
-					return "사원정보 없음";
-				}
+				return buffer.toString();
 			}
 			
-	
-}
+		}

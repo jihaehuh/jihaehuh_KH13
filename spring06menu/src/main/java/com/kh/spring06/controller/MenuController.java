@@ -13,6 +13,8 @@ MenuController : 메뉴 관련 처리 페이지 제공 클래스
  */
 package com.kh.spring06.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,7 +69,39 @@ public class MenuController {
 			//삭제 주소
 			//http://localhost:8080/menu/delete?menuNo=2
 			
+			//통합 목록 조회
 			
-			
-			
+			@RequestMapping("/list")
+			public String list(
+					@RequestParam(required = false) String column, 
+					@RequestParam(required = false) String keyword) {
+				boolean isSearch = column != null && keyword != null;
+				List<MenuDto> list;
+				if(isSearch) {
+					list = dao.selectList(column, keyword);
+				}
+				else {
+					list = dao.selectList();
+				}
+
+				StringBuffer buffer = new StringBuffer();
+				for(MenuDto dto : list) {
+					buffer.append("[");
+					buffer.append(dto.getMenuType());
+					buffer.append("]");
+					buffer.append(dto.getMenuNameKor());
+					buffer.append("(");
+					buffer.append(dto.getMenuNameEng());
+					buffer.append(")");
+					buffer.append(" - ");
+					buffer.append(dto.getMenuPrice());
+					buffer.append("원");
+					buffer.append("<br>");
+				}
+				return buffer.toString();
+			}
+		
+			//http://localhost:8080/menu/list
+			//http://localhost:8080/menu/list?column=menu_name_kor&keyword=한글
 }
+

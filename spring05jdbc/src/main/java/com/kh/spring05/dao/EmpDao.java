@@ -1,11 +1,12 @@
 package com.kh.spring05.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring05.dto.EmpDto;
-import com.kh.spring05.dto.PocketmonDto;
 import com.kh.spring05.mapper.EmpMapper;
 
 @Repository
@@ -47,4 +48,19 @@ public class EmpDao {
 	//삭제 주소
 	//http://localhost:8080/emp/delete?empNo=2
 	
+	//단순목록 조회 
+	public List<EmpDto> selectList() {
+		String sql = "select * from emp order by emp_no asc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	
+	//항목+키워드 검색
+	public List<EmpDto> selectList(String column, String keyword) {
+		String sql = "select * from emp where instr("+column+", ?) > 0 "
+										+ "order by "+column+" asc, emp_no asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, mapper, data);
+	}
 }
+		//http://localhost:8080/emp/list?column=emp_name&keyword=이
+

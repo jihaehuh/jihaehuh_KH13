@@ -1,5 +1,7 @@
 package com.kh.spring05.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -56,10 +58,21 @@ public class PocketmonDao {
 	//삭제 주소
 	//http://localhost:8080/pocketmon/delete?pocketmonNo=66
 	
+	//단순목록조회
+	public List<PocketmonDto> selectList() {
+		String sql = "select * from pocketmon order by pocketmon_no asc";
+		return jdbcTemplate.query(sql, mapper);
+	}
+	//http://localhost:8080/pocketmon/list?pocketmonNo&pocketmonKeyword=피카
 	
-	
-	
-	
+	//항목+키워드 검색
+	public List<PocketmonDto> selectList(String column, String keyword) {
+		String sql = "select * from pocketmon where instr("+column+", ?) > 0 "
+										+ "order by "+column+" asc, pocketmon_no asc";
+		Object[] data = {keyword};
+		return jdbcTemplate.query(sql, mapper, data);
+	}
+	//http://localhost:8080/pocketmon/list3?column=pocketmon_name&keyword=테스트
 	
 	
 	

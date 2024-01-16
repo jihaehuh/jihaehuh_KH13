@@ -16,6 +16,7 @@ package com.kh.spring06.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring06.dao.MenuDao;
@@ -50,6 +51,23 @@ public class MenuController {
 					return "존재하지 않는 메뉴 번호";
 				}
 			}
+			//수정 주소
 			//http://localhost:8080/menu/change?menuNo=1&menuNameKor=찹살떡&menuNameEng=ddock&menuType=음식&menuPrice=6000
-	
+			
+			//삭제
+			@RequestMapping("/delete")
+			public String delete(@RequestParam int menuNo) {
+				if(dao.delete(menuNo)) {
+					return "메뉴정보 삭제 완료";
+				}
+				else {
+					return "메뉴 정보 없음 ";
+				}
+			}
+			//삭제 주소
+			//http://localhost:8080/menu/delete?menuNo=2
+			
+			
+			
+			
 }

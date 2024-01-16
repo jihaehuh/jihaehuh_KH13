@@ -16,6 +16,7 @@ package com.kh.spring05.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.spring05.dao.EmpDao;
@@ -48,5 +49,16 @@ public class EmpController {
 			}
 	//http://localhost:8080/emp/edit?empNo=1&empName=바꾼이름&empDept=무소속&empDate=2024-01-01&empSal=0
 	
+	//삭제
+			@RequestMapping("/delete")
+			public String delete(@RequestParam int empNo) {
+				if(dao.delete(empNo)) {
+					return "사원 정보 삭제 완료";
+				}
+				else{
+					return "사원정보 없음";
+				}
+			}
+			
 	
 }

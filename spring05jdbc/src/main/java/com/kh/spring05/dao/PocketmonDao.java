@@ -50,7 +50,7 @@ public class PocketmonDao {
 		
 	}
 	//삭제 주소
-	//http://localhost:8080/pocketmon/delete?pocketmonNo=66&pocketmonName=삭제이름&pocketmonType=삭제함
+	//http://localhost:8080/pocketmon/delete?pocketmonNo=66
 	
 	
 	

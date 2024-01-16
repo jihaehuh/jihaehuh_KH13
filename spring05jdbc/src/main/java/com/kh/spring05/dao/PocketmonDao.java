@@ -74,6 +74,14 @@ public class PocketmonDao {
 	}
 	//http://localhost:8080/pocketmon/list3?column=pocketmon_name&keyword=테스트
 	
+	//한 항목(번호)조회
+	public PocketmonDto selectOne(int pocketmonNo) {
+		String sql = "select * from pocketmon where pocketmon_no = ?";
+		Object[] data = {pocketmonNo};
+		List<PocketmonDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
+	//http://localhost:8080/pocketmon/detail?pocketmonNo=3
 	
 	
 	

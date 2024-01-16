@@ -61,6 +61,16 @@ public class EmpDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
+	//http://localhost:8080/emp/list?column=emp_name&keyword=이
+	
+	//한 항목(번호)조회
+	public EmpDto selectOne(int empNo) {
+		String sql = "select * from emp where emp_no =?";
+		Object[]data = {empNo};
+		List<EmpDto>list =jdbcTemplate.query(sql, mapper,data);
+		return list.isEmpty() ? null:list.get(0);
+	}
+	//http://localhost:8080/emp/detail?empNo=2
 }
-		//http://localhost:8080/emp/list?column=emp_name&keyword=이
+		
 

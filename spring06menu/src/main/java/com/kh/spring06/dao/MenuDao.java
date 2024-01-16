@@ -71,8 +71,14 @@ public class MenuDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
-	
-	
+	//한 항목 조회(번호)
+	public MenuDto selectOne(int menuNo) {
+		String sql = "select * from menu where menu_no=?";
+		Object[]data = {menuNo};
+		List<MenuDto> list =jdbcTemplate.query(sql, mapper,data);
+		return list.isEmpty()? null :list.get(0);
+	}
+	//http://localhost:8080/menu/detail?menuNo=1
 	
 	
 	

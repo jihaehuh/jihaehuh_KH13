@@ -103,5 +103,37 @@ public class MenuController {
 		
 			//http://localhost:8080/menu/list
 			//http://localhost:8080/menu/list?column=menu_name_kor&keyword=한글
-}
+			
+			//한 항목 조회(번호)
+			@RequestMapping("/detail")
+			public String detail(@RequestParam int menuNo) {
+				MenuDto dto = dao.selectOne(menuNo);
+				if(dto != null) {
+					StringBuffer buffer = new StringBuffer();
+					buffer.append(dto.getMenuNameKor());
+					buffer.append(",");
+					buffer.append(dto.getMenuNameEng());
+					buffer.append(",");
+					buffer.append(dto.getMenuType());
+					buffer.append(",");
+					buffer.append(dto.getMenuPrice());
+					return buffer.toString();
+				}
+				else {
+					return "존재하지 않는 메뉴번호 입니다";
+				}
+			}
 
+
+
+
+
+
+
+
+
+
+
+
+
+}

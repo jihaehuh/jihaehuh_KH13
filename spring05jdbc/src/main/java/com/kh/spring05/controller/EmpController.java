@@ -83,5 +83,36 @@ public class EmpController {
 				}
 				return buffer.toString();
 			}
+			@RequestMapping("/detail")
+			public String detail(@RequestParam int empNo) {
+				EmpDto dto = dao.selectOne(empNo);
+				if(dto != null) {
+					StringBuffer buffer = new StringBuffer();
+					buffer.append(dto.getEmpName());
+					buffer.append(",");
+					buffer.append(dto.getEmpDept());
+					buffer.append(",");
+					buffer.append(dto.getEmpDate());
+					buffer.append(",");
+					buffer.append(dto.getEmpSal());
+					buffer.append(",");
+					
+					
+					return buffer.toString();
+					
+				}
+				else {
+					return "존재하지 않는 사원번호 입니다";
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 		}

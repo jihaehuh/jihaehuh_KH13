@@ -42,4 +42,24 @@ public class PocketmonDao {
 	//등록주소 
 	//http://localhost:8080/pocketmon/edit?pocketmonNo=1&pocketmonName=바꾼이름&pocketmonType=바꿨음
 	
+	//삭제
+	public boolean delete(int pocketmonNo) { //삭제는 프라이머리 키로 한다(상세 검색과 비슷)
+		String sql ="delete pocketmon where pocketmon_no=?";
+		Object[]data = {pocketmonNo};
+		return jdbcTemplate.update(sql,data)>0;
+		
+	}
+	//삭제 주소
+	//http://localhost:8080/pocketmon/delete?pocketmonNo=66&pocketmonName=삭제이름&pocketmonType=삭제함
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

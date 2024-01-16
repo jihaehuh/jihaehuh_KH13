@@ -39,16 +39,17 @@ public class MenuController {
 	
 		//수정
 	
-			@RequestMapping("/edit")
+			@RequestMapping("/change")
 			public String edit(@ModelAttribute MenuDto dto) {
-				boolean result = dao.update(dto);
-				if(result) {
+				//boolean result = dao.update(dto);
+				//if(result)
+				if(dao.update(dto)) {
 					return "메뉴 수정 완료";
 				}
 				else {
 					return "존재하지 않는 메뉴 번호";
 				}
 			}
-			//http://localhost:8080/menu/edit?menuNo=1&menuNameKor=찹살떡&menuNameEng=ddock&menuType=음식&menuPrice=6000
+			//http://localhost:8080/menu/change?menuNo=1&menuNameKor=찹살떡&menuNameEng=ddock&menuType=음식&menuPrice=6000
 	
 }

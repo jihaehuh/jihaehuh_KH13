@@ -26,6 +26,9 @@ public class HtmlController {
 	public String link() {
 		return "/WEB-INF/views/link.jsp";
 	}
-	
+	@RequestMapping("/realtime")
+	public String realtime() {
+		return "/WEB-INF/views/realtime.jsp";
+	}
 	
 }

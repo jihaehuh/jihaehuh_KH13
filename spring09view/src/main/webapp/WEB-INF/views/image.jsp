@@ -22,6 +22,7 @@
   
   <img  alt="짱구는 못말려 짱구이미지"  width="30%" src="https://m.ezendolls.com/web/product/big/201803/605_shop1_119071.jpg">
   
+  <hr>
   <%--
   			<img src="D:\ZEZE\bg.png">
   			프로젝트 외부에 있는 이미지는 보안상의 이유로 src에 설정할 수 없다

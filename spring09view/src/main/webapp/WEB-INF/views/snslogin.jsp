@@ -8,5 +8,5 @@
 <img width="200"  alt="카카오 로고" src="/logo/kakao.PNG" >
 &nbsp;&nbsp;
 <img width="200"  alt="페이스북 로고" src="/logo/facebook.PNG" >
-&nbsp;&nbsp;
+&nbsp;&nbsp; <%--띄어쓰기 --%>
 <img width="180"   alt="구글 로고" src="/logo/google.png">

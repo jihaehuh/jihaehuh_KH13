@@ -41,7 +41,7 @@
   			상대경로는 현재 페이지에 따라 다른 위치를 가리킨다
   			
    --%> 
-   <img width ="400" src ="http://localhost:8080/bg.png">
+   <img width ="400" src ="bg.png">
   
   
   

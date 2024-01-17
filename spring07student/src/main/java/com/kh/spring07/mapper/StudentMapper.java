@@ -16,9 +16,9 @@ public class StudentMapper implements RowMapper<StudentDto> {
 		StudentDto dto = new StudentDto();
 		dto.setStudentId(rs.getInt("student_id"));
 		dto.setName(rs.getString("name"));
-		dto.setKoreanScore(rs.getFloat("korean_score"));
-		dto.setMathScore(rs.getFloat("math_score"));
-		dto.setEnglishScore(rs.getFloat("english_score"));
+		dto.setKoreanScore(rs.getInt("korean_score"));
+		dto.setMathScore(rs.getInt("math_score"));
+		dto.setEnglishScore(rs.getInt("english_score"));
 		return dto;
 	}
 	

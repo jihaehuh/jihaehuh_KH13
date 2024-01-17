@@ -1,5 +1,6 @@
 package com.kh.spring07.controller;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,8 +77,27 @@ public class StudentController {
 			}
 			return buffer.toString();
 		}
-		//http://localhost:8080/student/list?column=name&keyword=한글
+		//http://localhost:8080/student/list?column=name&keyword=김
 		//한항목 조회
-		
+		@RequestMapping("/detail")
+		public String detail(@RequestParam int studentId) {
+			StudentDto dto = dao.selectOne(studentId);
+			DecimalFormat fmt = new DecimalFormat("#,##0.00");
+			if(dto != null) {
+				StringBuffer buffer = new StringBuffer();
+				buffer.append("학생번호 - " + dto.getStudentId() + "<br>");
+				buffer.append("학생명 - " + dto.getName() + "<br>");
+				buffer.append("국어점수 - " + dto.getKoreanScore() + "점<br>");
+				buffer.append("수학점수 - " + dto.getMathScore() + "점<br>");
+				buffer.append("영어점수 - " + dto.getEnglishScore() + "점<br>");
+				buffer.append("총점 - " + dto.getTotal() + "점<br>");
+				buffer.append("평균 - " + fmt.format(dto.getAverage()) + "점<br>");
+				return buffer.toString();
+			}
+			else {
+				return "존재하지 않는 학생 번호";
+			}
+		}
+		//http://localhost:8080/student/detail?studentId=1
 
 }

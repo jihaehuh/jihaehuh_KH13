@@ -60,7 +60,12 @@ public class StudentDao {
 	}
 	//한 항목 조회(번호)
 		
-	  //f
+	public StudentDto selectOne(int studentId) {
+		String sql = "select * from student where student_id = ?";
+		Object[] data = {studentId};
+		List<StudentDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 	
 	
 	

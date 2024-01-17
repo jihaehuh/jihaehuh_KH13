@@ -51,7 +51,7 @@ public class MenuController {
 				}
 				else {
 					return "존재하지 않는 메뉴 번호";
-				}
+				}  
 			}
 			//수정 주소
 			//http://localhost:8080/menu/change?menuNo=1&menuNameKor=찹살떡&menuNameEng=ddock&menuType=음식&menuPrice=6000

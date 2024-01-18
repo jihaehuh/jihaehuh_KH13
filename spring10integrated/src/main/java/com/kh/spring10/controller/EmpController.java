@@ -1,7 +1,33 @@
 
 package com.kh.spring10.controller;
 
-public class EmpController {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-			
+import com.kh.spring10.dao.EmpDao;
+import com.kh.spring10.dto.EmpDto;
+
+@Controller
+@RequestMapping("/emp")
+public class EmpController {
+	@Autowired
+	private EmpDao dao;
+	
+	@RequestMapping("/insert1")
+	public String insert1() {
+	return"/WEB-INF/views/emp/insert1.jsp";
+	}
+	@RequestMapping("/insert2")
+	public String insert2(@ModelAttribute EmpDto dto) {
+		dao.insert(dto);
+		// return "redirect:/emp/insert3"; //절대
+		return "redirect:insert3"; //상대
+		
+	}
+	@RequestMapping("/insert3")
+	public String insert3() {
+		return "/WEB-INF/views/emp/insert3.jsp";
+	}
 }

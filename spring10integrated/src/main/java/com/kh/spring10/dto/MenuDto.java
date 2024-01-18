@@ -5,6 +5,12 @@ public class MenuDto {
 	private String menuNameKor, menuNameEng;
 	private String menuType;
 	private int menuPrice;
+	
+	@Override
+	public String toString() {
+		return "MenuDto [menuNo=" + menuNo + ", menuNameKor=" + menuNameKor + ", menuNameEng=" + menuNameEng
+				+ ", menuType=" + menuType + ", menuPrice=" + menuPrice + "]";
+	}
 	public MenuDto() {
 		super();
 	}

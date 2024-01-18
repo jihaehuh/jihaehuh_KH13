@@ -19,12 +19,12 @@ public class EmpController {
 	
 	//@RequestMapping("/insert")
 	@GetMapping("/insert") //Get방식 -일반적인 주소를 이용한 접근
-	public String insert1() {
+	public String insert() {
 	return"/WEB-INF/views/emp/insert1.jsp";
 	}
 	//@RequestMapping("/insert")
 	@PostMapping("/insert") //Post방식 - Form을 이용한 데이터 전송 접근
-	public String insert2(@ModelAttribute EmpDto dto) {
+	public String insert(@ModelAttribute EmpDto dto) {
 		dao.insert(dto);
 		// return "redirect:/emp/insert3"; //절대
 		return "redirect:insert3"; //상대

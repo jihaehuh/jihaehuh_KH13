@@ -5,7 +5,7 @@
 		<form action ="/emp/insert2"></form>
  --%>
 <%-- <form action="insert2"> --%>
-	<form action ="insert" method ="post">
+<form action ="insert" method ="post">
 	사원이름: <input name="empName" type="text" ><br><br>
 	사원소속:<input name="empDept" type="text"><br><br>
 	입사날짜:<input name="empDate" type="date"><br><br>

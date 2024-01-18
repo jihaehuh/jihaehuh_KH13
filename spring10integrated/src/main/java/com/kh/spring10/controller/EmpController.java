@@ -3,7 +3,9 @@ package com.kh.spring10.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.spring10.dao.EmpDao;
@@ -15,11 +17,13 @@ public class EmpController {
 	@Autowired
 	private EmpDao dao;
 	
-	@RequestMapping("/insert1")
+	//@RequestMapping("/insert")
+	@GetMapping("/insert") //Get방식 -일반적인 주소를 이용한 접근
 	public String insert1() {
 	return"/WEB-INF/views/emp/insert1.jsp";
 	}
-	@RequestMapping("/insert2")
+	//@RequestMapping("/insert")
+	@PostMapping("/insert") //Post방식 - Form을 이용한 데이터 전송 접근
 	public String insert2(@ModelAttribute EmpDto dto) {
 		dao.insert(dto);
 		// return "redirect:/emp/insert3"; //절대
@@ -30,4 +34,5 @@ public class EmpController {
 	public String insert3() {
 		return "/WEB-INF/views/emp/insert3.jsp";
 	}
+	
 }

@@ -1,5 +1,7 @@
 package com.kh.spring09.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,5 +34,14 @@ public class ELJstlController {
 	public String tes03() {
 		return "/WEB-INF/views/elJstl/test03.jsp";
 	}
+	@RequestMapping("/test04")
+	public String test04(Model model) {
+		List<Integer> list = List.of(7, 13, 17, 30, 43, 4);
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/elJstl/test04.jsp";
+	}
+	
+	
+	
 	
 }

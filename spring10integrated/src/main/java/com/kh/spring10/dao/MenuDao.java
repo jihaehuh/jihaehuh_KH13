@@ -30,40 +30,28 @@ public class MenuDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
-	
-	//수정
 	public boolean update(MenuDto dto) {
 		String sql = "update menu "
-				+ "set menu_name_kor=?, menu_name_eng=? ,menu_type=?, menu_price=? "
-				+ "where menu_no=?";
+						+ "set "
+							+ "menu_name_kor=?, menu_name_eng=?, "
+							+ "menu_type=?, menu_price=? "
+						+ "where menu_no=?";
 		Object[] data = {
-				dto.getMenuNameKor(), dto.getMenuNameEng(),
-				dto.getMenuType(), dto.getMenuPrice(),
-				dto.getMenuNo()
-			};
-		return jdbcTemplate.update(sql, data)>0;
+			dto.getMenuNameKor(), dto.getMenuNameEng(),
+			dto.getMenuType(), dto.getMenuPrice(),
+			dto.getMenuNo()
+		};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
-	//삭제 
 	public boolean delete(int menuNo) {
-		String sql = "delete menu where menu_no=?";
-		Object[]data= {menuNo};
-		return jdbcTemplate.update(sql,data)>0;
+		String sql = "delete menu where menu_no = ?";
+		Object[] data = {menuNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
-	//단순목록 조회
-	public List <MenuDto> slectList()
-	{
-		String sql = "slelct * from menu order by menu_no asc";
-		return jdbcTemplate.query(sql, mapper);
-		
-	}
-	
-	//항목 +키워드 검색
 	public List<MenuDto> selectList() {
 		String sql = "select * from menu order by menu_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
 	public List<MenuDto> selectList(String column, String keyword) {
 		String sql = "select * from menu "
 						+ "where instr("+column+", ?) > 0 "
@@ -71,19 +59,10 @@ public class MenuDao {
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
-	//한 항목 조회(번호)
 	public MenuDto selectOne(int menuNo) {
-		String sql = "select * from menu where menu_no=?";
-		Object[]data = {menuNo};
-		List<MenuDto> list =jdbcTemplate.query(sql, mapper,data);
-		return list.isEmpty()? null :list.get(0);
+		String sql = "select * from menu where menu_no = ?";
+		Object[] data = {menuNo};
+		List<MenuDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
-	//http://localhost:8080/menu/detail?menuNo=1
-	
-	
-	
-	
-	
-	
-	
 }

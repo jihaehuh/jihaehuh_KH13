@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.spring10.dao.EmpDao;
 import com.kh.spring10.dto.EmpDto;
 
+
 @Controller
 @RequestMapping("/emp")
 public class EmpController {
@@ -91,25 +92,6 @@ public class EmpController {
 			return "/WEB-INF/views/emp/list.jsp";
 			
 		}
-				
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	
 }

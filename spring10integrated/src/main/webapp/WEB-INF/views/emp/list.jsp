@@ -3,7 +3,7 @@
 
     
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <h1> 사원 목록</h1>
+    <h1> 사원 목록 및 검색</h1>
     <%--검색창 --%>
     <form action ="list" method ="get">
     	<select name ="column">

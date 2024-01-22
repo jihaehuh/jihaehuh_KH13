@@ -80,18 +80,29 @@ public class EmpController {
 		}
 		
 		//목록,검색 페이지
+		//@RequestMapping( value ="/list". method = RequestMethod.GET)
 		@RequestMapping("/list")
-		public String list(@RequestParam (required = false)String column,
+		public String list(
+				@RequestParam (required = false)String column,
 				@RequestParam(required = false)String keyword,
 				Model model) {
-			boolean isSeaech = column != null && keyword != null;
-			List<EmpDto> list = isSeaech?
-					dao.selectList(column,keyword) :dao.selectList();
+			boolean isSearch = column != null && keyword != null;
 			
+			//List<EmpDto> list = isSeaech?
+			//	dao.selectList(column,keyword) :dao.selectList();
+			
+			List<EmpDto>list;
+			if(isSearch) {
+				list=dao.selectList(column, keyword);
+			}
+			else {
+				list =dao.selectList();
+			}
 			model.addAttribute("list",list);
 			return "/WEB-INF/views/emp/list.jsp";
-			
 		}
-
+		
+		
+		
 	
 }

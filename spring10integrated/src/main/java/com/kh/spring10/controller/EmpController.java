@@ -99,7 +99,7 @@ public class EmpController {
 				list =dao.selectList();
 			}
 			model.addAttribute("list",list);
-			return "/WEB-INF/views/emp/list.jsp";
+			return "/WEB-INF/views/emp/list2.jsp";
 		}
 		
 		

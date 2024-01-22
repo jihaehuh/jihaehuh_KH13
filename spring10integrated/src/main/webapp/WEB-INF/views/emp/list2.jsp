@@ -63,48 +63,25 @@
 </form>
 
 <%-- 목록 출력 --%>
-<table border ="1">
+<table border="1">
 	<thead>
-		<tr> 
-				<th>사원번호</th>
-				<th>사원명 </th>
-				<th>부서명 </th>
-				<th>입사일</th>
-				<th> 급여액</th>
+		<tr>
+			<th>사원번호</th>
+			<th>사원명</th>
+			<th>부서명</th>
+			<th>입사일</th>
+			<th>급여액</th>
 		</tr>
-		</thead>
-		<tbody align="center">
-			<c:forEach var ="dto" items ="${list}">
-			<tr>
-					<td>${dto.empNo}</td>
-					<td>${dto.empName}</td>
-					<td>${dto.empDept}</td>
-					<td>${dto.empDate}</td>
-					<td>${dto.empSal}원</td>
+	</thead>
+	<tbody align="center">
+		<c:forEach var="dto" items="${list}">
+		<tr>
+			<td>${dto.empNo}</td>
+			<td>${dto.empName}</td>
+			<td>${dto.empDept}</td>
+			<td>${dto.empDate}</td>
+			<td>${dto.empSal}원</td>
 		</tr>
 		</c:forEach>
-		</tbody>
+	</tbody>
 </table>
-
-
-
-
-<%-- for(EmpDto dto : list) {} --%>
-<c:forEach var="dto" items="${list}">
-	<h1>
-		[${dto.empNo}]
-		${dto.empName} 
-		(${dto.empDept})
-		-
-		${dto.empDate}
-		<%-- 
-			html에서 꺾쇠는 태그를 의미하여 사용할 수 없다
-			특수문자로 대체하여 사용
-			< 는 less than 줄여서 &lt;
-			> 는 greater than 줄여서 &gt;
-			띄어쓰기는 non-breaking space 줄여서 &nbsp;
-			궁금하다면 인터넷에 HTML 특수문자표 검색
-		--%>
-		&lt;${dto.empSal}원&gt;
-	</h1>
-</c:forEach>

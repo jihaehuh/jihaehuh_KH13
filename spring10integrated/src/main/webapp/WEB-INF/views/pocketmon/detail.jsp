@@ -1,5 +1,3 @@
-<%@page import="org.apache.tomcat.util.descriptor.tld.TaglibXml"%>
-<%@page import="javax.swing.text.TabableView"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- 

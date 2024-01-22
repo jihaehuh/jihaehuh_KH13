@@ -16,3 +16,8 @@ ${dto.empName},${dto.getEmpName()} <%--두 개 같은 것임 --%>
     <%--value 는 미리 떠있게 할 수 있는 기능이다 --%>
     </form>
     <%--http://localhost:8080/emp/edit?empNo=48 --%>
+    
+
+
+
+    

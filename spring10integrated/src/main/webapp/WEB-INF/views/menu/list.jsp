@@ -23,6 +23,7 @@
 <%-- 검색창 --%>
 <form action="list" method="get">
 	<select name="column">
+	<option value="menu_no" ${param.column == 'menu_no' ? 'selected' : ''}>메뉴명(한글)</option>
 		<option value="menu_name_kor" ${param.column == 'menu_name_kor' ? 'selected' : ''}>메뉴명(한글)</option>
 		<option value="menu_name_eng" ${param.column == 'menu_name_eng' ? 'selected' : ''}>메뉴명(영문)</option>
 		<option value="menu_type" ${param.column == 'menu_type' ? 'selected' : ''}>메뉴유형</option>

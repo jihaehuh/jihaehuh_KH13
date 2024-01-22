@@ -69,22 +69,33 @@ public class MenuController {
 	}
 	
 	//목록,검색 페이지
-	//테이블
-	@RequestMapping("/list")
-	public String list(
-			@RequestParam (required = false , defaultValue = "menu_name") String column,
-			@RequestParam  (required = false )String keyword,Model model) {
-		boolean isSearch =column != null && keyword !=null;
-		List<MenuDto> list;
-		if(isSearch) {
-			list =dao.selectList(column,keyword);
+		//-사용자의 검색어(선택)을 전달받아 조회 후 Model에 첨부한다
+		@RequestMapping("/list")
+		public String list(@RequestParam(required = false) String column,
+				@RequestParam(required = false) String keyword,
+				Model model) {//항목,모델, 키워드
+			boolean isSearch = column != null && keyword != null;
+			List<MenuDto> list = isSearch ?
+						dao.selectList(column,keyword) :dao.selectList();
+			model.addAttribute("list",list);
+			return "/WEB-INF/views/menu/list.jsp";
+			} 
+	
+	//상세 페이지
+		@RequestMapping("/detail")
+		public String detail (@RequestParam int menuNo, Model model) {
+			MenuDto dto = dao.selectOne(menuNo);
+			model.addAttribute("dto", dto);
+			return "/WEB-INF/views/menu/detail.jsp";
 		}
-		else {
-			list = dao.selectList();
+		
+		//삭제페이지
+		@RequestMapping("/delete")
+		public String delete(@RequestParam int  menuNo) {
+			dao.delete(menuNo);
+			return "redirect:list";//상대
+			
 		}
-		model.addAttribute("list",list);
-		return "/WEB-INF/views/menu/list.jsp";
-	}
 	
 	
 	

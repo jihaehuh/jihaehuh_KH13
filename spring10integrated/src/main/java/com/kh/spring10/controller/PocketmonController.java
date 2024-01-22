@@ -67,17 +67,17 @@ public class PocketmonController {
 	}
 	
 	//목록,검색 페이지
-	//-사용자의 검색어(선택)을 전달받아 조회 후 Model에 첨부한다
-	@RequestMapping("/list")
-	public String list(@RequestParam(required = false) String column,
-			@RequestParam(required = false) String keyword,
-			Model model) {//항목,모델, 키워드
-		boolean isSearch = column != null && keyword != null;
-		List<PocketmonDto> list = isSearch ?
-					dao.selectList(column,keyword) :dao.selectList();
-		model.addAttribute("list",list);
-		return "/WEB-INF/views/pocketmon/list.jsp";
-		} 
+		//-사용자의 검색어(선택)을 전달받아 조회 후 Model에 첨부한다
+		@RequestMapping("/list")
+		public String list(@RequestParam(required = false) String column,
+				@RequestParam(required = false) String keyword,
+				Model model) {//항목,모델, 키워드
+			boolean isSearch = column != null && keyword != null;
+			List<PocketmonDto> list = isSearch ?
+						dao.selectList(column,keyword) :dao.selectList();
+			model.addAttribute("list",list);
+			return "/WEB-INF/views/pocketmon/list.jsp";
+			} 
 	//상세 페이지
 	@RequestMapping("/detail")
 	public String detail (@RequestParam int pocketmonNo, Model model) {

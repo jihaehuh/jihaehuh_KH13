@@ -22,6 +22,7 @@
 		번호 = ${dto.pocketmonNo},
 		이름 = ${dto.pocketmonName},
 		속성 = ${dto.pocketmonType}
+		<a href ="detail?pocketmonNo= ${dto.pocketmonNo}">이동</a>
 	</h2>  
 </c:forEach>  
 

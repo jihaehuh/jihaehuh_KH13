@@ -86,6 +86,15 @@ public class PocketmonController {
 		return "/WEB-INF/views/pocketmon/detail.jsp";
 	}
 	
+	//삭제페이지
+	@RequestMapping("/delete")
+	public String delete(@RequestParam int  pocketmonNo) {
+		dao.delete(pocketmonNo);
+		//return "redirect:/pocketmon/list";//절대
+		return "redirect:list";//상대
+		
+	}
+	
 	
 	
 }

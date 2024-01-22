@@ -11,6 +11,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<h1> 포켓몬 목록 
+<a href ="insert1" > +신규등록</a>
+</h1>
+<h2> <a href ="list" > 목록 보기</a></h2>
+<h2><a href ="insert1"> 다시 등록 하기</a></h2>
+
 <c:choose>
 	<c:when test ="${dto !=null }">
 	<h1>몬스터 정보</h1>
@@ -32,7 +38,7 @@
 			<%-- 다른 페이지로의 링크 --%>
 		<h2><a href="list">목록보기</a></h2>
 		<h2><a href="">수정하기</a></h2>
-		<h2><a href="">삭제하기</a></h2>
+		<h2><a href="delete?pocketmonNo=${dto.pocketmonNo}">삭제하기</a></h2>
 	</c:when>
 		<c:otherwise>
 				<h1>존재하지 않는 포켓몬스터 번호</h1>

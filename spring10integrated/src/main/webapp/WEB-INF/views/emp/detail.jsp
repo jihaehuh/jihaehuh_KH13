@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<%-- 템플릿 페이지를 불러오는 코드 --%>
+<jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+
 <h1>사원 상세 정보</h1>
 
 <table border="1" width="300">
@@ -36,3 +39,6 @@
 <h2><a href="insert">신규등록</a></h2>
 <h2><a href="edit?empNo=${dto.empNo}">정보변경</a></h2>
 <h2><a href="delete?empNo=${dto.empNo}">사원삭제</a></h2>
+
+<%-- 템플릿 페이지를 불러오는 코드 --%>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

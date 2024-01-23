@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<jsp:include page ="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>메뉴 목록</h1>
 
 <%-- 검색창 --%>
@@ -48,3 +48,4 @@
 		</c:forEach>
 	</tbody>	
 </table>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

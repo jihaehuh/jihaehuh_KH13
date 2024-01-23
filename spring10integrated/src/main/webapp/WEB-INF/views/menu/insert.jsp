@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<jsp:include page ="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>신규 메뉴 등록</h1>
 
 <form action="insert" method="post">
@@ -27,7 +27,7 @@
 	<button>메뉴 등록</button>
 	<a href="list">목록 보기</a>
 </form>
-
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 
 

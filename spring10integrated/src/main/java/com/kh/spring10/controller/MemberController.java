@@ -49,7 +49,38 @@ public class MemberController {
 		session.removeAttribute("loginId");
 		return "redirect:/";
 	}
-	
+	//실제 로그인
+	//-아이디와 비밀번호 검사를 통과해야만 세션에 데이터를 추가한다
+	//-사용자가 입력한 아이디를 추가한다
+	@GetMapping("/login")
+	public String login() {
+		return "/WEB-INF/views/member/login.jsp";
+	}
+	@PostMapping("/login")
+	public String login(@ModelAttribute MemberDto inputDto,HttpSession session) {//아이디, 비밀번호 : 회원정보
+		//사용자가 입력한 아이디로 회원정보를 조회한다
+		MemberDto findDto = memberDao.selectOne(inputDto.getMemberId()); //사용자가 입력한 아이디 받기
+		//로그인 가능 여부를 판정
+		boolean isValid = findDto != null && 
+				inputDto.getMemberPw().equals(findDto.getMemberPw());//아이디가 있어야하고 비밀번호가 일치한다면
+		//결과에 따라 다른 처리
+		if(isValid) {
+			//세션에 데이터 추가
+			session.setAttribute("loginId",findDto.getMemberId());//,사용자 ID
+			return "redirect:/";
+		}
+		else {//로그인 실패
+			 return "redirect:login?error";
+		}
+	}
+	//실제 로그아웃
+		//- 로그인 때 검사를 했으므로 추가 검사는 불필요
+		//- 로그인 때 저장한 세션의 데이터만 삭제 처리
+		@RequestMapping("/logout")
+		public String logout(HttpSession session) {
+			session.removeAttribute("loginId");
+			return "redirect:/";
+		}
 	
 	
 }

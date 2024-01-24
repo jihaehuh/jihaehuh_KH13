@@ -74,4 +74,18 @@ public class MemberDao {
 		Object[] data = {memberId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
+	
+	//최종 로그인 시각 변경 (수정 ,update)
+	public boolean updateMemberLogin(String memberId) {
+		String sql ="update member set member_login=sysdate"
+				+ " where member_id=?"; //모든 회원의 로그인시간이 현재로 바뀌기때문에 프라이머리키가 들어가야함
+	Object [] data = {memberId};
+	return jdbcTemplate.update(sql,data)>0;
+	
+	}
+	
+	
+	
+	
+	
 }

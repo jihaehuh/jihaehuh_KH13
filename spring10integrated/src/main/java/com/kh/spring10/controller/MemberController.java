@@ -1,7 +1,5 @@
 package com.kh.spring10.controller;
 
-import java.lang.ProcessBuilder.Redirect;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
@@ -68,6 +67,8 @@ public class MemberController {
 		if(isValid) {
 			//세션에 데이터 추가
 			session.setAttribute("loginId",findDto.getMemberId());//,사용자 ID
+			//최종 로그인 시각 갱신
+			memberDao.updateMemberLogin(findDto.getMemberId());
 			return "redirect:/";
 		}
 		else {//로그인 실패
@@ -88,16 +89,46 @@ public class MemberController {
 		@RequestMapping("/mypage")
 		public String mypage(Model model, HttpSession session) {//세션에서 꺼내야함
 			//1.세션에 저장된 아이디를 꺼낸다
-			String loginId=(String)session.getAttribute("loginId");  //세션에 있는 로그인아이디를 꺼내면 오브젝트여서 스트링이라 안맞아서 맞춰줘야함 
+			String loginId=(String)session.getAttribute("loginId");  
+			//세션에 있는 로그인아이디를 꺼내면 오브젝트여서 스트링이라 안맞아서 맞춰줘야함 
 			//2.아이디에 맞는 정보를 조회한다
-			MemberDto memberdto=memberDao.selectOne(loginId); //로그인을 했는데 아이디가 없다..? 말이 안됌
+			MemberDto memberdto=memberDao.selectOne(loginId); 
+			//로그인을 했는데 아이디가 없다..? 말이 안됌
 			//3. 화면에 조회한 정보를 전달한다
 			model.addAttribute("memberDto",memberdto);
 			
 			//4. 연결될 화면을 반환한다
 			return "/WEB-INF/views/member/mypage.jsp";
 		}
+		//마이페이지 - 비밀 번호 변경 페이지
+		@GetMapping("/password")
+		public String password(@RequestParam String memberPw, Model model) {
+			  MemberDto memberdto = memberDao.selectOne(memberPw);
+			    model.addAttribute("dto", memberdto);
+			    return "/WEB-INF/views/member/password.jsp";
+		}
+		@PostMapping("/password")
+		public String password(@ModelAttribute MemberDto inputDto,HttpSession session) {
+			MemberDto findDto = memberDao.selectOne(inputDto.getMemberPw()); //사용자가 입력한 비밀번호받기
+			boolean isValid = findDto != null && 
+					inputDto.getMemberPw().equals(findDto.getMemberPw());//아이디가 있어야하고 비밀번호가 일치한다면
+			if(isValid) {
+				//세션에 데이터 추가
+				session.setAttribute("loginPw",findDto.getMemberPw());//,사용자 Pw
+				return "redirect:password";
+				
+			}
+			else {//수정 실패
+				 return "redirect:password?error";
+			}
+		}
 		
-	
+		/*
+		//마이페이지- 개인정보 변경
+		@GetMapping("/change")
+		public String change() {
+			MemberDto memberdto = memberDao.
+		}
+		*/
 	
 }

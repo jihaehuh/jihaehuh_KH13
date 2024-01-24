@@ -62,6 +62,7 @@
 			 --%>
 			login = ${sessionScope.loginId != null} , 
 			loginId = ${sessionScope.loginId}
+			
 		</div>
 		<hr>
 		<%-- 

@@ -101,34 +101,46 @@ public class MemberController {
 			return "/WEB-INF/views/member/mypage.jsp";
 		}
 		//마이페이지 - 비밀 번호 변경 페이지
+		/*
+		@RequestMapping("/password")
+		public String password() {
+			return "/WEB-INF/views/member/password.jsp";
+			//기존 비밀번호 , 신규비밀번호 
+			//기존 비밀번호가 맞으면 신규비밀번호가 바뀌는거지 
+			//수정 
+		}
+		*/
 		@GetMapping("/password")
-		public String password(@RequestParam String memberPw, Model model) {
-			  MemberDto memberdto = memberDao.selectOne(memberPw);
-			    model.addAttribute("dto", memberdto);
-			    return "/WEB-INF/views/member/password.jsp";
+		public String password() {
+			return "/WEB-INF/views/member/password.jsp";
 		}
 		@PostMapping("/password")
 		public String password(@ModelAttribute MemberDto inputDto,HttpSession session) {
-			MemberDto findDto = memberDao.selectOne(inputDto.getMemberPw()); //사용자가 입력한 비밀번호받기
-			boolean isValid = findDto != null && 
-					inputDto.getMemberPw().equals(findDto.getMemberPw());//아이디가 있어야하고 비밀번호가 일치한다면
+			//사용자가 입력한 아이디로 회원정보를 조회한다
+			MemberDto correctDto = memberDao.selectOne(inputDto.getMemberPw()); //사용자가 입력한 비밀번호 받기
+			//로그인 가능 여부를 판정
+			boolean isValid = correctDto != null && 
+					inputDto.getMemberPw().equals(correctDto.getMemberPw());//아이디가 있어야하고 비밀번호가 일치한다면
+			
+			//결과에 따라 다른 처리
 			if(isValid) {
 				//세션에 데이터 추가
-				session.setAttribute("loginPw",findDto.getMemberPw());//,사용자 Pw
-				return "redirect:password";
-				
+				session.setAttribute("loginPw",correctDto.getMemberPw());//,사용자 ID
+				//최종 로그인 시각 갱신
+				memberDao.updateMemberPw(correctDto);
+				return "member/pwok.jsp";
 			}
-			else {//수정 실패
+			else {//로그인 실패
 				 return "redirect:password?error";
 			}
 		}
-		
-		/*
-		//마이페이지- 개인정보 변경
-		@GetMapping("/change")
-		public String change() {
-			MemberDto memberdto = memberDao.
+		@RequestMapping("/pwok")
+		public String pwok(HttpSession session) {
+			session.getAttribute("loginpw");
+			return "/WEB-INF/views/member/pwok";
 		}
-		*/
+		
+		
+		
 	
 }

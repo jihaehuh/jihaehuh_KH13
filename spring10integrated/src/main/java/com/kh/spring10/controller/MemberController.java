@@ -4,6 +4,7 @@ import java.lang.ProcessBuilder.Redirect;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,6 +82,22 @@ public class MemberController {
 			session.removeAttribute("loginId");
 			return "redirect:/";
 		}
+	// 마이페이지
+	//-(중요) 내 아이디는 HttpSession에 있다
+	//-그리고 화면에 정보를 표시해야한다
+		@RequestMapping("/mypage")
+		public String mypage(Model model, HttpSession session) {//세션에서 꺼내야함
+			//1.세션에 저장된 아이디를 꺼낸다
+			String loginId=(String)session.getAttribute("loginId");  //세션에 있는 로그인아이디를 꺼내면 오브젝트여서 스트링이라 안맞아서 맞춰줘야함 
+			//2.아이디에 맞는 정보를 조회한다
+			MemberDto memberdto=memberDao.selectOne(loginId); //로그인을 했는데 아이디가 없다..? 말이 안됌
+			//3. 화면에 조회한 정보를 전달한다
+			model.addAttribute("memberDto",memberdto);
+			
+			//4. 연결될 화면을 반환한다
+			return "/WEB-INF/views/member/mypage.jsp";
+		}
+		
 	
 	
 }

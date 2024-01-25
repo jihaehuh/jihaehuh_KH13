@@ -90,7 +90,7 @@ public class MemberController {
 		public String mypage(Model model, HttpSession session) {//세션에서 꺼내야함
 			//1.세션에 저장된 아이디를 꺼낸다
 			String loginId=(String)session.getAttribute("loginId");  
-			//세션에 있는 로그인아이디를 꺼내면 오브젝트여서 스트링이라 안맞아서 맞춰줘야함 
+			//세션에 있는 로그인아이디를 꺼내면 오브젝트여서 스트링으로 써야하는데 안맞아서 맞춰줘야함 
 			//2.아이디에 맞는 정보를 조회한다
 			MemberDto memberdto=memberDao.selectOne(loginId); 
 			//로그인을 했는데 아이디가 없다..? 말이 안됌
@@ -100,16 +100,7 @@ public class MemberController {
 			//4. 연결될 화면을 반환한다
 			return "/WEB-INF/views/member/mypage.jsp";
 		}
-		//마이페이지 - 비밀 번호 변경 페이지
-		/*
-		@RequestMapping("/password")
-		public String password() {
-			return "/WEB-INF/views/member/password.jsp";
-			//기존 비밀번호 , 신규비밀번호 
-			//기존 비밀번호가 맞으면 신규비밀번호가 바뀌는거지 
-			//수정 
-		}
-		*/
+		
 		//비밀번호 변경
 		@GetMapping("/password")
 		public String password() {
@@ -199,7 +190,7 @@ public class MemberController {
 		@PostMapping("/exit")
 		public String exit(@RequestParam String memberPw, HttpSession session ) {
 			//아이디꺼내기(세션필요함)
-			String loginId =(String)session.getAttribute("loginId"); 
+			String loginId =(String) session.getAttribute("loginId"); 
 			
 			MemberDto findDto =memberDao.selectOne(loginId);
 			boolean isValid = findDto.getMemberPw().equals(memberPw);
@@ -219,7 +210,4 @@ public class MemberController {
 		}
 		
 		
-		
-		
-	
 }

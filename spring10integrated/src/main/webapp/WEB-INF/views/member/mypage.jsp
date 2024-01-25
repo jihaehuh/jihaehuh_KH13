@@ -60,7 +60,9 @@
 		</tr>
 	</tbody>
 </table>
-<h2><a href ="/member/password">비밀번호변경</a></h2>
+
+<%-- <h2><a href="/member/password">비밀번호 변경 마지막 슬래쉬를 endpoint라고 한다--%>
+<h2><a href="/member/password">비밀번호 변경</a></h2>
 <h2><a href ="#">개인정보변경</a></h2>
 <h2><a href ="#">회원탈퇴</a></h2>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

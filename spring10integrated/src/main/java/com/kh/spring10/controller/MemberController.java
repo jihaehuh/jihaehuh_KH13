@@ -189,11 +189,34 @@ public class MemberController {
 					return "redirect:change?error";
 				}
 			
-			
 		}
 		
-		
-		
+		//회원 탈퇴
+			@GetMapping("/exit")
+			public String exit() {
+				return "/WEB-INF/views/member/exit.jsp";
+			}
+		@PostMapping("/exit")
+		public String exit(@RequestParam String memberPw, HttpSession session ) {
+			//아이디꺼내기(세션필요함)
+			String loginId =(String)session.getAttribute("loginId"); 
+			
+			MemberDto findDto =memberDao.selectOne(loginId);
+			boolean isValid = findDto.getMemberPw().equals(memberPw);
+			if (isValid) {
+				memberDao.delete(loginId); //회원탈퇴
+				session.removeAttribute("loginId"); //로그아웃
+				return "redirect:exitFinish";
+			}
+			else {
+				return "redirect:exit?error"; //redirect는 get방식 form 만이 post방식을 발생
+			}
+			
+		}
+		@RequestMapping("/exitFinish")
+		public String exitFinish() {
+			return "/WEB-INF/views/member/exitFinish.jsp";
+		}
 		
 		
 		

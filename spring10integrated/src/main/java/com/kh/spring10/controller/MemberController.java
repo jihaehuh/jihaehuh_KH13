@@ -143,48 +143,59 @@ public class MemberController {
 			}
 			
 		}
-		
 		@RequestMapping("/passwordFinish")
 		public String passwordFinish() {
 			return "/WEB-INF/views/member/passwordFinish.jsp";
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*
-		@PostMapping("/password")
-		public String password(@ModelAttribute MemberDto inputDto,HttpSession session) {
-			//사용자가 입력한 비밀번호로 회원정보를 조회한다
-			MemberDto correctDto = memberDao.selectOne(inputDto.getMemberPw()); //사용자가 입력한 비밀번호 받기
-			//로그인 가능 여부를 판정
-			boolean isValid = correctDto != null && 
-					inputDto.getMemberPw().equals(correctDto.getMemberPw());//아이디가 있어야하고 비밀번호가 일치한다면
+			//개인정보 변경
+			@GetMapping("/change")
+			public String change(Model model, HttpSession session) {
+				//페이지 넘기려면 모델이 필요하고, 정보 받으려면 세션필요함
+				//사용자 아이디를 세션에서 추출
+				String loginId = (String)session.getAttribute("loginId");
+				
+				//아이디로 정보 조회
+				MemberDto memberDto = memberDao.selectOne(loginId);
+				
+				//모델에 정보 추가
+				model.addAttribute("memberDto", memberDto);
+				
+				return "/WEB-INF/views/member/change.jsp";
+			}
 			
-			//결과에 따라 다른 처리
-			if(isValid) {
-				//세션에 데이터 추가
-				session.setAttribute("loginPw",correctDto.getMemberPw());//,사용자 ID
-				//최종 로그인 시각 갱신
-				memberDao.updateMemberPw(correctDto);
-				return "member/pwok.jsp";
-			}
-			else {//로그인 실패
-				 return "redirect:password?error";
-			}
+			@PostMapping("/change")
+			public String change(
+					@ModelAttribute MemberDto memberDto, HttpSession session) {
+				//세션에서 아이디 추출
+				String loginId = (String)session.getAttribute("loginId");
+				
+				//memberDto에 아이디 설정
+				memberDto.setMemberId(loginId);
+				
+				//DB정보 조회
+				MemberDto findDto = memberDao.selectOne(loginId);
+				
+				//판정
+				boolean isValid = memberDto.getMemberPw().equals(findDto.getMemberPw());
+				
+				//변경 요청
+				if(isValid) {
+					memberDao.updateMember(memberDto);
+					return "redirect:mypage";
+				}
+				else {
+					//이전 페이지로 리다이렉트
+					return "redirect:change?error";
+				}
+			
+			
 		}
 		
-		@RequestMapping("/pwok")
-		public String pwok(HttpSession session) {
-			session.getAttribute("loginpw");
-			return "/WEB-INF/views/member/pwok";
-		}
-		*/
+		
+		
+		
+		
 		
 		
 	

@@ -28,9 +28,28 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 			//.addPathPatterns("/**");  
 			//Interceptor 에서 false로 반환해놓고 포켓몬 목록과 사원목록주소만 써놓으면 두곳은 차단할수있음
 			
+			/*
 			registry.addInterceptor(memberInterceptor)
-						.addPathPatterns("/member/mypage");
-	
+						.addPathPatterns(
+								"/member/mypage",
+								"/member/password",
+								"/member/passwordFinish",
+								"/member/change",
+								"/member/exit"
+								);
+			*/
+			//중간 주소를 등록 하고 특정페이지를 제외(exclude)
+			// -주소를 설정할 때  **와 * 를 사용할 수 있다
+			// - **는 하위 엔드포인트(/) 까지 모두 포함하여 설정할 때 사용 (전부 -후손)
+			// - *는 동일 엔드포인트(/) 까지만 포함하여 설정할때 사용(지금 위치만 -자식)
+			
+			registry.addInterceptor(memberInterceptor)
+						.addPathPatterns("/member/**")  //멤버로 시작하는 모든 주소 막아
+						.excludePathPatterns( //제외 페이지
+						//	"/member/join","/member/joinFinish",
+							"/member/join*",
+							"/member/login","/member/exitFinish"
+								); //이제 부터는 비회원은 회원페이지를 못들어감(위 주소있는것만 접속가능)
 	
 	
 	

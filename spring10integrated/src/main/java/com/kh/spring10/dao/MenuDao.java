@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring10.Vo.StatVO;
 import com.kh.spring10.dto.MenuDto;
 import com.kh.spring10.mapper.MenuMapper;
+import com.kh.spring10.mapper.StatMapper;
 
 @Repository
 public class MenuDao {
@@ -66,4 +68,22 @@ public class MenuDao {
 		List<MenuDto> list = jdbcTemplate.query(sql, mapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	//변종 메소드- 유형별 메뉴 개수 통계
+	@Autowired
+	private StatMapper statMapper;
+	
+	public List<StatVO> statByType() {
+		String sql= "select menu_type 항목,count(*)개수"
+			+ " from menu group by menu_type"
+			+ " order by 개수 desc";
+	return jdbcTemplate.query(sql,statMapper);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

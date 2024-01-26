@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring10.Vo.StatVO;
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.mapper.MemberMapper;
+import com.kh.spring10.mapper.StatMapper;
 
 //member 테이블 데이터 처리를 담당하는 클래스
 @Repository
@@ -98,5 +100,21 @@ public class MemberDao {
 			};
 			return jdbcTemplate.update(sql, data) > 0;
 		}
+		//변종 메소드 - 멤버 등급별 인원수 통계
+		@Autowired
+		private StatMapper statMapper;
+		
+		public List<StatVO> statByType() {
+			String sql ="select member_level 항목, count(*)개수"
+					+ " from member group by member_level"
+					+ " order by 개수 desc";
+			return jdbcTemplate.query(sql, statMapper);
+		}
+		
+		
+		
+		
+		
+		
 	}
 	

@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring10.Vo.StatVO;
 import com.kh.spring10.dto.EmpDto;
 import com.kh.spring10.mapper.EmpMapper;
+import com.kh.spring10.mapper.StatMapper;
 
 @Repository
 public class EmpDao {
@@ -71,6 +73,25 @@ public class EmpDao {
 		return list.isEmpty() ? null:list.get(0);
 	}
 	//http://localhost:8080/emp/detail?empNo=2
+	
+	@Autowired
+	private StatMapper statMapper;
+	//변종 메소드 - 부서별 사원 수 통계
+	public List<StatVO> statByType() {
+		String sql= "select emp_dept 항목,count(*)개수"
+				+ " from emp group by emp_dept"
+				+ " order by 개수 desc";
+		return jdbcTemplate.query(sql, statMapper);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 		
 

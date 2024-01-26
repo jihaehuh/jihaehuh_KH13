@@ -1,5 +1,7 @@
 package com.kh.spring10.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -211,6 +213,23 @@ public class MemberController {
 		public String exitFinish() {
 			return "/WEB-INF/views/member/exitFinish.jsp";
 		}
+		//회원 목록 항목 검색
+		@RequestMapping("/search")
+		public String search(@RequestParam(required = false) String column,
+				@RequestParam(required = false) String keyword,
+				Model model
+				) {
+			boolean isSearch = column != null && keyword != null;
+			List <MemberDto> list = isSearch ?
+					memberDao.selectList(column,keyword) :memberDao.selectList();
+			model.addAttribute("list", list);
+			return "/WEB-INF/views/admin/member/search.jsp";
+		}
+		
+		
+		
+		
+		
 		
 		
 }

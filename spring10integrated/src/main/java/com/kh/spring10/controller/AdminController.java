@@ -21,6 +21,8 @@ public class AdminController {
 	
 	@Autowired
 	private PocketmonDao pocketmonDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	@RequestMapping("/stat/pocketmon")
 	public String statPocketmon(Model model) {
@@ -51,8 +53,6 @@ public class AdminController {
 		return "/WEB-INF/views/admin/stat/menu.jsp";
 	}
 	//등급별 인원수 통계
-	@Autowired
-	private MemberDao memberDao;
 	
 	@RequestMapping("/stat/member")
 	public String statMember(Model model) {
@@ -60,16 +60,12 @@ public class AdminController {
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/stat/member.jsp";
 	}
-	/*
-	//멤버 회원 검색 구현
-	@Autowired
-	private MemberDao memberDao;
 	
 	@RequestMapping("/member/search")
-	public String statMember(Model model) {
+	public String statMeberSearch(Model model) {
 		List<StatVO> list = memberDao.statByType();
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/member/search.jsp";
 	}
-	*/
+	
 }

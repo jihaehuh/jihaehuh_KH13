@@ -21,17 +21,18 @@ public class StudentController {
 	@Autowired
 	private StudentDao studentDao;
 
+	//학생등록
 	@GetMapping("/add")
 	public String add() {
-		return "/WEB-INF/views/student/add.jsp";
+		return "/WEB-INF/views/student/add.jsp"; 
 	}
 	@PostMapping("/add")
-	public String add(@ModelAttribute StudentDto studentDto) {
-		studentDao.insert(studentDto);
-		return "redirect:list";
+	public String add(@ModelAttribute StudentDto studentDto) { 
+		studentDao.insert(studentDto); 
+		return "redirect:list"; //목록 페이지로 반환
 	}
 
-
+	//학생 목록
 	@RequestMapping("/list")
 	public String list(@RequestParam(required = false) String keyword, Model model) {
 		boolean isSearch = keyword != null;
@@ -40,7 +41,8 @@ public class StudentController {
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/student/list.jsp";
 	}
-
+	
+	//학생 상세정보
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int studentId, Model model) {
 		StudentDto studentDto = studentDao.selectOne(studentId);
@@ -49,7 +51,8 @@ public class StudentController {
 		model.addAttribute("rank", rank); 
 		return "/WEB-INF/views/student/detail.jsp";
 	}
-
+	
+	//학생 정보 수정
 	@GetMapping("/edit")
 	public String edit(@RequestParam int studentId, Model model) {
 		StudentDto studentDto = studentDao.selectOne(studentId);
@@ -61,7 +64,8 @@ public class StudentController {
 		studentDao.update(studentDto);
 		return "redirect:detail?studentId="+studentDto.getStudentId();
 	}
-
+	
+	//학생 정보 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int studentId) {
 		studentDao.delete(studentId);

@@ -67,6 +67,7 @@ public class MemberController {
 		if(isValid) {
 			//세션에 데이터 추가
 			session.setAttribute("loginId",findDto.getMemberId());//,사용자 ID
+			session.setAttribute("loginLevel", findDto.getMemberLevel());
 			//최종 로그인 시각 갱신
 			memberDao.updateMemberLogin(findDto.getMemberId());
 			return "redirect:/";
@@ -81,6 +82,8 @@ public class MemberController {
 		@RequestMapping("/logout")
 		public String logout(HttpSession session) {
 			session.removeAttribute("loginId");
+			session.removeAttribute("loginLevel");
+			//session.invalidate();//세션삭제(비추천) -특별한 목적없이 전체삭제는 별로임
 			return "redirect:/";
 		}
 	// 마이페이지

@@ -18,6 +18,7 @@ import com.kh.spring10.dao.PocketmonDao;
 @RequestMapping("/admin")
 public class AdminController {
 	//포켓몬스터 통계
+	
 	@Autowired
 	private PocketmonDao pocketmonDao;
 	
@@ -34,9 +35,10 @@ public class AdminController {
 
 	@RequestMapping("/stat/emp")
 	public String statEmp(Model model) {
-	List<StatVO> list = empDao.statByType();
-	model.addAttribute("list", list);
-	return "/WEB-INF/views/admin/stat/emp.jsp";
+		//List<StatVO> list = empDao.statByType();
+		//model.addAttribute("list", list);
+		model.addAttribute("list", empDao.countByEmpType()); //위에 두줄 한번에 쓰기
+		return "/WEB-INF/views/admin/stat/emp.jsp";
 	}
 	//유형별 메뉴 개수 통계
 	@Autowired
@@ -44,7 +46,7 @@ public class AdminController {
 	
 	@RequestMapping("/stat/menu")
 	public String statMenu(Model model) {
-		List<StatVO>list = menuDao.statByType();
+		List<StatVO>list = menuDao.countByMenuType();
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/stat/menu.jsp";
 	}
@@ -58,6 +60,16 @@ public class AdminController {
 		model.addAttribute("list", list);
 		return "/WEB-INF/views/admin/stat/member.jsp";
 	}
+	/*
+	//멤버 회원 검색 구현
+	@Autowired
+	private MemberDao memberDao;
 	
-	
+	@RequestMapping("/member/search")
+	public String statMember(Model model) {
+		List<StatVO> list = memberDao.statByType();
+		model.addAttribute("list", list);
+		return "/WEB-INF/views/admin/member/search.jsp";
+	}
+	*/
 }

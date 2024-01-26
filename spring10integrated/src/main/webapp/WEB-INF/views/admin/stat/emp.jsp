@@ -11,7 +11,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach var="statVO" items="${list}">
+		<c:forEach var="statVO" items="${list}">  
 		<tr>
 			<td>${statVO.title}</td>
 			<td>${statVO.count}</td>

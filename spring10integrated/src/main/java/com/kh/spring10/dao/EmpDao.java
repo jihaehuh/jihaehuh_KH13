@@ -74,13 +74,14 @@ public class EmpDao {
 	}
 	//http://localhost:8080/emp/detail?empNo=2
 	
+	//변종 메소드 - 부서별 사원 수 통계
 	@Autowired
 	private StatMapper statMapper;
-	//변종 메소드 - 부서별 사원 수 통계
-	public List<StatVO> statByType() {
+	
+	public List<StatVO> countByEmpType() {
 		String sql= "select emp_dept 항목,count(*)개수"
 				+ " from emp group by emp_dept"
-				+ " order by 개수 desc";
+				+ " order by 개수 desc, emp_dept asc";
 		return jdbcTemplate.query(sql, statMapper);
 	}
 	

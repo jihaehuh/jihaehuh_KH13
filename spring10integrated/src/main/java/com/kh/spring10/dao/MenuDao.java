@@ -72,7 +72,7 @@ public class MenuDao {
 	@Autowired
 	private StatMapper statMapper;
 	
-	public List<StatVO> statByType() {
+	public List<StatVO> countByMenuType() {
 		String sql= "select menu_type 항목,count(*)개수"
 			+ " from menu group by menu_type"
 			+ " order by 개수 desc";

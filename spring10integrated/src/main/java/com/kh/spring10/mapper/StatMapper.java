@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
-import com.kh.spring10.Vo.StatVO;
+import com.kh.spring10.vo.StatVO;
 @Service
 public class StatMapper implements RowMapper<StatVO>{
 

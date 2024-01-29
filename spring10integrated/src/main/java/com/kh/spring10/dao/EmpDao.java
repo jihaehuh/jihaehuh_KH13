@@ -6,20 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spring10.Vo.StatVO;
 import com.kh.spring10.dto.EmpDto;
 import com.kh.spring10.mapper.EmpMapper;
 import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.StatVO;
 
 @Repository
 public class EmpDao {
-
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@Autowired
 	private EmpMapper mapper;
-
+	
 	public void insert(EmpDto dto) {
 		String sql = "insert into emp("
 						+ "emp_no, emp_name, emp_dept, emp_date, emp_sal"
@@ -32,67 +32,53 @@ public class EmpDao {
 	}
 	public boolean update(EmpDto dto) {
 		String sql = "update emp "
-						+ "set emp_name=?, emp_dept=?, emp_date=?, emp_sal=? "
+						+ "set "
+							+ "emp_name=?, emp_dept=?, "
+							+ "emp_date=?, emp_sal=? "
 						+ "where emp_no=?";
 		Object[] data = {
-				dto.getEmpName(), dto.getEmpDept(), 
-				dto.getEmpDate(), dto.getEmpSal(),dto.getEmpNo()
+			dto.getEmpName(), dto.getEmpDept(),
+			dto.getEmpDate(), dto.getEmpSal(),
+			dto.getEmpNo()
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-		//삭제
 	public boolean delete(int empNo) {
-		String sql="delete emp where emp_no=?";
-		Object[]data= {empNo};
-		return jdbcTemplate.update(sql,data)>0;
+		String sql = "delete emp where emp_no = ?";
+		Object[] data = {empNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
-	//삭제 주소
-	//http://localhost:8080/emp/delete?empNo=2
-	
-	//단순목록 조회 
 	public List<EmpDto> selectList() {
 		String sql = "select * from emp order by emp_no asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
-	//항목+키워드 검색
 	public List<EmpDto> selectList(String column, String keyword) {
 		String sql = "select * from emp where instr("+column+", ?) > 0 "
 										+ "order by "+column+" asc, emp_no asc";
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
-	//http://localhost:8080/emp/list?column=emp_name&keyword=이
-	
-	//한 항목(번호)조회
 	public EmpDto selectOne(int empNo) {
-		String sql = "select * from emp where emp_no =?";
-		Object[]data = {empNo};
-		List<EmpDto>list =jdbcTemplate.query(sql, mapper,data);
-		return list.isEmpty() ? null:list.get(0);
+		String sql = "select * from emp where emp_no = ?";
+		Object[] data = {empNo};
+		List<EmpDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
-	//http://localhost:8080/emp/detail?empNo=2
 	
-	//변종 메소드 - 부서별 사원 수 통계
 	@Autowired
 	private StatMapper statMapper;
 	
-	public List<StatVO> countByEmpType() {
-		String sql= "select emp_dept 항목,count(*)개수"
-				+ " from emp group by emp_dept"
-				+ " order by 개수 desc, emp_dept asc";
+	//사원 통계 메소드
+	public List<StatVO> countByEmpDept() {
+		String sql = "select emp_dept 항목, count(*) 개수 from emp "
+						+ "group by emp_dept "
+						+ "order by 개수 desc, emp_dept asc";
 		return jdbcTemplate.query(sql, statMapper);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-		
+
+
+
+
+
 

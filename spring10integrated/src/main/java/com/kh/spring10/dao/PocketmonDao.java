@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.spring10.Vo.StatVO;
 import com.kh.spring10.dto.PocketmonDto;
 import com.kh.spring10.mapper.PocketmonMapper;
 import com.kh.spring10.mapper.StatMapper;
+import com.kh.spring10.vo.StatVO;
 
 //DAO도 이제부터는 등록 해야한다
 //-@Repository는 파일이나 데이터베이스 

@@ -11,13 +11,13 @@ import com.kh.spring10.mapper.StudentMapper;
 
 @Repository
 public class StudentDao {
-
+	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-
+	
 	@Autowired
 	private StudentMapper mapper;
-
+	
 	public void insert(StudentDto dto) {
 		String sql = "insert into student("
 							+ "student_id, name, korean_score, "
@@ -30,26 +30,22 @@ public class StudentDao {
 		};
 		jdbcTemplate.update(sql, data);
 	}
-	
 	public List<StudentDto> selectList() {
 		String sql = "select * from student order by student_id asc";
 		return jdbcTemplate.query(sql, mapper);
 	}
-	
 	public List<StudentDto> selectList(String column, String keyword) {
 		String sql = "select * from student where instr(" + column+", ?) > 0 "
 											+ "order by "+column+" asc, student_id asc";
 		Object[] data = {keyword};
 		return jdbcTemplate.query(sql, mapper, data);
 	}
-	
 	public StudentDto selectOne(int studentId) {
 		String sql = "select * from student where student_id = ?";
 		Object[] data = {studentId};
 		List<StudentDto> list = jdbcTemplate.query(sql, mapper, data);
 		return list.isEmpty() ? null : list.get(0);
 	}
-	
 	public boolean update(StudentDto dto) {
 		String sql = "update student "
 						+ "set name=?, korean_score=?, math_score=?, english_score=? "
@@ -60,15 +56,14 @@ public class StudentDao {
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
 	public boolean delete(int studentId) {
 		String sql = "delete student where student_id = ?";
 		Object[] data = {studentId};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-
+	
 	//특정 번호의 학생에 대한 순위를 추첨하는 메소드
-	//- 필요 데이터 : 학생 테이블의 기본키(studentId)
+	//- 필요 데이터 : 학생의 총점
 	//- 결과 데이터 : 해당 학생의 순위(int)
 	//- 명령 : jdbcTemplate.query가 아닌 jdbcTemplate.queryForObject 사용
 	//- int, String등 하나의 결과만 나오는 경우 사용할 수 있음

@@ -51,8 +51,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 							"/member/login","/member/exitFinish"
 								); //이제 부터는 비회원은 회원페이지를 못들어감(위 주소있는것만 접속가능)
 	
-	
-	
+			
+			//관리자 인터셉터 등록
+			//registry.addInterceptor(adminInterceptor)
+			//			.addPathPatterns("/admin/**");
 	}
 
 }

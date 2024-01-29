@@ -24,7 +24,16 @@ public class BoardController {
 	
 	//목록 조회
 	@RequestMapping("/list")
-	public String search(@RequestParam(required = false) String column,
+		public String search(@RequestParam(required = false) String column,
+				@RequestParam(required = false) String keyword,
+				Model model) {
+		boolean isSearch = column != null && keyword != null;
+		List <BoardDto> list = isSearch ?
+				boardDao.selectList(column,keyword) :boardDao.selectList();
+		return "/WEB-INF/views/board/list.jsp";
+	}
+	/*
+	 * public String search(@RequestParam(required = false) String column,
 			@RequestParam(required = false) String keyword,
 			Model model
 			) {
@@ -32,7 +41,5 @@ public class BoardController {
 		List <BoardDto> list = isSearch ?
 				boardDao.selectList(column,keyword) :boardDao.selectList();
 		model.addAttribute("list", list);
-		return "/WEB-INF/views/board/list.jsp";
-	}
-	
+	 */
 }

@@ -3,19 +3,20 @@ package com.kh.spring10.dto;
 import java.sql.Date;
 
 public class BoardDto {
-	private int boardNo;
-	private String boardTitle;
-	private String boardContent;
-	private String boardWriter;
-	private Date boardWtime;
-	private Date boardEtime;
-	private int boardReadcount;
+	private int boardNo; //글번호
+	private String boardTitle; //작성자
+	private String boardContent; //글내용
+	private String boardWriter; //작성자(회원아이디)
+	private Date boardWtime; //작성시각
+	private Date boardEtime; //수정시각
+	private int boardReadcount; //조회수
 	
-	public BoardDto() {
-		super();
-	}
+	//toString 만드려면 컨텐트는 빼고 만드는게 좋다
 	public int getBoardNo() {
 		return boardNo;
+	}
+	public BoardDto() {
+		super();
 	}
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
@@ -55,7 +56,11 @@ public class BoardDto {
 	}
 	public void setBoardReadcount(int boardReadcount) {
 		this.boardReadcount = boardReadcount;
-	} 
+	}
+	
+	
+	
+	
 	
 	
 	

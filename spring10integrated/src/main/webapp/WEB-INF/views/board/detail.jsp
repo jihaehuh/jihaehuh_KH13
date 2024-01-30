@@ -1,33 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<h1>${boardDto.boardNo}게시글 상세</h1>
+<h1>${boardDto.boardNo} 번 게시글 상세</h1>
 
 <table border="1" width="800">
 	<tbody>
 		<tr>
-			<th width ="30%">게시글 번호</th>
-			<td>${boardDto.boardNo}</td>
-		</tr>
-		<tr>
-			<th>게시글 제목</th>
 			<td>${boardDto.boardTitle}</td>
 		</tr>
 		<tr> 
-			<th>게시글 내용</th>
+			<td>
+			<%--탈퇴한 사용자 일때와 아닐때 나오는 정보가 다르게 구현 --%>
+			<c:choose><%-- 목록에서 사용자를 구별하기엔 아직 문제가 있어서 여기서 함 --%>
+				<c:when test="${boardDto.boardWriter =null}">
+					${boardDto.boardWriterStr}
+				</c:when>
+				<c:otherwise>
+				<%-- <td>${boardDto.boardwriter}</td>--%>
+				${memberDto.memberNick}
+				(${memberDto.memberLevel})	
+				</c:otherwise>
+			</c:choose>
+			</td>
+		</tr>
+		<tr height="200" valign="top">
 			<td>${boardDto.boardContent}</td>
 		</tr>
 		<tr>
-			<th>게시글 작성 시간</th>
-			<td>${boardDto.boardWtime}</td>
-		</tr>
-		<tr>
-			<th>게시글 마지막 수정 시간</th>
-			<td>${boardDto.boardEtime}</td>
-		</tr>
-		<tr>
-			<th>조회수</th>
-			<td>${boardDto.boardReadcount}</td>
+			<td>조회수${boardDto.boardReadcount} 댓글 ?<br>
+			<fmt:formatDate value="${boardDto.boardWriter}"
+				pattern="yyyy-MM-dd HH:mm:ss"/>
+			 </td>
 		</tr>
 	</tbody>	
 	</table>

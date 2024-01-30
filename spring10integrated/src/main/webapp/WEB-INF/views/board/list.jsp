@@ -26,9 +26,21 @@
 		<c:forEach var="boardDto" items="${list}">
 		<tr>
 			<td>${boardDto.boardNo}</td>
-			<td align="left">${boardDto.boardTitle}</td>
-			<td>${boardDto.boardWriter}</td>
-			<td>${boardDto.boardWtime}</td>
+			<td align="left">
+			<a href="detail?boardNo=${boardDto.boardNo}">
+					${boardDto.boardTitle}</a></td>
+			<%--
+			<c:choose>
+				<c:when test="${boardDto.boardWriter == null}">
+					<td>탈퇴한사용자</td>
+				</c:when>			
+				<c:otherwise>
+					<td>${boardDto.boardWriter}</td>
+				</c:otherwise>
+			</c:choose>
+			 --%>
+		 	<td>${boardDto.boardWriterStr}</td>
+			<td>${boardDto.boardWtimeStr}</td>
 			<td>${boardDto.boardReadcount}</td>
 		</tr>
 		</c:forEach>
@@ -38,5 +50,15 @@
 <%-- 네비게이터 --%>
 
 <%-- 검색창 --%>
+<form action="list" method="get">
+	<select name="column">
+		<option value="board_title" ${param.column == 'board_title' ? 'selected' : ''}>제목</option>
+		<option value="board_writer" ${param.column == 'board_writer' ? 'selected' : ''}>작성자</option>
+		<option value="board_content" ${param.column == 'board_content' ? 'selected' : ''}>내용</option>
+	</select>
+	<input type="search" name="keyword" placeholder="검색어 입력" required value="${param.keyword}">
+	<button>검색</button>
+</form>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

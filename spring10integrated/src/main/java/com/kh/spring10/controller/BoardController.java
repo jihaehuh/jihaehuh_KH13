@@ -1,29 +1,28 @@
 package com.kh.spring10.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.BoardDao;
+import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.BoardDto;
 import com.kh.spring10.dto.MemberDto;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
+
+	@Autowired
+	private MemberDao memberDao;
 	@Autowired
 	private BoardDao boardDao;
 	
+	//목록
 	@RequestMapping("/list")
-	public String list( //항목 키워드 모델
+	public String list(
 			@RequestParam(required = false) String column, 
 			@RequestParam(required = false) String keyword, Model model) {
 		boolean isSearch = column != null && keyword != null;
@@ -36,14 +35,22 @@ public class BoardController {
 		return "/WEB-INF/views/board/list.jsp";
 	}
 	
+
+	
 	//상세
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo ,Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		model.addAttribute("boardDto", boardDto);
+		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부
+		if(boardDto.getBoardWriter() != null) { 
+			//탈퇴한 사람이 작성했을 경우 
+		MemberDto memberDto = memberDao.selectOne(boardDto.getBoardWriter()); 
+		model.addAttribute("memberDto", memberDto);
+		}
 		return "/WEB-INF/views/board/detail.jsp";
 	}
-	
+	/*
 	//게시글 작성(등록)
 	@GetMapping("/write")
 	public String wirte() {
@@ -60,5 +67,5 @@ public class BoardController {
 		;
 		return "redirect:list";
 	}
-	
+	*/
 }

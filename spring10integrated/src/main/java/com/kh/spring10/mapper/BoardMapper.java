@@ -8,11 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring10.dto.BoardDto;
 
-
-
 @Service
-public class BoardMapper implements RowMapper<BoardDto> {
-
+public class BoardMapper implements RowMapper<BoardDto>{
 	@Override
 	public BoardDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BoardDto boardDto = new BoardDto();
@@ -23,9 +20,6 @@ public class BoardMapper implements RowMapper<BoardDto> {
 		boardDto.setBoardWtime(rs.getDate("board_wtime"));
 		boardDto.setBoardEtime(rs.getDate("board_etime"));
 		boardDto.setBoardReadcount(rs.getInt("board_readcount"));
-		
 		return boardDto;
-		
 	}
-
 }

@@ -57,4 +57,15 @@ public class BoardDao {
 		List<BoardDto> list=jdbcTemplate.query(sql, boardMapper,data);
 		return list.isEmpty() ? null : list.get(0);
 	}
+	
+	//조회수 증가
+	public boolean updateBoardReadcount(int boardNo) {
+		String sql= "update board "
+				+ "set board_readcount =board_readcount +1 "
+				+ "where board_no=? ";
+		Object[]data = {boardNo};
+		return jdbcTemplate.update(sql,data)>0;
+	}
+	
+	
 }

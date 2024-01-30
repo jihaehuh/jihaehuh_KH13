@@ -40,6 +40,9 @@ public class BoardController {
 	//상세
 	@RequestMapping("/detail")
 	public String detail(@RequestParam int boardNo ,Model model) {
+		//조회수 중복방지 --인터셉터에서 한번에 했다가 안했다가 하도록 만들수 있다
+		//boardDao.updateBoardReadcount(boardNo); //이걸 안지우면 인터셉터에도 있어서 두개씩 올라간다
+		
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		model.addAttribute("boardDto", boardDto);
 		//조회한 게시글 정보에 있는 회원 아이디로 작성자 정보를 불러와서 첨부

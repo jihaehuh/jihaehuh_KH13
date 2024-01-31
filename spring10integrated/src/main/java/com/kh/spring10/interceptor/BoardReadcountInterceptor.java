@@ -65,16 +65,15 @@ public class BoardReadcountInterceptor implements HandlerInterceptor{
 			history = new HashSet<>();
 		}
 		
-		//if(history.(boardNo)) { //(글번호가 들어갔다면(읽은적이 없다면) 
+		//if(history.add(boardNo)) { //(글번호가 들어갔다면(읽은적이 없다면) //번호가 들어왔는데 있으면 이미 읽었던거 없으면 새로운거 
 		if(history.contains(boardNo)) { //이미 읽은적이 있다면
-			return true; //어~읽었어?지나가 (조회수 증가로 빠지기)
+			return true; //어~읽었어?지나가 (밖으로 통과)
 		}
 		else {//읽은적이 없다면
 			history.add(boardNo); //번호를 기록하고
 			session.setAttribute("history", history); //저장소를 갱신 시켜라
-			//조회수 증가 안시킴으로 반환
+			//set에 번호를 넣고 조회수 증가 시킴으로 반환
 		}
-		
 		//조회수 증가
 		boardDao.updateBoardReadcount(boardNo);
 			return true;//통과

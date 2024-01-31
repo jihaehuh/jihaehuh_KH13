@@ -67,5 +67,39 @@ public class BoardDao {
 		return jdbcTemplate.update(sql,data)>0;
 	}
 	
+	//count, sequence, max, min, sum, avg처럼 결과가 하나만 나오는 경우
+		//그 결과는 객체가 아니라 원시데이터 형태일 확률이 높다
+		public int getSequence() {
+			String sql = "select board_seq.nextval from dual";
+			//jdbcTemplate.queryForObject(구문, 결과자료형);
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+
+		//등록할 때 시퀀스 번호를 생성하면 절대 안된다
+		public void insert(BoardDto boardDto) {
+			//String sql = "insert into board(7개) values(?, ?, ?, ?, sysdate, null, 0)";
+			//String sql = "insert into board(4개) values(?, ?, ?, ?)";
+			String sql = "insert into board("
+							+ "board_no, board_title, board_content, board_writer"
+						+ ") values(?, ?, ?, ?)";
+			Object[] data = {
+				boardDto.getBoardNo(), boardDto.getBoardTitle(),
+				boardDto.getBoardContent(), boardDto.getBoardWriter()
+			};
+			jdbcTemplate.update(sql, data);
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

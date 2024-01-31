@@ -3,6 +3,9 @@ package com.kh.spring10.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -10,6 +13,8 @@ import com.kh.spring10.dao.BoardDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.BoardDto;
 import com.kh.spring10.dto.MemberDto;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/board")
@@ -53,16 +58,28 @@ public class BoardController {
 		}
 		return "/WEB-INF/views/board/detail.jsp";
 	}
-	/*
-	//게시글 작성(등록)
+	
+	//게시글 작성(등록)  //제목 + 내용 + 등록
 	@GetMapping("/write")
 	public String wirte() {
 		return "/WEB-INF/views/board/write.jsp";
 	}
-	@PostMapping("/write")
-	public String write(@ModelAttribute BoardDto boardDto) {
-		boardDao.insert(boardDto);
-		return "redirect:list?boardNo="+boardDto.getBoardNo();	
+	@PostMapping("/write") //등록을눌렀을때 여기로 이동 (세션에서 아이디, DB에서 내용받기)
+	public String write(@ModelAttribute BoardDto boardDto ,HttpSession session) {  //제목,내용은 들어있고 작성자 ,번호를 넣어야한다
+		//세션에서 로그인한 사용자의 아이디를 추출
+		String loginId =(String)session.getAttribute("loginId");
+		
+		//아이디를 게시글 정보에 포함시킨다 
+		boardDto.setBoardWriter(loginId); //DTO에는 이제 3개 아이디 ,제목 ,내용 이 들어감
+		
+		//명령 분할
+		int sequence = boardDao.getSequence(); //DB에서 시퀀스 번호를 추출
+		boardDto.setBoardNo(sequence); //게시글 정보에 추출한 번호를 포함시킨다
+		boardDao.insert(boardDto); //등록
+		
+		return "redirect:detail?boardNo="+sequence;	
+		
+		
 		}
 	//게시글 삭제
 	@GetMapping("/delete")
@@ -70,5 +87,5 @@ public class BoardController {
 		;
 		return "redirect:list";
 	}
-	*/
+	
 }

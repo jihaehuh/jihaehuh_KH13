@@ -34,6 +34,16 @@
 				pattern="yyyy-MM-dd HH:mm:ss"/>
 			 </td>
 		</tr>
+		<tr>
+			<td align ="right">
+				<a href="write">글쓰기</a>
+				<a href="#">답글쓰기</a>
+				<a href="#">글 수정</a>
+				<a href="#">글 삭제</a>
+				<a href="list">글 목록</a>
+				
+			</td>
+		</tr>
 	</tbody>	
 	</table>
 <h3> <a href="#">게시글 삭제하기</a></h3>	

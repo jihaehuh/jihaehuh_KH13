@@ -1,5 +1,8 @@
 package com.kh.spring10.interceptor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -51,8 +54,28 @@ public class BoardReadcountInterceptor implements HandlerInterceptor{
 		//세션에 history라는 이름으로 글 번호를 저장할 저장소를 저장
 		//- ex) history =10,13,15 과 같은 형태로 만들예정
 		//- history 에 해당하는 저장소는 ???형태로 만든다  --HashSet<Integer>
+		//----------------------------------------------------------------------
+		//session에 history라는 이름의 저장소를 꺼낸다(없을수도 있음)
+		//Set<Integer> history = new HashSet<>();
+		//@SuppressWarnings("unchecked") //경고띄우지마(맨위에꺼 추가 할경우) --굳이 필요없어서 주석처리
+		Set<Integer> history = (Set<Integer>)session.getAttribute("history"); //세션은 오브젝트인데 Set으로 꺼내려고 해서 경고 남
+			
+		//history가 없으면 null이므로 새로 만들어야한다
+		if(history ==null) {
+			history = new HashSet<>();
+		}
 		
-		//조회수 증가 & 중복 방지
+		//if(history.(boardNo)) { //(글번호가 들어갔다면(읽은적이 없다면) 
+		if(history.contains(boardNo)) { //이미 읽은적이 있다면
+			return true; //어~읽었어?지나가 (조회수 증가로 빠지기)
+		}
+		else {//읽은적이 없다면
+			history.add(boardNo); //번호를 기록하고
+			session.setAttribute("history", history); //저장소를 갱신 시켜라
+			//조회수 증가 안시킴으로 반환
+		}
+		
+		//조회수 증가
 		boardDao.updateBoardReadcount(boardNo);
 			return true;//통과
 			

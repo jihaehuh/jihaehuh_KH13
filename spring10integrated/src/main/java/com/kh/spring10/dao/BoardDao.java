@@ -55,15 +55,26 @@ public class BoardDao {
 		return jdbcTemplate.query(sql, boardListMapper,data);
 	}
 	
-	
-	
-	
-	
-	
 	//검색 + 페이징
-	
-	
-	
+	public List<BoardDto> selectListByPaging(
+			String column, String keyword,int page, int size) {//객체가 2개도 아니고 4개면 생각해야함...
+		int endRow = page * size;
+		int beginRow = endRow- (size-1);
+		
+		String sql = "select * from ("
+				+ "select rownum rn, TMP.* from ( "
+				+ "select "
+				+"board_no, board_title, board_writer, "
+				+ "board_wtime, board_etime, board_readcount "
+				+ "from board "
+				+ "where instr("+column+", ?) > 0 "
+				+ "order by board_no desc"
+				+")TMP"
+				+") where rn between ? and ?";
+				
+			Object[]data = {keyword, beginRow, endRow};
+			return jdbcTemplate.query(sql, boardListMapper,data);
+	}
 	
 	//검색
 		public List<BoardDto> selectList(String column, String keyword) {
@@ -82,6 +93,9 @@ public class BoardDao {
 			Object[] data = {keyword};
 			return jdbcTemplate.query(sql, boardListMapper, data);
 		}
+		
+		
+		
 	//단일 조회
 	public BoardDto selectOne(int boardNo) {
 		String sql = "select * from board where board_no = ?";

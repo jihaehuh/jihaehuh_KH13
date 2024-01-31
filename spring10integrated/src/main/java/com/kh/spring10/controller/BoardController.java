@@ -35,11 +35,12 @@ public class BoardController {
 			Model model) {
 		boolean isSearch = column != null && keyword != null;
 		if(isSearch) {
-			model.addAttribute("list", boardDao.selectList(column, keyword));
+			//model.addAttribute("list", boardDao.selectList(column, keyword));
+			model.addAttribute("list", boardDao.selectListByPaging(column, keyword, page, size));
 		}
 		else {
 			//model.addAttribute("list", boardDao.selectList());
-			model.addAttribute("list", boardDao.selectListByPaging(page,size));
+			model.addAttribute("list", boardDao.selectListByPaging(page, size));
 		}
 		return "/WEB-INF/views/board/list.jsp";
 	}

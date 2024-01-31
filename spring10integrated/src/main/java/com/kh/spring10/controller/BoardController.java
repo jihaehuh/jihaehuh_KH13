@@ -84,8 +84,30 @@ public class BoardController {
 	//게시글 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
-		;
-		return "redirect:list";
+		boardDao.delete(boardNo);
+		//return "redirect:/board/list"; 
+		return "redirect:list"; 
 	}
+	
+	//수정
+	@GetMapping("/edit")
+	public String edit(@RequestParam int boardNo , Model model) {
+		BoardDto boardDto = boardDao.selectOne(boardNo);
+		model.addAttribute("boardDto", boardDto);
+		return "/WEB-INF/views/board/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit (@ModelAttribute BoardDto boardDto) {
+		boardDao.update(boardDto);
+		return "redirect:detail?boardNo ="+boardDto.getBoardNo();
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 }

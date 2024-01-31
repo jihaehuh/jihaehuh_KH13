@@ -88,18 +88,27 @@ public class BoardDao {
 			};
 			jdbcTemplate.update(sql, data);
 		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		public boolean delete(int boardNo) {
+			String sql = "delete board where board_no =? ";
+			Object[]data = {boardNo};
+			return jdbcTemplate.update(sql,data)>0;
+		}
+		//직접적으로 관계가 있으면 강결합 , 중간에 뭐가있으면 약결합 
+		//구조적으로는 약결합이 엄청 좋다 
+		//-스프링과 오토와이어드 
+		
+		//수정 +수정시각
+		public boolean update(BoardDto boardDto) {
+			String sql ="update board "
+					+ "set board_title, board_content, board_etime=sysdate "
+					+ "where board_no=?";
+			Object[] data= {
+					boardDto.getBoardTitle(), boardDto.getBoardContent(), 
+					boardDto.getBoardNo()
+			};
+			return jdbcTemplate.update(sql, data)>0;
+		}
 	
 	
 }

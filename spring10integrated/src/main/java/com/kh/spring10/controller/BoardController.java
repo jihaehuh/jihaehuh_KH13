@@ -30,6 +30,7 @@ public class BoardController {
 	public String list(
 			@RequestParam(required = false) String column, 
 			@RequestParam(required = false) String keyword, Model model) {
+		
 		boolean isSearch = column != null && keyword != null;
 		if(isSearch) {
 			model.addAttribute("list", boardDao.selectList(column, keyword));

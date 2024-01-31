@@ -19,24 +19,21 @@ import com.kh.spring10.interceptor.TestInterceptor;
 public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Autowired
 	private TestInterceptor testInterceptor;
-	
 	@Autowired
 	private MemberInterceptor memberInterceptor;
-	
 	@Autowired
 	private AdminInterceptor adminInterceptor;
-	
 	@Autowired
 	private BoardReadcountInterceptor boardReadcountInterceptor;
-	
 	@Autowired
 	private BoardOwnerInterceptor boardOwnerInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		registry에다가 인터셉터를 주소와 함께 등록
 //		registry.addInterceptor(인터셉터객체).addPathPatterns(주소);
-//		registry.addInterceptor(testInterceptor)
-//					.addPathPatterns("/pocketmon/list", "/emp/list");
+		registry.addInterceptor(testInterceptor)
+					.addPathPatterns("/**");
 		
 //		지정한 페이지만 허용하도록 설정
 //		registry.addInterceptor(memberInterceptor)
@@ -53,15 +50,14 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //		- *는 동일 엔드포인트까지만 포함하여 설정할 때 사용 (자식)
 		registry.addInterceptor(memberInterceptor)
 					.addPathPatterns(
-							"/member/**",
-							"/board/**"
-							)
+						"/member/**",
+						"/board/**"
+					)
 					.excludePathPatterns(
-							//"/member/join", "/member/joinFinish",
-							"/member/join*",
-							"/member/login", "/member/exitFinish",
-						   "/board/list", "/board/detail"
-							
+						//"/member/join", "/member/joinFinish",
+						"/member/join*",
+						"/member/login", "/member/exitFinish",
+						"/board/list", "/board/detail"
 					);
 		
 		//관리자 인터셉터 등록
@@ -72,9 +68,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 		registry.addInterceptor(boardReadcountInterceptor)
 					.addPathPatterns("/board/detail");
 		
-		//내글 또는 관리자만 수정 삭제 하는 인터셉터 등록
+		//내글 또는 관리자만 수정 삭제하는 인터셉터 등록
 		registry.addInterceptor(boardOwnerInterceptor)
-		.addPathPatterns("/board/edit");
+					.addPathPatterns("/board/edit", "/board/delete");
 	}
-	
 }

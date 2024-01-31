@@ -1,53 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<h1>${boardDto.boardNo} 번 게시글 상세</h1>
+
+<h1>${boardDto.boardNo}번 글 보기</h1>
 
 <table border="1" width="800">
-	<tbody>
-		<tr>
-			<td>${boardDto.boardTitle}</td>
-		</tr>
-		<tr> 
-			<td>
-			<%--탈퇴한 사용자 일때와 아닐때 나오는 정보가 다르게 구현 --%>
-			<c:choose><%-- 목록에서 사용자를 구별하기엔 아직 문제가 있어서 여기서 함 --%>
-				<c:when test="${boardDto.boardWriter =null}">
+	<tr>
+		<td>
+			${boardDto.boardTitle}
+			
+			<%-- (추가) 수정시각 유무에 따라 수정됨 표시 --%>
+			<c:if test="${boardDto.boardEtime != null}">
+				(수정됨)
+			</c:if>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%-- 탈퇴한 사용자일 때와 아닐 때 나오는 정보가 다르게 구현 --%>
+			<c:choose>
+				<c:when test="${boardDto.boardWriter == null}">
 					${boardDto.boardWriterStr}
 				</c:when>
 				<c:otherwise>
-				<%-- <td>${boardDto.boardwriter}</td>--%>
-				${memberDto.memberNick}
-				(${memberDto.memberLevel})	
+					${memberDto.memberNick}
+					(${memberDto.memberLevel})
 				</c:otherwise>
 			</c:choose>
-			</td>
-		</tr>
-		<tr height="200" valign="top">
-			<td>${boardDto.boardContent}</td>
-		</tr>
-		<tr>
-			<td>조회수${boardDto.boardReadcount} 댓글 ?<br>
-			<fmt:formatDate value="${boardDto.boardWriter}"
-				pattern="yyyy-MM-dd HH:mm:ss"/>
-			 </td>
+		</td>	
+	</tr>
+	<tr height="200" valign="top">
+		<td>
+			${boardDto.boardContent}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			조회수 ${boardDto.boardReadcount} 
+			댓글 ? 
+			<br>
+			
+			<fmt:formatDate value="${boardDto.boardWtime}" 
+										pattern="yyyy-MM-dd HH:mm:ss"/>
+			<br>
+			
+			${boardDto.boardWtimeDiff}
+		</td>
 		</tr>
 		<tr>
 			<td align ="right">
 				<a href="write">글쓰기</a>
 				<a href="#">답글쓰기</a>
-				<a href="#">글 수정</a>
-				<a href="delete?boardNo=${boardDto.boardNo}">글 삭제</a>
-				<a href="list">글 목록</a>
 				
-			</td>
-		</tr>
-	</tbody>	
-	</table>
-<h3> <a href="#">게시글 삭제하기</a></h3>	
-<h3> <a href="#">게시글 새로 작성하기</a></h3>
-	
+				<%-- 
+				수정과 삭제 링크는 회원이면서 본인글이거나 관리자일 경우만 출력 
+				- 본인글이란 로그인한 사용자 아이디와 게시글 작성자가 같은 경우
+				- 관리자란 로그인한 사용자 등급이 '관리자'인 경우
+			--%>
+			<c:if test="${sessionScope.loginId != null && (sessionScope.loginId == boardDto.boardWriter || sessionScope.loginLevel == '관리자')}">
+			<a href="edit?boardNo=${boardDto.boardNo}">글수정</a>
+			<a href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
+			</c:if>
+			<a href="list">글목록</a>
+		</td>
+	</tr>
+</table>
+
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>

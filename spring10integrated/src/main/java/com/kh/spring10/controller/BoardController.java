@@ -61,13 +61,13 @@ public class BoardController {
 	
 	//게시글 작성(등록)  //제목 + 내용 + 등록
 	@GetMapping("/write")
-	public String wirte() {
+	public String write() {
 		return "/WEB-INF/views/board/write.jsp";
 	}
 	@PostMapping("/write") //등록을눌렀을때 여기로 이동 (세션에서 아이디, DB에서 내용받기)
-	public String write(@ModelAttribute BoardDto boardDto ,HttpSession session) {  //제목,내용은 들어있고 작성자 ,번호를 넣어야한다
+		public String write(@ModelAttribute BoardDto boardDto, HttpSession session) { //제목,내용은 들어있고 작성자 ,번호를 넣어야한다
 		//세션에서 로그인한 사용자의 아이디를 추출
-		String loginId =(String)session.getAttribute("loginId");
+		String loginId = (String)session.getAttribute("loginId");
 		
 		//아이디를 게시글 정보에 포함시킨다 
 		boardDto.setBoardWriter(loginId); //DTO에는 이제 3개 아이디 ,제목 ,내용 이 들어감
@@ -85,24 +85,23 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
 		boardDao.delete(boardNo);
-		//return "redirect:/board/list"; 
-		return "redirect:list"; 
+		//return "redirect:/board/list";
+		return "redirect:list";
 	}
 	
 	//수정
 	@GetMapping("/edit")
-	public String edit(@RequestParam int boardNo , Model model) {
+	public String edit(@RequestParam int boardNo, Model model) {
 		BoardDto boardDto = boardDao.selectOne(boardNo);
 		model.addAttribute("boardDto", boardDto);
 		return "/WEB-INF/views/board/edit.jsp";
 	}
 	
 	@PostMapping("/edit")
-	public String edit (@ModelAttribute BoardDto boardDto) {
+	public String edit(@ModelAttribute BoardDto boardDto) {
 		boardDao.update(boardDto);
-		return "redirect:detail?boardNo ="+boardDto.getBoardNo();
+		return "redirect:detail?boardNo="+boardDto.getBoardNo();
 	}
-	
 	
 	
 	

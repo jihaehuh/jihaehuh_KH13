@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.kh.spring10.interceptor.AdminInterceptor;
+import com.kh.spring10.interceptor.BoardOwnerInterceptor;
 import com.kh.spring10.interceptor.BoardReadcountInterceptor;
 import com.kh.spring10.interceptor.MemberInterceptor;
 import com.kh.spring10.interceptor.TestInterceptor;
@@ -28,6 +29,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 	@Autowired
 	private BoardReadcountInterceptor boardReadcountInterceptor;
 	
+	@Autowired
+	private BoardOwnerInterceptor boardOwnerInterceptor;
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 //		registry에다가 인터셉터를 주소와 함께 등록
@@ -49,11 +52,16 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 //		- **는 하위 엔드포인트까지 모두 포함하여 설정할 때 사용 (후손)
 //		- *는 동일 엔드포인트까지만 포함하여 설정할 때 사용 (자식)
 		registry.addInterceptor(memberInterceptor)
-					.addPathPatterns("/member/**")
+					.addPathPatterns(
+							"/member/**",
+							"/board/**"
+							)
 					.excludePathPatterns(
 							//"/member/join", "/member/joinFinish",
 							"/member/join*",
-							"/member/login", "/member/exitFinish"
+							"/member/login", "/member/exitFinish",
+						   "/board/list", "/board/detail"
+							
 					);
 		
 		//관리자 인터셉터 등록
@@ -63,5 +71,10 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 		//게시글 조회수 중복방지 인터셉터 등록
 		registry.addInterceptor(boardReadcountInterceptor)
 					.addPathPatterns("/board/detail");
+		
+		//내글 또는 관리자만 수정 삭제 하는 인터셉터 등록
+		registry.addInterceptor(boardOwnerInterceptor)
+		.addPathPatterns("/board/edit");
 	}
+	
 }

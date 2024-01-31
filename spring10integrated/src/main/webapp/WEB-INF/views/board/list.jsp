@@ -10,7 +10,9 @@
 <p>
 	타인에 대한 무분별한 비방 또는 욕설은 경고 없이 삭제될 수 있습니다
 </p>
+
 <h2><a href="write">글쓰기</a></h2>
+
 <%-- 테이블 --%>
 <table border="1" width="800">
 	<thead>
@@ -27,8 +29,10 @@
 		<tr>
 			<td>${boardDto.boardNo}</td>
 			<td align="left">
-			<a href="detail?boardNo=${boardDto.boardNo}">
-					${boardDto.boardTitle}</a></td>
+				<a href="detail?boardNo=${boardDto.boardNo}">
+					${boardDto.boardTitle}
+				</a>
+			</td>
 			<%--
 			<c:choose>
 				<c:when test="${boardDto.boardWriter == null}">

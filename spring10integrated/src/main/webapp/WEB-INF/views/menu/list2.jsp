@@ -52,6 +52,11 @@
 	</tbody>	
 </table>
 
+<%-- 네비게이터 출력(구조는 복잡하지만 /board/list와 같지 않을까?) --%>
+<jsp:include page="/WEB-INF/views/template/navigator.jsp"></jsp:include> 
 
 <%-- 템플릿 페이지를 불러오는 코드 --%>
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+
+
+

@@ -23,58 +23,55 @@ public class BoardDao {
 	private BoardListMapper boardListMapper;
 
 	//목록
-	public List<BoardDto> selectList() {
-//		String sql = "select * from board order by board_no desc";
-//		return jdbcTemplate.query(sql, boardMapper);
-		
-		String sql = "select "
-							+ "board_no, board_title, board_writer, "
-							+ "board_wtime, board_etime, board_readcount "
-						+ "from board order by board_no desc";
-		return jdbcTemplate.query(sql, boardListMapper);
-	}
-	//목록 + 페이징
-	//-page 는 현재 조회할 페이지 번호
-	//-size는 조회할 페이지의 출력개수
-	//-위 두개를 이용하여 시작행(beginRow)과  종료행(endRow)를 계산
-	public List<BoardDto> selectListByPaging(int page, int size) {
-		int endRow = page * size;
-		int beginRow = endRow- (size-1);
-		
-		String sql =
-				"select * from ("
-				+"select rownum rn, TMP.* from ( "
-				+"select "
-				+ "board_no, board_title, board_writer, "
-				+ "board_wtime, board_etime, board_readcount "
-			+ "from board order by board_no desc"
-				+")TMP"
-				+") where rn between ? and ?";
+		public List<BoardDto> selectList() {
+//			String sql = "select * from board order by board_no desc";
+//			return jdbcTemplate.query(sql, boardMapper);
+			
+			String sql = "select "
+								+ "board_no, board_title, board_writer, "
+								+ "board_wtime, board_etime, board_readcount "
+							+ "from board order by board_no desc";
+			return jdbcTemplate.query(sql, boardListMapper);
+		}
+		//목록+페이징
+		//- page는 현재 조회할 페이지 번호
+		//- size는 조회할 페이지의 출력개수
+		//- 위 두개를 이용하여 시작행(beginRow)과 종료행(endRow)를 계산
+		public List<BoardDto> selectListByPaging(int page, int size) {
+			int endRow = page * size;
+			int beginRow = endRow - (size-1);
+			
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, "
+										+ "board_wtime, board_etime, board_readcount "
+									+ "from board order by board_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {beginRow, endRow};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
 	
-		Object[]data = {beginRow,endRow};
-		return jdbcTemplate.query(sql, boardListMapper,data);
-	}
-	
-	//검색 + 페이징
-	public List<BoardDto> selectListByPaging(
-			String column, String keyword,int page, int size) {//객체가 2개도 아니고 4개면 생각해야함...
-		int endRow = page * size;
-		int beginRow = endRow- (size-1);
-		
-		String sql = "select * from ("
-				+ "select rownum rn, TMP.* from ( "
-				+ "select "
-				+"board_no, board_title, board_writer, "
-				+ "board_wtime, board_etime, board_readcount "
-				+ "from board "
-				+ "where instr("+column+", ?) > 0 "
-				+ "order by board_no desc"
-				+")TMP"
-				+") where rn between ? and ?";
-				
-			Object[]data = {keyword, beginRow, endRow};
-			return jdbcTemplate.query(sql, boardListMapper,data);
-	}
+		//검색+페이징
+		public List<BoardDto> selectListByPaging(
+				String column, String keyword, int page, int size){
+			int endRow = page * size;
+			int beginRow = endRow - (size-1);
+			
+			String sql = "select * from ("
+								+ "select rownum rn, TMP.* from ("
+									+ "select "
+										+ "board_no, board_title, board_writer, "
+										+ "board_wtime, board_etime, board_readcount "
+									+ "from board "
+									+ "where instr("+column+", ?) > 0 "
+									+ "order by board_no desc"
+								+ ")TMP"
+							+ ") where rn between ? and ?";
+			Object[] data = {keyword, beginRow, endRow};
+			return jdbcTemplate.query(sql, boardListMapper, data);
+		}
 	
 	//검색
 		public List<BoardDto> selectList(String column, String keyword) {
@@ -94,7 +91,18 @@ public class BoardDao {
 			return jdbcTemplate.query(sql, boardListMapper, data);
 		}
 		
-		
+	//카운트
+		public int count () {
+			String sql ="select count (*) from board";
+			return jdbcTemplate.queryForObject(sql, int.class);
+		}
+		public int count(String column, String Keyword) {
+			String sql ="select count(*) from board "
+					+ "where instr("+column+", ?) > 0";
+			Object[]data = {Keyword};
+			return jdbcTemplate.query(sql, boardListMapper,data);
+		}
+	
 		
 	//단일 조회
 	public BoardDto selectOne(int boardNo) {

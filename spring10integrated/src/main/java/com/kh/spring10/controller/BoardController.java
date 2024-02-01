@@ -1,9 +1,12 @@
 package com.kh.spring10.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +23,15 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/board")
 public class BoardController {
 
+		//게시판에서는 emptyString 으로 전달되는 파라미터를 null로 간주하도록 설정
+	//@initBinder 설정으로 구현
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+	}
+	
+	
+	
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
@@ -30,10 +42,34 @@ public class BoardController {
 	public String list(
 			@RequestParam(required = false) String column, 
 			@RequestParam(required = false) String keyword,
-			@RequestParam(required = false, defaultValue ="1")int page,
-			@RequestParam(required = false, defaultValue = "10")int size,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "10") int size,
 			Model model) {
 		boolean isSearch = column != null && keyword != null;
+		
+		/*
+			화면에 네비게이터를 보여주는 데 필요한 값들을 계산
+			- blockSize : 화면에 표시할 네비게이터 개수 (10으로 설정)
+			- beginBlock : 네비게이터의 처음 숫자 , (페이지-1) / 10 * 10 + 1 (10은 blockSize)
+			- endBlock : 네비게이터의 마지막 숫자 , (페이지-1) / 10 * 10 + 10 (10은 blockSize)
+			- count : 게시글 개수
+			- totalPage : 전체 페이지 개수
+		 */
+		int blockSize = 10;
+		int beginBlock = (page-1) / blockSize * blockSize + 1;
+		int endBlock = (page-1) / blockSize * blockSize + blockSize;
+		model.addAttribute("beginBlock", beginBlock);//네비게이터 시작번호
+		model.addAttribute("endBlock", endBlock);//네비게이터 종료번호
+		model.addAttribute("page", page);//현재 페이지 번호
+		
+		int count = isSearch ? 
+				boardDao.count(column, keyword) : boardDao.count();
+		int totalPage = (count - 1) / size + 1;
+		model.addAttribute("count", count);//게시글 개수
+		model.addAttribute("totalPage", totalPage);//총 페이지 수
+		
+		model.addAttribute("size", size);//현재 게시글 표시 개수
+		
 		if(isSearch) {
 			//model.addAttribute("list", boardDao.selectList(column, keyword));
 			model.addAttribute("list", boardDao.selectListByPaging(column, keyword, page, size));

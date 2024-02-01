@@ -73,7 +73,7 @@ public class PageVO {
 		return Math.min(getTotalPage(), number);
 	}
 	//논리 반환값을 가지는 Getter 메소드는 get이 아니라 is로 시작한다
-	public boolean isFirstBlock() {
+	public boolean isFirstBlock() {   
 		return getBeginBlock() == 1;
 	}
 	public boolean isLastBlock() {

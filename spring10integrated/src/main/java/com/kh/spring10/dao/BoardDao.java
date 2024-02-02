@@ -191,11 +191,14 @@ public class BoardDao {
 			//String sql = "insert into board(7개) values(?, ?, ?, ?, sysdate, null, 0)";
 			//String sql = "insert into board(4개) values(?, ?, ?, ?)";
 			String sql = "insert into board("
-							+ "board_no, board_title, board_content, board_writer"
-						+ ") values(?, ?, ?, ?)";
+							+ "board_no, board_title, board_content, board_writer, "
+							+ "board_group, board_target, board_depth"
+						+ ") values(?, ?, ?, ?, ?, ?, ?)";
 			Object[] data = {
 				boardDto.getBoardNo(), boardDto.getBoardTitle(),
-				boardDto.getBoardContent(), boardDto.getBoardWriter()
+				boardDto.getBoardContent(), boardDto.getBoardWriter(),
+				boardDto.getBoardGroup(),boardDto.getBoardTarget(),
+				boardDto.getBoardDepth()
 			};
 			jdbcTemplate.update(sql, data);
 		}

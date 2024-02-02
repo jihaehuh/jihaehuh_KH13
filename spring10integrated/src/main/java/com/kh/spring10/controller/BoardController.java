@@ -117,28 +117,74 @@ public class BoardController {
 		return "/WEB-INF/views/board/detail.jsp";
 	}
 	
-	//게시글 작성(등록)  //제목 + 내용 + 등록
+//	@PostMapping("/write") //등록을눌렀을때 여기로 이동 (세션에서 아이디, DB에서 내용받기)
+//		public String write(@ModelAttribute BoardDto boardDto, HttpSession session) { //제목,내용은 들어있고 작성자 ,번호를 넣어야한다
+//		//세션에서 로그인한 사용자의 아이디를 추출
+//		String loginId = (String)session.getAttribute("loginId");
+//		
+//		//아이디를 게시글 정보에 포함시킨다 
+//		boardDto.setBoardWriter(loginId); //DTO에는 이제 3개 아이디 ,제목 ,내용 이 들어감
+//		
+//		//명령 분할
+//		int sequence = boardDao.getSequence(); //DB에서 시퀀스 번호를 추출
+//		boardDto.setBoardNo(sequence); //게시글 정보에 추출한 번호를 포함시킨다
+//		boardDao.insert(boardDto); //등록
+//		
+//		return "redirect:detail?boardNo="+sequence;	
+//		
+//		
+//		}
+	
+	@PostMapping("/write")
+	public String write(@ModelAttribute BoardDto boardDto, HttpSession session) {
+//		새글과 답글을 구분하여 처리
+//		- 구분 기준은 boardDto에 boardTarget 유무(있으면 답글, 없으면 새글)
+//		- 새글이면 그룹번호=글번호, 대상=null, 차수=0
+//		- 답글이면 그룹번호=원본글그룹번호, 대상=원본글번호, 차수=원본글차수+1
+		
+		// 새글이든 답글이든 작성자는 있어야 한다
+		String loginId = (String)session.getAttribute("loginId");
+		boardDto.setBoardWriter(loginId);
+		
+//		글번호를 생성하여 설정해준다
+		int sequence = boardDao.getSequence();
+		boardDto.setBoardNo(sequence);
+		
+//		새글,답글에 따른 그룹,대상,차수를 계산한다
+		if(boardDto.getBoardTarget() == null) {//새글(대상 == null)
+			boardDto.setBoardGroup(sequence);//그룹번호는 글번호로 설정
+			//boardDto.setBoardTarget(null);
+			//boardDto.setBoardDepth(0);
+		}
+		else {//답글(대상 != null)
+			//대상글의 모든 정보를 조회
+			BoardDto targetDto = boardDao.selectOne(boardDto.getBoardTarget());
+			
+			boardDto.setBoardGroup(targetDto.getBoardNo()); 
+			//boardDto.setBoardTarget(targetDto.getBoardNo());
+			//boardTarget 은 이미 설정되어 있음
+			boardDto.setBoardDepth(targetDto.getBoardDepth()+1);
+		}
+		//계산이 완료된 정보를 이용하여 새글과 답글 모두 같은 메소드로 등록
+		//같은 메소드로 등록이 가능한 이유는 계산을 따로해줘서 가능함
+		boardDao.insert(boardDto);
+		return "redirect:detail?boardNo="+sequence;
+	}
+	
 	@GetMapping("/write")
-	public String write() {
+	public String write(
+			@RequestParam(required = false) Integer boardTarget,
+			Model model) {
+//		답글일 경우는 작성 페이지로 답글의 정보를 전달(제목 등에 사용)
+		if(boardTarget != null) {
+			BoardDto targetDto = boardDao.selectOne(boardTarget);
+			model.addAttribute("targetDto", targetDto);
+		}
 		return "/WEB-INF/views/board/write.jsp";
 	}
-	@PostMapping("/write") //등록을눌렀을때 여기로 이동 (세션에서 아이디, DB에서 내용받기)
-		public String write(@ModelAttribute BoardDto boardDto, HttpSession session) { //제목,내용은 들어있고 작성자 ,번호를 넣어야한다
-		//세션에서 로그인한 사용자의 아이디를 추출
-		String loginId = (String)session.getAttribute("loginId");
-		
-		//아이디를 게시글 정보에 포함시킨다 
-		boardDto.setBoardWriter(loginId); //DTO에는 이제 3개 아이디 ,제목 ,내용 이 들어감
-		
-		//명령 분할
-		int sequence = boardDao.getSequence(); //DB에서 시퀀스 번호를 추출
-		boardDto.setBoardNo(sequence); //게시글 정보에 추출한 번호를 포함시킨다
-		boardDao.insert(boardDto); //등록
-		
-		return "redirect:detail?boardNo="+sequence;	
-		
-		
-		}
+	
+	
+	
 	//게시글 삭제
 	@GetMapping("/delete")
 	public String delete(@RequestParam int boardNo) {
@@ -160,11 +206,5 @@ public class BoardController {
 		boardDao.update(boardDto);
 		return "redirect:detail?boardNo="+boardDto.getBoardNo();
 	}
-	
-	
-	
-	
-	
-	
 	
 }

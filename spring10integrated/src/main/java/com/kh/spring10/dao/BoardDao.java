@@ -178,7 +178,8 @@ public class BoardDao {
 		Object[] data = {boardNo};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	
+	//왜 두개를 등록?
+	//- 번호가 필요하니까...
 	//count, sequence, max, min, sum, avg처럼 결과가 하나만 나오는 경우
 		//그 결과는 객체가 아니라 원시데이터 형태일 확률이 높다
 		public int getSequence() {

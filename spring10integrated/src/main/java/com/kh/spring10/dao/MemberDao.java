@@ -135,7 +135,7 @@ public class MemberDao {
 	}
 
 	public int findAttachNo(String memberId) {
-		String sql ="select * attach_no from member_attach where member_id = ?";
+		String sql ="select attach_no from member_attach where member_id = ?";
 		Object[]data = {memberId};
 		
 		return jdbcTemplate.queryForObject(sql, int.class,data);

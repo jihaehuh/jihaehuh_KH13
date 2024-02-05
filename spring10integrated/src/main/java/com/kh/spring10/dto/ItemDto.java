@@ -31,4 +31,9 @@ public class ItemDto {
 	public void setItemCharge(int itemCharge) {
 		this.itemCharge = itemCharge;
 	}
+	@Override
+	public String toString() {
+		return "ItemDto [itemNo=" + itemNo + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", itemCharge="
+				+ itemCharge + "]";
+	}
 }

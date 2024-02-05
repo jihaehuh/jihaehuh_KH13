@@ -1,5 +1,7 @@
 package com.kh.spring10.dao;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -35,7 +37,23 @@ public class ItemDao {
 		Object[] data = {itemNo, attachNo};
 		jdbcTemplate.update(sql, data);
 	}
+	
+	//목록
+	public List <ItemDto> selectList() {
+		String sql = "select * from item order by item_price asc";
+		return jdbcTemplate.query(sql, itemMapper);
+	}
+	public int findAttachNo(int itemNo) {
+		String sql ="select attach_no from item_attach where item_no = ?";
+		Object[]data = {itemNo};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
+	}
+	public boolean delete(int itemNo) {
+		String sql="delete item where item_no=?";
+		Object[]data = {itemNo};
+		return jdbcTemplate.update(sql,data)>0;
+		
+	}
+	
 }
-
-
 

@@ -2,9 +2,11 @@ package com.kh.spring10.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -81,7 +83,56 @@ public class AdminItemController {
 			//연결
 			itemDao.connect(itemNo, attachNo);
 		}
-		return "redirect:add";
+		return "redirect:list";
+	}
+	
+	//포인트 상품 목록
+	@RequestMapping("/list")
+	public String list(Model model) {
+		List<ItemDto> list = itemDao.selectList();
+		model.addAttribute("list",list);
+//		for(ItemDto dto : list) {
+//			System.out.println(dto.getItemName());
+//		}
+		return "/WEB-INF/views/admin/item/list.jsp";
+	}
+	
+	//상품 번호를 전달하면 파일 번호를 찾아서 리다이렉트 하는 페이지
+	@RequestMapping("/image")
+	public String image(@RequestParam int itemNo) {
+		try {
+			int attachNo = itemDao.findAttachNo(itemNo);
+			return "redirect:/download?attachNo="+attachNo;
+		}
+		catch(Exception e) {
+			//return "기본 이미지 주소";
+			return "redirect:https://via.placeholder.com/200x100";
+		}
+	}
+	
+	//충전 상품 삭제
+	//- 주의 사항은 파일 번호를 먼저 알아내고 지워야하는다는 것
+	@GetMapping("/delete")
+	public String delete(@RequestParam int itemNo) {
+		try {
+		int attachNo= itemDao.findAttachNo(itemNo); //아이템 번호로 파일 찾고
+		//실제 파일 삭제
+		File dir = new File(System.getProperty("user.home"),"upload");
+		File target = new File(dir, String.valueOf(attachNo));
+		target.delete();
+		
+		attachDao.delete(attachNo);  // 파일 정보 지우기
+		
+		itemDao.delete(itemNo); //아이템 정보삭제
+		}
+		catch(Exception e) {}
+		finally { //예외여부와 관계없이 무조건 실행되는 구문
+			itemDao.delete(itemNo); //아이템 정보 삭제
+		}
+		return "redirect:list";
 	}
 	
 }
+
+
+

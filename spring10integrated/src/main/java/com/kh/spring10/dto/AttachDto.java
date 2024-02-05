@@ -5,7 +5,6 @@ public class AttachDto {
 	private String attachName;
 	private String attachType;
 	private long attachSize;
-	
 	public AttachDto() {
 		super();
 	}
@@ -33,5 +32,4 @@ public class AttachDto {
 	public void setAttachSize(long attachSize) {
 		this.attachSize = attachSize;
 	}
-	
 }

@@ -4,7 +4,6 @@ public class ItemDto {
 	private int itemNo;
 	private String itemName;
 	private int itemPrice, itemCharge;
-	
 	public ItemDto() {
 		super();
 	}
@@ -32,5 +31,4 @@ public class ItemDto {
 	public void setItemCharge(int itemCharge) {
 		this.itemCharge = itemCharge;
 	}
-	
 }

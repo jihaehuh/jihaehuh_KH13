@@ -2,15 +2,20 @@ package com.kh.spring10.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.method.annotation.HttpHeadersReturnValueHandler;
 
 import com.kh.spring10.dao.AttachDao;
 import com.kh.spring10.dto.AttachDto;
@@ -52,20 +57,26 @@ public class FileDownloadController {
 		//- 추가 적인 정보를 제공해서 파일 다운로드 처리가 일어나도록 구현
 		//- 추가적인 정보는 header에 설정
 		//return ResponseEntity.status(200).body(내용);
-		return ResponseEntity.ok()
-				.header("Content-Encoding", "UTF-8")
+		//return ResponseEntity.ok()
+//				.header("Content-Encoding", "UTF-8")
 //				.header("Content-Type", attachDto.getAttachType())
-				.header("Content-Type", "application/octet-stream") //무조건 다운로드 가능
-				.header("Content-Length", String.valueOf(attachDto.getAttachSize()))
-				.header("Content-Disposition", "attachment; filename=\""+attachDto.getAttachName()+"\"")
-				.body(resource);
+//				.header("Content-Type", "application/octet-stream") //무조건 다운로드 가능
+//				.header("Content-Length", String.valueOf(attachDto.getAttachSize()))
+//				.header("Content-Disposition", "attachment; filename=\""+attachDto.getAttachName()+"\"")
+//				.body(resource);
 		//내용에 data를 쓸수 없음 - 이유: 우리는 바이트 어레이리소스에서 데이터를 포장해와서 쓰기
 		
-		
-		
-		
-		
-		
-		
-	}
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_ENCODING, StandardCharsets.UTF_8.name())
+//				.header(HttpHeaders.CONTENT_TYPE, attachDto.getAttachType())
+				.contentType(MediaType.APPLICATION_OCTET_STREAM)
+				.contentLength(attachDto.getAttachSize())
+				.header(HttpHeaders.CONTENT_DISPOSITION,
+						ContentDisposition.attachment()//파일을 접근해서 다운받아라
+								.filename(attachDto.getAttachName(),StandardCharsets.UTF_8)
+								.build().toString()
+						) 
+				.body(resource);
+	}//이렇게하면 한글이름이어도 다운이 가능해진다
+	
 }

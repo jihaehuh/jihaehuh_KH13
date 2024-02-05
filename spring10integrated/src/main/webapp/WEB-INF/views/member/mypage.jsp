@@ -6,6 +6,8 @@
 
 <h2>${sessionScope.loginId}님의 회원 정보</h2>
 
+<img src="image" width="200" height="200">
+
 <table border="1" width="350">
 	<tbody>
 	<tr>

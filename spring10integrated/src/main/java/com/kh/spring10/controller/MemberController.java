@@ -248,6 +248,22 @@ public class MemberController {
 	public String exitFinish() {
 		return "/WEB-INF/views/member/exitFinish.jsp";
 	}
+	
+	//프로필 다운로드 페이지
+	@RequestMapping("/image")
+	public String image(HttpSession session) {
+		try {
+			String loginId =(String)session.getAttribute("loginId");
+			int attachNo = memberDao.findAttachNo(loginId);
+			return "redirect:/download?attachNo="+attachNo;
+		}
+		catch (Exception e) {
+			return "redirect:/image/user.jpg";
+		}
+	}
+	
+	
+	
 }
 
 

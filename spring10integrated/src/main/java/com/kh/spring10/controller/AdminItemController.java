@@ -132,6 +132,59 @@ public class AdminItemController {
 		return "redirect:list";
 	}
 	
+	//충전 상품 정보 수정 
+	@GetMapping("/edit")
+	public String deit(@RequestParam int itemNo, Model model) {
+		ItemDto itemDto = itemDao.selectOne(itemNo);
+		model.addAttribute("itemDto",itemDto);
+		return "/WEB-INF/views/admin/item/edit.jsp";
+	}
+	
+	@PostMapping("/edit")
+	public String edit(@ModelAttribute ItemDto itemDto
+			,@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		//우선 아이템 정보는 첨부파일과 관계없이 수정 처리
+		itemDao.update(itemDto);
+		
+		
+		//첨부파일이 생긴다면
+		//첨부파일이 있다면 기존의 첨부파일을 지우고 신규 첨부파일을 등록
+		if(!attach.isEmpty()) {
+			//기존 파일 삭제
+		try {
+			int attachNo = itemDao.findAttachNo(itemDto.getItemNo()); //파일번호 찾기
+			File dir = new File(System.getProperty("user.home"),"upload");
+			File target = new File(dir, String.valueOf(attachNo));
+			target.delete(); //실제 파일 삭제
+			attachDao.delete(attachNo); //DB에서 삭제
+		}
+		catch (Exception e) {//예외 발생 시 아무것도 안함 (skip)
+			//신규 파일 추가
+			//- attach_seq 번호 생성
+			//- 실물 파일 등록
+			//- DB에 insert
+			//- item 과 connect 처리
+			
+			int attachNo = attachDao.getSequence(); //시퀀스 생성
+			File dir = new File(System.getProperty("user.home"),"upload");
+			File target = new File(dir, String.valueOf(attachNo));
+			attach.transferTo(target);//실물파일저장
+			
+			AttachDto attachDto = new AttachDto();
+			attachDto.setAttachNo(attachNo);
+			attachDto.setAttachName(attach.getOriginalFilename());
+			attachDto.setAttachType(attach.getContentType());
+			attachDto.setAttachSize(attach.getSize());
+			
+			attachDao.insert(attachDto); //DB저장
+			
+			itemDao.connect(itemDto.getItemNo(), attachNo); //연결 처리 
+			
+		}
+		 
+		}
+		return "redirect:list";
+	}
 }
 
 

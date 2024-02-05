@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>충전 상품 목록</h1>
+<a href="add">신규등록</a>
 <table border="1">
 	<c:forEach var="itemDto" items="${list}">
 		<tr>
@@ -11,6 +12,7 @@
 				<td> ${itemDto.itemPrice}원</td>	 <%--가격 --%>
 				<td> ${itemDto.itemCharge}포인트 충전</td>
 				<td>
+					<a href="edit?itemNo=${itemDto.itemNo}">수정</a>
 					<a href="delete?itemNo=${itemDto.itemNo}">삭제</a>
 				</td>
 			</tr>

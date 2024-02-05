@@ -23,27 +23,25 @@ public class AttachDao {
 		
 	}
 	public void insert(AttachDto attachDto) {
-		String sql ="insert into attach("
-				+ "attach_no, attach_name, attach_type, attach_size"
-				+ ") values(? ,? ,? ,? )";
-		Object[]data = {
-				attachDto.getAttachNo(),attachDto.getAttachName(),
-				attachDto.getAttachType(),attachDto.getAttachSize()
+		String sql = "insert into attach("
+						+ "attach_no, attach_name, attach_type, attach_size"
+					+ ") values(?, ?, ?, ?)";
+		Object[] data = {
+			attachDto.getAttachNo(), attachDto.getAttachName(),
+			attachDto.getAttachType(), attachDto.getAttachSize()
 		};
-		jdbcTemplate.update(sql,data);
-		
+		jdbcTemplate.update(sql, data);
 	}
 	public AttachDto selectOne(int attachNo) {
-		String sql ="select * from attach where attach_no=?";
-		Object [] data = {attachNo};
-		List<AttachDto> list =jdbcTemplate.query(sql, attachMapper,data);
-		return list.isEmpty() ? null:list.get(0);
+		String sql = "select * from attach where attach_no = ?";
+		Object[] data = {attachNo};
+		List<AttachDto> list = jdbcTemplate.query(sql, attachMapper, data);
+		return list.isEmpty() ? null : list.get(0);
 	}
 	public boolean delete(int attachNo) {
-		String sql ="delete attach where attach_no=?";
-		Object[]data = {attachNo};
-		return jdbcTemplate.update(sql,data)>0;
-		
+		String sql = "delete attach where attach_no = ?";
+		Object[] data = {attachNo};
+		return jdbcTemplate.update(sql, data) > 0;
 	}
 	
 	

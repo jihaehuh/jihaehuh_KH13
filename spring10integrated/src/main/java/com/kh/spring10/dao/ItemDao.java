@@ -54,6 +54,23 @@ public class ItemDao {
 		return jdbcTemplate.update(sql,data)>0;
 		
 	}
+	public ItemDto selectOne(int itemNo) {
+		String sql ="select * from item where item_no = ?";
+		Object[]data = {itemNo};
+		List<ItemDto>list =jdbcTemplate.query(sql, itemMapper,data);	
+		return list.isEmpty() ?null : list.get(0);
+	}
+	
+	public boolean update(ItemDto itemDto) {
+		String sql ="update item "
+				+ "set item_name=?, item_price=?, item_charge=? "
+				+ "where item_no=?";
+		Object[]data = {
+				itemDto.getItemName(), itemDto.getItemPrice(),
+				itemDto.getItemCharge(), itemDto.getItemNo()
+		};
+		return jdbcTemplate.update(sql,data)>0;
+	}
 	
 }
 

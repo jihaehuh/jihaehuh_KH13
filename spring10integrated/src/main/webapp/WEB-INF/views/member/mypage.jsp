@@ -99,8 +99,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-<c:forEach var="buyDto" items="${buyList}">
-</c:forEach>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 

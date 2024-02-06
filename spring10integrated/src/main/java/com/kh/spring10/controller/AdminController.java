@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.EmpDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dao.MenuDao;
@@ -31,6 +32,8 @@ public class AdminController {
 	private MenuDao menuDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private BuyDao buyDao;
 	
 	//포켓몬스터 통계
 	@RequestMapping("/stat/pocketmon")
@@ -92,6 +95,7 @@ public class AdminController {
 	public String memberDetail(@RequestParam String memberId, Model model) {
 		MemberDto memberDto = memberDao.selectOne(memberId);
 		model.addAttribute("memberDto", memberDto);
+		model.addAttribute("buyList", buyDao.selectList(memberId));
 		return "/WEB-INF/views/admin/member/detail.jsp";
 	}
 	

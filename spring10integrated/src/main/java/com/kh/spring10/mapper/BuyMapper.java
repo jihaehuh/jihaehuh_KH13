@@ -4,9 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
 import com.kh.spring10.dto.BuyDto;
-
+@Service
 public class BuyMapper implements RowMapper<BuyDto> {
 
 	

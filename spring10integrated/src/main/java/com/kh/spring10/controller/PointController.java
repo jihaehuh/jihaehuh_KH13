@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.ItemDao;
+import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.BuyDto;
 import com.kh.spring10.dto.ItemDto;
 
@@ -26,6 +27,8 @@ public class PointController {
 	@Autowired
 	private BuyDao buyDao;
 	
+	@Autowired
+	private MemberDao memberDao;
 	@GetMapping("/charge")
 	public String charge(Model model) {
 		model.addAttribute("list", itemDao.selectList());
@@ -41,7 +44,9 @@ public class PointController {
 		buyDto.setItemName(itemDto.getItemName());//상품명 복사
 		buyDto.setBuyTotal(itemDto.getItemPrice() * buyDto.getBuyQty());//금액x수량
 		
-		buyDao.insert(buyDto);
+		buyDao.insert(buyDto); //구매내역 등록
+		int point =itemDto.getItemCharge() * buyDto.getBuyQty(); //계산식 미리 변수 처리하기
+		memberDao.plusMemberPoint(loginId, point);//포인트 증가
 		
 		return "redirect:chargeFinish";
 	}

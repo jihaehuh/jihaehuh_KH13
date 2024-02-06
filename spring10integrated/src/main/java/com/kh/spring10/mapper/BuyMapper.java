@@ -15,7 +15,7 @@ public class BuyMapper implements RowMapper<BuyDto> {
 	public BuyDto mapRow(ResultSet rs, int rowNum) throws SQLException {
 		BuyDto buyDto = new BuyDto();
 		buyDto.setBuySerial(rs.getInt("buy_serial"));
-		buyDto.setMemberId(rs.getString("memebr_id"));
+		buyDto.setMemberId(rs.getString("member_id"));
 		buyDto.setItemNo(rs.getInt("item_no"));
 		buyDto.setItemName(rs.getString("item_name"));
 		buyDto.setBuyTime(rs.getDate("buy_time"));

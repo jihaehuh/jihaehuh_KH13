@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 <h1>마이 페이지</h1><br>
 
@@ -67,6 +68,40 @@
 <h2><a href="/member/password">비밀번호 변경</a></h2>
 <h2><a href ="/member/change">개인정보변경</a></h2>
 <h2><a href ="/member/exit">회원탈퇴</a></h2> <%--세션때문에 파라미터 들어간 주소는 못씀 --%>
+<hr>
+<h1>
+포인트 구매 내역
+<a href="/point/charge"> 추가 구매</a>
+</h1>
+
+<table border="1" width="600">
+	<thead>
+		<tr>
+			<th> 번호</th>
+			<th> 상품명</th>
+			<th>수량</th>
+			<th>구매 금액</th>
+			<th> 구매일시</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach var="buyDto" items="${buyList}">
+			<tr>
+				<td>${buyDto.buySerial}</td>
+				<td>${butDto.itemName}</td>
+				<td>${buyDto.buyQty}</td>
+				<td>
+				<fmt:formatNumber value="${buyDto.buyTotal}" pattern ="#,##0"></fmt:formatNumber></td>
+				<td>
+				<fmt:formatDate value="${buyDto.buyTime}" 
+				pattern ="yyyy-MM-dd HH:mm" ></fmt:formatDate></td>
+			</tr>
+		</c:forEach>
+	</tbody>
+</table>
+<c:forEach var="buyDto" items="${buyList}">
+</c:forEach>
+
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
 
 

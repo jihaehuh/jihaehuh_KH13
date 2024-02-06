@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring10.dao.AttachDao;
+import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.service.AttachService;
@@ -33,6 +34,8 @@ public class MemberController {
 	@Autowired
 	private AttachService attachService;
 	
+	@Autowired
+	private BuyDao buyDao;
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -127,6 +130,11 @@ public class MemberController {
 		
 		//3. 화면에 조회한 정보를 전달한다
 		model.addAttribute("memberDto", memberDto);
+		
+		//(추가) 현재 사용자의 구매내역을 첨부
+		model.addAttribute("buyList", buyDao.selectList(loginId));
+		
+		//(추가) 현재 사용자의 작성 글 내역을 첨부
 		
 		//4. 연결될 화면을 반환한다
 		return "/WEB-INF/views/member/mypage.jsp";

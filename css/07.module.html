@@ -139,6 +139,17 @@
         .btn.negative:hover{
             background-color: #c42627;
         }
+        /* 
+             정렬 스타일
+             - .left 를 붙이면 왼쪽 정렬
+             - .center 를 붙이면 가운데 정렬
+             - .right 를 붙이면 오른쪽 정렬
+        */
+        .left {text-align: left;}
+        .center {text-align: center;}
+        .right { text-align: right;}
+
+
 
 
 
@@ -146,8 +157,10 @@
 </head>
 <body>
 
-    <div class="container w-200">
-        <div class="cell">이미지</div>
+    <div class="container w-500">
+        <div class="cell center">
+            <img src="image/naver.png" width="200">
+        </div>
         <div class="cell">
             <input type="text" name="memberId" class="tool w-100" placeholder="아이디">
         </div>

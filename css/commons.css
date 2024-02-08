@@ -84,8 +84,8 @@
 .tool:focus {
     border-color: #2d3436;
 }
-/* 밑줄만 있는 입력창 구현 ( 여백 왼쪽 오른쪽 없음).tool.underline */
 
+/* 밑줄만 있는 입력창 구현 .tool.underline*/
 .tool.underline {
     border-left: none;
     border-right: none;
@@ -93,8 +93,6 @@
     padding-left: 0;
     padding-right: 0;
 }
-
-
 
 /*
     버튼은 크게 세 가지 용도로 구분한다
@@ -127,7 +125,7 @@
     color: white;
 }
 
-/* 버튼에 마우스가 올라가면 색상의 변화를 주겠다 ( 색상에서 10%로 어둡게하기 )*/
+/* 버튼에 마우스가 올라가면 색상의 변화를 주겠다 */
 .btn:hover {
     filter: brightness(0.9);
 }

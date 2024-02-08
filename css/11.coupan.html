@@ -33,6 +33,19 @@
         .title > span:nth-child(4) { color: rgb(136, 204, 47); }
         .title > span:nth-child(5) { color: rgb(49, 180, 221); }
 
+
+        input[name=memberId] {
+            background-image: url("image/user.png");
+            background-size: 1.5em;
+        }
+        input[name=memberPw] {
+            background-image: url("image/lock.png");
+            background-size: 1.5em;
+        }
+
+
+
+
     </style>
 </head>
 <body>
@@ -44,10 +57,10 @@
             <span>cou</span><span>p</span><span>a</span><span>n</span><span>g</span>
         </div>
         <div class="cell">
-            <input type="text" name="memberId" placeholder="아이디(이메일)" class="tool w-100">
+            <input type="text" name="memberId" placeholder="아이디(이메일)" class="tool tool-image w-100">
         </div>
         <div class="cell">
-            <input type="text" name="memberPw" placeholder="비밀번호" class="tool w-100">
+            <input type="text" name="memberPw" placeholder="비밀번호" class="tool tool-image w-100">
         </div>
         <div class="cell">
             <button class="btn positive w-100">로그인</button>

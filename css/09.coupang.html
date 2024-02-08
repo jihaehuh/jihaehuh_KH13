@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coupangLogin</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+   
+    <style>
+
+        /* 디자인을 재정의 하여 원하는 모양이나 색상으로변경 */
+
+        *{
+            box-sizing: border-box;
+            font-family: 빙그레 메로나체, sans-serif;
+        }
+
+        .container {
+            border: 1px dotted grey;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cell {
+            border: 1px dotted gray;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .tool, .btn {
+            font-size: 20px;
+            padding: 0.5em 1em;   /*  상하 좌우 */
+            outline: none; /*선택시 자동 강조효과 제거*/
+            border: 1px solid #636e72;
+            border-radius: 0.1em;
+        }
+        .tool:focus {
+            border-color: #2d3436;
+        }
+        .btn.positive {
+            border: 1px solid #fee500;
+            background-color: #fee500;
+            color: black;
+        }
+        .btn { /*모든 버튼으로 쓸 경우*/
+            color: #2d3436;
+            text-decoration: none; /*밑줄제거*/
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn.positive:hover {
+            background-color: #c9c616;
+        }
+        .btn:hover {
+            background-color: #e5e5e5;
+        }
+        
+
+    </style>
+</head>
+<body>
+    
+    <div class="container w-500">
+        <div class="cell center">
+            <img src="image/kakao.png" width="200">
+        </div>
+        <div class="cell"> 
+            <input type= "text" name="memberId" class="tool w-500" placeholder="카카오메일 아이디, 이메일, 전화번호">
+        </div>
+        <div class="cell">
+            <input type="password" name="memberPw" class="tool w-500"placeholder="비빌번호">
+        </div>
+        <div class= "cell">
+            <button class="btn positive w-100" >로그인</button>
+        </div>
+
+        <hr> <!--구분선-->
+        <div class="cell">
+            <a href="#" class="btn w-100">QR코드 로그인</a>
+        </div>
+    </div>
+    
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - Login</title>
+    <style>
+        /* 전체 선택자 - 모든 태그에 설정(전체 규칙) */
+        * {
+            box-sizing: border-box;
+            font-family: 빙그레 메로나체, sans-serif;
+        }
+
+        img {
+            width:200px;
+            height:120px;
+        }
+        input {
+            display: block;
+            width:400px;
+            font-size: 16px;
+            padding: 0.85em;
+            margin: 10px 0px;
+            /* border-color: #2d3436;
+            border-style: solid;
+            border-width: 1px; */
+            border: 1px solid #2d3436;
+            border-radius: 0.1em;
+        }
+        button {
+            display: block;
+            width:400px;
+            font-size: 16px;
+            padding: 0.65em 0.85em;
+            margin: 20px 0px;
+            border: 1px solid rgb(76,181,249);
+            border-radius: 0.5em;
+            background-color: rgb(76,181,249);
+            color: white;
+        }
+        hr {
+            width:400px;
+            margin: 20px 0px;
+        }
+        a {
+            color: #2d3436;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div align="center">
+        <!-- <img src="https://picsum.photos/id/1/200/80"> -->
+        <img src="image/instagramlogo.PNG">
+        <form action="#" method="post" autocomplete="off">
+            <input type="text" name="memberId" placeholder="전화번호, 사용자 이름 또는 이메일">
+            <input type="password" name="memberPw" placeholder="비밀번호">
+            <button>로그인</button>
+        </form>
+        <hr>
+        <a href="#">비밀번호를 잊으셨나요?</a>
+    </div>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%--
 	HTML은 여러 버전이 있었으며, 지금은 HTML 5가 표준
 	- 디자인과 관련된 요소를 많이 제거하고 다른 언어들과의 화합을 고려

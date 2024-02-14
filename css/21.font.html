@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰트 스타일</title>
+    <link rel="stylesheet" type="text/css" href="commons.css">
+    <link rel="stylesheet" type="text/css" href="test.css">
+
+    <!--font awsome 아이콘 CDN-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   
+    <style>
+        /* 
+            텍스트 디자인
+            - word-break 설정을 통해 줄바꿈 기준을 정한다
+            - 줄바꿈을 원치 않는 경우도 설정 가능하도록 구현한다
+        */
+        .dummy-text {
+            word-break: break-all;
+        }
+
+        
+        .ellipsis {
+            /* 다음 세개의 스타일을 같이 사용하면 한줄 + 말줄임표 처리가 된다 
+                단, 반드시 영역에 폭이 설정되어 있어야한다  
+                -지금은 container 가 있어서 폭이자동 설정 된다 
+            */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>폰트 디자인</h1>
+        </div>
+
+        <div class="cell">
+            <h2>Lorem Ipsum</h2>
+        </div>
+
+        <div class="cell dummy-text">
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </div>
+
+        <div class="cell">
+            <h2>한줄 +말줄임표</h2>
+        </div>
+
+        <div class="cell ellipsis">
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <%--
 	HTML은 여러 버전이 있었으며, 지금은 HTML 5가 표준
 	- 디자인과 관련된 요소를 많이 제거하고 다른 언어들과의 화합을 고려
@@ -22,8 +21,18 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>나의 홈페이지</title>
+		
+		<!-- 구글 폰트 -->
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+	    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+	
+	    <!-- 내가 구현한 스타일 -->
 		<link rel="stylesheet" type="text/css" href="/css/commons.css">
 		<link rel="stylesheet" type="text/css" href="/css/test.css">
+	
+	    <!-- font awesome 아이콘 CDN -->
+	    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 	</head>
 	<body>
 		<%-- 
@@ -32,58 +41,69 @@
 			- 로고, 검색창, 각종 메뉴들을 배치	
 			- div는 투명한 영역
 		--%>
-		<div>
-			<%-- 템플릿 페이지는 무조건 절대경로를 써야한다 --%>
-			<a href="/">홈으로</a>
-			<a href="/pocketmon/list">포켓몬스터 시스템</a>
-			<a href="/emp/list">사원관리 시스템</a>
-			<a href="/menu/list">메뉴관리 시스템</a>
-			<a href="/student/list">학생관리 시스템</a>
-			<a href="/board/list">자유 게시판시스템</a>
-		</div>
-		<%-- 로그인 여부에 따라 달라지는 메뉴 --%>
-		<div>
-			<c:choose>
-				<c:when test="${sessionScope.loginId != null}">
-					<a href="/member/logout">로그아웃</a>
-					<a href="/member/mypage">내정보</a>
-					<a href="/point/charge">포인트 충전</a>
-				</c:when>
-				<c:otherwise>
-					<a href="/member/join">회원가입</a>
-					<a href="/member/login">로그인</a>
-				</c:otherwise>
-			</c:choose>
-		</div>
+		<ul class="menu" style="width:1200px">
 		
-		<%--관리자 메뉴 - 관리자일 경우만 출력 --%>
-		<c:if test ="${sessionScope.loginLevel == '관리자'}">
-		<div>
-			<a href="/admin/member/search">회원관리</a>
-			<a href="/admin/item/list">충전상품관리</a>
-			<a href="/admin/stat/pocketmon">포켓몬통계</a>
-			<a href="/admin/stat/emp">사원통계</a>
-			<a href="/admin/stat/menu">메뉴통계</a>
-			<a href="/admin/stat/member">회원통계</a>
-		</div>
-		</c:if>
+			<li>
+				<a href="/">
+					<i class="fa-solid fa-house"></i>
+					HOME
+				</a>
+			</li>
 		
-		<div>
-			<%--
-			<c:choose>
-				<c:when test="${sessionScope.loginId != null}">
-					<a href="/member/testLogout">테스트로그아웃</a>
-				</c:when>
-				<c:otherwise>
-					<a href="/member/testLogin">테스트로그인</a>
-				</c:otherwise>
-			</c:choose>
-			 --%>
-			login = ${sessionScope.loginId != null} , 
-			loginId = ${sessionScope.loginId}
-			loginLevel = ${sessionScope.loginLevel} 
-			
-		</div>
+	        <li>
+	            <a href="#">데이터관리</a>
+	            <ul>
+	                <li><a href="/pocketmon/list">포켓몬스터</a></li>
+	                <li><a href="/emp/list">사원정보</a></li>
+	                <li><a href="/menu/list">메뉴정보</a></li>
+	                <li><a href="/student/list">학생성적</a></li>
+	            </ul>
+	        </li>
+	        
+	        <li><a href="/board/list">자유게시판</a></li>
+	        
+	        <%-- 관리자 메뉴는 관리자에게만 출력 --%>
+	        <c:if test="${sessionScope.loginLevel == '관리자'}">
+	        <li>
+	            <a href="#">관리자메뉴</a>
+	            <ul>
+	                <li><a href="/admin/member/search">회원관리</a></li>
+	                <li><a href="/admin/item/list">충전상품관리</a></li>
+	                <li>
+	                    <a href="#">통계</a>
+	                    <ul>
+	                        <li><a href="/admin/stat/pocketmon">포켓몬통계</a></li>
+	                        <li><a href="/admin/stat/emp">사원통계</a></li>
+	                        <li><a href="/admin/stat/menu">메뉴통계</a></li>
+	                        <li><a href="/admin/stat/member">회원통계</a></li>
+	                    </ul>
+	                </li>
+	            </ul>
+	        </li>
+	        </c:if>
+	        
+	        <li class="menu-end">
+	        	<c:choose>
+					<c:when test="${sessionScope.loginId != null}">
+						<a href="/member/mypage">
+							<i class="fa-solid fa-user"></i>
+							${sessionScope.loginId}
+						</a>
+			            <ul>
+			                <li><a href="/point/charge">포인트충전</a></li>
+			                <li><a href="/member/logout">로그아웃</a></li>
+			            </ul>
+					</c:when>
+					<c:otherwise>
+						<a href="/member/login">로그인</a>
+			            <ul>
+			                <li><a href="/member/join">회원가입</a></li>
+			            </ul>
+					</c:otherwise>
+				</c:choose>
+	        </li>
+	    </ul>
+		
 		<hr>
 		<%-- 
 			중단 영역

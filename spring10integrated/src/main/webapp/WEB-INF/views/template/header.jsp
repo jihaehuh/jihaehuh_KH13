@@ -106,5 +106,5 @@
 			</ul>
 		</nav>
 		<section>
-			<aside>사이드바</aside>
+			<!--<aside>사이드바</aside>  -->
 			<article>

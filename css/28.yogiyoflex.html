@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>요기요 가게 리스트 </title>
+    <title>요기요 가게 리스트 flex </title>
 
     <!-- 구글 폰트 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,26 +12,36 @@
 
     <!-- 내가 구현한 스타일 -->
     <link rel="stylesheet" type="text/css" href="commons.css">
-    <!--<link rel="stylesheet" type="text/css" href="test.css">-->
+    <!-- <link rel="stylesheet" type="text/css" href="test.css"> -->
 
     <!-- font awesome 아이콘 CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         .card {
+            display: flex;
             box-shadow: 0 0 1px 1px #b2bec3;
         }
         .card > .image-wrapper {
+            display: flex;
             width: 25%;
             padding: 20px 15px;
         }
         .card > .content-wrapper {
-            width: 75%;
-            padding: 15px;
+            flex-grow: 1;
         }
         .card > .content-wrapper > .title-wrapper {
+            display: flex;
             font-size: 24px;
         }
+        
+        .flex-cell.middle{
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -40,11 +50,11 @@
         <div class="cell center">
             <h1>요기요 가게 리스트 카드 구현</h1>
         </div>
-        <div class="cell floating-cell card">
-            <div class="image-wrapper">
-                <img src="https://via.placeholder.com/200x200?text=F" width="100%">
+        <div class="cell flex-cell card">
+            <div class=" w-25 flex-cell middle">
+                <img src="https://via.placeholder.com/100x100?text=F" width="80%">
             </div>
-            <div class="content-wrapper">
+            <div class="content-wrapper width-fill p-10">
                 <div class="title-wrapper">제목줄</div>  
                 <div> 
                     <span class="yellow">

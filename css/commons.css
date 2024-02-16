@@ -711,3 +711,24 @@ textarea.tool.tool-fixed {
 .floating-cell.reverse > * {
     float: right;
 }
+
+
+ /* flex layout 디자인 */
+ .flex-cell {
+    display: flex;
+}
+.flex-cell >.width-fill {
+    flex-grow: 1;
+}
+/* 자동으로 1대1 비율로 나눠주는 것들 */
+.flex-cell.auto-width >* {   
+    flex-grow: 1;
+}
+.flex-cell.vertical {
+    flex-direction: column;
+}
+/* 가운데 정렬 */
+.flex-cell.middle{
+    justify-content: center;
+    align-items: center;
+}

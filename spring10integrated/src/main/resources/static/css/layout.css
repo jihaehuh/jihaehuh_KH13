@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+/* 레이아웃 틀*/
+/* 태그라서 .을 안찍는다  */
+html,body{
+    margin: 0;
+    padding: 0;
+}
+main {
+    width: 1100px;
+    margin: 0 auto;
+}
+header {
+    padding: 10px;
+}
+/* nav {} */
+
+section {
+    display: flex;
+    min-height: 400px; /* 글이 없어도 여백이 이정도는 있어줘라*/
+}
+aside {
+    width: 200px;
+    padding: 10px;
+}
+article {
+    flex-grow: 1;
+    padding: 10px;
+}
+footer {
+    padding: 10px;
+}

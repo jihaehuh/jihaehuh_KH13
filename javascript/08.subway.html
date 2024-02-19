@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!--  구글 폰트  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!--내가 구현한 스타일-->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">   <!--../는 상위 폴더를 의미함-->
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+    <!--font awsome 아이콘 CDN-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   
+    <style>
+        
+
+
+    </style>
+
+
+<!-- javascript 를 의도적으로 head자리에 배치하여 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        function subway() {
+            //입력
+		var current = 20231206;
+		var birth = 20000101;
+		
+		//계산
+		var currentYear = current / 10000;
+		var currentMonth = current % 10000 / 100;
+		var birthYear = birth / 10000;
+		var birthMonth = birth % 10000 / 100;
+		
+		var now = currentYear * 12 + currentMonth;
+		var before = birthYear * 12 + birthMonth;
+		var gap = now - before;
+		//System.out.println(gap);
+		
+		var age = gap / 12;
+		
+		 
+        if(age >=65 || age <8) {//65세 이상 이거나 8세 미만(어르신 또는 영유아)
+            price =0;	
+        }
+        //else if(age >=20 &&age<65) //이미 위에서 한번 물어봤음
+        else if(age >=20) {
+            price=1400;
+            
+        }
+        else if(age >=14) {
+            price=800;
+
+        }
+        else {
+            price =500;
+
+        }
+
+        document.getElementById("display").innerHTML = "지불하실 금액은 " + price + "원";
+    }
+      
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-500" align="center">
+        <div class="cell center">
+            <h1>지하철요금</h1>
+            <i>출생년도 4자리를 입력해 주세요</i>
+        </div>
+        <div class="cell">
+            <h4>출생년도 4자리</h4>
+            <hr>
+            <input type="number" id="birthYearInput" placeholder="출생년도 4자리를 입력하세요"> 
+            <div class="cell">
+                <button onclick="subway()" style="color:green;">요금 계산하기</button> 
+            </div>
+        </div>
+        <div id="display" class="display" ></div> 
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!--  구글 폰트  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!--내가 구현한 스타일-->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">   <!--../는 상위 폴더를 의미함-->
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+    <!--font awsome 아이콘 CDN-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   
+    <style>
+        
+
+
+    </style>
+
+
+<!-- javascript 를 의도적으로 head자리에 배치하여 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        //함수(function)
+        //- 혼자서 특정기능을 처리하도록 구성된 코드 덩어리 
+        //- 원할때 실행할 수 있어야한다
+        //- 화면에서의 어떤 변화가 발생하면 함수가 실행되도록 구성하는 것이 중요
+
+        function hello() {
+            console.log("안녕!");
+        }
+       
+
+        function sum() {
+            var total =0;
+            for(var i=1; i<=100; i++) {
+                total +=i;
+            }
+            console.log(total);
+        }
+
+        function seven() {
+            var count=0;
+            for(var i=1; i <=100;i++) {
+                if(i % 7 == 0) {
+                    count ++;   
+            }
+        }
+        console.log(count);
+        }
+
+    
+       
+        //hello();//함수 호출(call) 실행시키려면 ()와 함께 쓰기 
+        //hello 함수의 이름 
+
+    </script>
+</head>
+<body>
+
+ 
+
+
+
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>자바스크립트 함수 </h1>
+        </div>
+
+        <!--
+            미리 작성해둔 javascript  
+            함수를 태그의 특정 상황에 연결(event binding/heading)
+            - onclick 은 클릭했을 때 
+            - oninput 은 입력했을 때
+
+        -->
+        <div class="cell">
+            <button onclick="hello();">안녕</button>
+        </div>
+        <div class="cell">
+            <h2 onlclick="hello();">안녕</h2>
+        </div>
+
+        <!-- 다음 글자를 누르면 콘솔 화면에 결과가 나오도록 함수와 호출을 구현-->
+        <div class="cell">
+           
+            <p onclick="sum();"> 1부터 100까지의 합계는?</p>
+        </div>
+        
+        <div class="cell" onclick="seven();">
+            <span>1 부터 100 사이의 7의 배수의 개수는 ?</span>
+        </div>
+    </div>
+
+
+    <!-- lazy loading 기법
+    <script>alert("전")</script>
+    <script>alert("후")</script> -->
+
+
+</body>
+</html>

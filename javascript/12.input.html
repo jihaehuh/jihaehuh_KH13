@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!--  구글 폰트  -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!--내가 구현한 스타일-->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">   <!--../는 상위 폴더를 의미함-->
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+    <!--font awsome 아이콘 CDN-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   
+    <style>
+        
+
+
+    </style>
+
+
+<!-- javascript 를 의도적으로 head자리에 배치하여 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        function checkText() {
+            var inputTarget = document.querySelector(".temp");
+            var text = inputTarget.value;
+
+            // console.log(text);
+            // console.log(text.length);//자바스크립트는 문자열을 배열로 본다 
+
+            var lengthTarget = document.querySelector(".result1");
+            lengthTarget.textContent = text.length;
+
+            //출생년도 형식인지를 검사(4자리)
+            //-JS에서는 정규표현식 객체를 슬래시로 감싸서 생성 
+            var regex=/^[0-9]{4}$/; 
+            var isValid = regex.test(text) //이거는 자바스크립트에서 쓰는 방법
+            // test.matches(regex) 이거는 자바에서 쓰는 방법
+            //확인  console.log(isValid); // 콘솔 창에 true또는 false 가 나옴 
+
+            var regexTarget =document.querySelector(".result2");
+            if(isValid) {
+                regexTarget.textContent = "나이스!";
+
+            }
+            else {
+                regexTarget.textContent = "잘못된 연도 형식입니다";
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+
+ 
+
+
+
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>입력 이벤트 </h1>
+        </div>
+        <div class="cell">
+            <input type="text" class="temp tool w-100" oninput="checkText();">  <!-- 입력 -->
+        </div>
+        <div class="cell result1"></div>   <!-- 글자수  -->
+        
+        <div class="cell result2"></div><!-- 형식  -->
+       
+    </div>
+
+
+   
+
+</body>
+</html>

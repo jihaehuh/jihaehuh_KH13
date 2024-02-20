@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 예제</title>
+   <link rel="stylesheet" type="text/css" href="commons.css">
+   <link rel="stylesheet" type="text/css" href="test.css">
+
+    <!--구글 폰트-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+<!--내가 구현한 스타일-->
+   <link rel="stylesheet" type="text/css" href="../css/commons.css">
+   <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+   <!--font awesome 아이콘-->
+   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+ 
+</style>
+<!-- javascript를 의도적으로 head자리에 배치해서 가장 먼저 실행되도록 구현-->
+<script type="text/javascript">
+   function calculatePrice(){
+    //입력-계산에 필요한 태그와 그 정보를 수집한다
+    //-input 태그와 그 입력값
+
+    var inputTarget = document.querySelector("input[name=birth]");
+            // var inputValue = inputTarget.value; //(주의)입력값은 문자열
+
+            //(중요!!!!!!!!!!!!)
+            var inputValue=parseInt(inputTarget.value);//정수로 변환 
+            // var inputValue=parseFloat(inputTarget.value);//실수로 변환 **doublle은 존재 안함**
+
+
+            //계산
+            // var age = 2024 - inputValue + 1;
+            var age = new Date().getFullYear() -inputValue +1;
+            // console.log("age="+age);
+
+            var price = 0;
+            if(age >= 65 || age < 8) {//어르신 또는 영유아
+                price = 0;
+            }
+            else if(age >= 14) {
+                price = 1500;
+            }
+            else {
+                price = 0;
+            }
+            //출력- 지정된 영역에 글자를 설정하거나 효과를 부여
+            // console.log("price= "+price);
+            var spanTarget = document.querySelector(".result");
+            spanTarget.textContent=price;
+        }  
+</script>
+</head>
+<body>
+    <div class="container w-500">
+    <div class="cell center">
+        <h1>지하철 요금 계산기2</h1>
+    </div>
+    <div class="cell">
+        <h2>출생년도 4자리</h2>
+    <hr>
+    <div clas="cell">
+        <!--<label> 생년월일 (ex:1999)</label> 라벨을 쓰면 아이콘을 함께 사용할수있다-->
+        <input name="birth" type="text" class="tool w-100"
+                                    placeholder="출생년도 4자리를 입력하세요">  
+        <!--placeholder은 아이콘을 함께 쓸수 없다 -->
+    </div>
+        <div class="cell center w-100">
+            <button onclick="calculatePrice();" style="color:green;"> 
+            <i class="fa-solid fa-credit-card"></i>
+            요금 계산하기
+            </button>
+        </div>
+    <div class="cell">
+        지불하실 금액은<span class="result"></span>원입니다
+    </div>
+</div>
+</body>
+</html>

@@ -16,24 +16,36 @@
 
     <!-- font awesome 아이콘 CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-   
-    <!-- 강사님 풀이 [3] 색상 및 코드 최적화 -->
+    
     <style>
-        .success-feedback {
-            display: none;
-            color: #00b894;
+        /* 
+            입력창 피드백 디자인 
+            - 입력창 뒤에 피드백 영역이 있다면 판정 결과에 따라 표시되도록 구현
+        */
+        .tool.success {
+            border-color: #00b894 !important;
         }
-        .fail-feedback {
+        .tool.fail {
+            border-color: #d63031 !important;
+        }
+        .success-feedback {
+            color: #00b894;
             display: none;
+        }
+        .fail-feedback, 
+        .fail2-feedback,
+        .fail3-feedback
+        {
             color: #d63031;
+            display: none;
         }
 
-        .success~.success-feedback{ 
-            /* success뒤에있는 success-feedback을 블럭으로 해라  */
-            display: block;
-        }
-        .fail~.fail-feedback {
-            display: block;
+        .tool.success ~ .success-feedback,
+        .tool.fail ~ .fail-feedback,
+        .tool.fail2 ~ .fail2-feedback,
+        .tool.fail3 ~ .fail3-feedback 
+        { 
+            display: block; 
         }
     </style>
 
@@ -50,12 +62,12 @@
             var regex = /^[a-z][a-z0-9]{7,19}$/;
             var isValid = regex.test(memberId);
 
-            //출력
-            inputTarget.classList.remove("success","fail");
+            //출력 - 입력창에 검사 결과를 표시하고 나머지 처리는 연결되도록 구현
+            inputTarget.classList.remove("success", "fail");
             if(isValid) {
                 inputTarget.classList.add("success");
             }
-            else{
+            else {
                 inputTarget.classList.add("fail");
             }
         }
@@ -67,17 +79,8 @@
             var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
             var isValid = regex.test(memberPw);
 
-            //var resultTarget = document.querySelector("input[name=memberPw] + div");
-            var resultTarget = inputTarget.nextElementSibling;
-            resultTarget.classList.remove("success", "fail");
-            if(isValid) {
-                resultTarget.textContent = "비밀번호가 올바른 형식입니다";
-                resultTarget.classList.add("success");
-            }
-            else {
-                resultTarget.textContent = "비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가 포함되어야 합니다";
-                resultTarget.classList.add("fail");
-            }
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
         }
 
         function checkMemberPwRe() {
@@ -89,25 +92,16 @@
             var memberPw = target1.value;//비밀번호
             var memberPw2 = target2.value;//비밀번호 확인
 
-            //var resultTarget = document.querySelector("#pw-reinput + div");
-            var resultTarget = target2.nextElementSibling;
-            resultTarget.classList.remove("success", "fail");
+            target2.classList.remove("success", "fail", "fail2");
 
-            //비밀번호가 입력되지 않았으면
-            //if(memberPw == "") {//자바스크립트는 모든 비교를 == 로 한다
             if(memberPw.length == 0) {//글자수 0이면
-            //if(memberPw == false) {//문자열이 부정적인 값이라면
-            //if(!memberPw) {
-                resultTarget.textContent = "비밀번호를 먼저 입력하세요";
-                resultTarget.classList.add("fail");
+                target2.classList.add("fail2");
             }
             else if(memberPw == memberPw2) {//비밀번호와 확인이 일치하면
-                resultTarget.textContent = "비밀번호가 일치합니다";
-                resultTarget.classList.add("success");
+                target2.classList.add("success");
             }
             else {//일치하지 않는다면
-                resultTarget.textContent = "비밀번호가 일치하지 않습니다";
-                resultTarget.classList.add("fail");
+                target2.classList.add("fail");
             }
         }
     </script>
@@ -129,7 +123,7 @@
                             placeholder="영문 소문자시작, 숫자 포함 8~20자" 
                             class="tool w-100" oninput="checkMemberId();">
             <div class="success-feedback">멋진 아이디네요!</div>
-            <div class="fail-feedback">영문 소문자시작, 숫자 포함 8~20자이내로 작성해주세요</div>
+            <div class="fail-feedback">아이디는 소문자 시작, 숫자 포함 8~20자로 작성하세요</div>
         </div>  
 
         <div class="cell">
@@ -140,7 +134,8 @@
             <input type="password" name="memberPw"
                             placeholder="영문 대소문자, 숫자, 특수문자 1개 이상 포함 6~15자"
                             class="tool w-100" oninput="checkMemberPw();">
-            <div></div>
+            <div class="success-feedback">비밀번호가 올바른 형식입니다</div>
+            <div class="fail-feedback">비밀번호에는 반드시 영문 대,소문자와 숫자, 특수문자가 포함되어야 합니다</div>
         </div>
 
         <div class="cell">
@@ -152,7 +147,9 @@
             <input type="password" placeholder=""
                             id="pw-reinput" class="tool w-100"
                             oninput="checkMemberPwRe();">
-            <div></div>
+            <div class="success-feedback">비밀번호가 일치합니다</div>
+            <div class="fail-feedback">비밀번호가 일치하지 않습니다</div>
+            <div class="fail2-feedback">비밀번호를 먼저 입력하세요</div>
         </div>
 
         <div class="cell">

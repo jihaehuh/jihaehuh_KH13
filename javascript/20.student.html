@@ -23,54 +23,57 @@
 
     <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
     <script type="text/javascript">
-        function checkMenuNameKor() {
-            var inputTarget = document.querySelector("[name=menuNameKor]");
-            
+        function checkName() {
+            var inputTarget = document.querySelector("[name=name]");
 
-           //한글인지 + 한글자라도 써졌는지 검사
-           var regex=/^[가-힣a-zA-Z0-9]+$/;
+            //한글인지 검사
+            var regex= /^[가-힣]{2,7}$/;
             var isValid = regex.test(inputTarget.value);
 
             inputTarget.classList.remove("success", "fail");
             inputTarget.classList.add(isValid ? "success" : "fail");
             return isValid;
         }
-        function checkMenuNameEng() {
-            var inputTarget = document.querySelector("[name=menuNameEng]");
-
-            var isValid = empDept.length > 0;
-
-            inputTarget.classList.remove("success", "fail");
-            inputTarget.classList.add(isValid ? "success" : "fail");
-            return isValid;
-        }
-        function checkMenuType() {
-            //select는 option이 있지만 select 자체로 제어하도록 권장
-            var inputTarget = document.querySelector("[name=menuType]");
-
-            var isValid = empDept.length > 0;
+        function checkKoreanScore() {
+            var inputTarget = document.querySelector("[name=koreanScore]");
             
-            inputTarget.classList.remove("success", "fail");
-            inputTarget.classList.add(isValid ? "success" : "fail");
-            return isValid;
-        }
-        function checkMenuPrice() {
-            //select는 option이 있지만 select 자체로 제어하도록 권장
-            var inputTarget = document.querySelector("[name=menuPrice]");
 
             var regex = /^[0-9]+$/;
             var isValid = regex.test(inputTarget.value);
-        
+
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkEnglishScore() {
+            //select는 option이 있지만 select 자체로 제어하도록 권장
+            var inputTarget = document.querySelector("[name=englishScore]");
+            
+
+            var regex = /^[0-9]+$/;
+            var isValid = regex.test(inputTarget.value);
+
+            inputTarget.classList.remove("success", "fail");
+            inputTarget.classList.add(isValid ? "success" : "fail");
+            return isValid;
+        }
+        function checkMathScore() {
+            //select는 option이 있지만 select 자체로 제어하도록 권장
+            var inputTarget = document.querySelector("[name=mathScore]");
+
+            var regex = /^[0-9]+$/;
+            var isValid = regex.test(inputTarget.value);
+
             inputTarget.classList.remove("success", "fail");
             inputTarget.classList.add(isValid ? "success" : "fail");
             return isValid;
         }
 
         function checkForm() {
-            var isValid1 = checkMenuNameKor();
-            var isValid2 = checkMenuNameEng();
-            var isValid3 = checkMenuType();
-            var isValid4 = checkMenuPrice();
+            var isValid1 = checkName();
+            var isValid2 = checkKoreanScore();
+            var isValid3 = checkEnglishScore();
+            var isValid4 = checkMathScore();
 
             return isValid1 && isValid2 && isValid3 && isValid4;
         }
@@ -78,69 +81,58 @@
 </head>
 <body>
 
-    <form action="insert" method="post" autocomplete="off"
+    <form action="add" method="post" autocomplete="off"
                                             onsubmit="return checkForm();">
     <div class="container w-400">
         <div class="cell center">
-            <h1>메뉴 등록</h1>
+            <h1>학생 등록</h1>
         </div>
         <div class="cell">
             <label>
-                한글 메뉴명
+               이름
                 <i class="fa-solid fa-asterisk red"></i>
             </label>
-            <input type="text" name="menuNameKor" 
-                        placeholder="(ex)김치찌개" class="tool w-100"
-                        onblur="checkMenuNameKor();">
+            <input type="text" name="name" 
+                        placeholder="(ex)홍길동" class="tool w-100"
+                        onblur="checkName();">
             <!-- <div class="success-feedback"></div> -->
-            <div class="fail-feedback">한글로 작성하세요</div>
+            <div class="fail-feedback">이름을 반드시 작성하세요</div>
         </div>  
         <div class="cell">
             <label>
-               영문 메뉴명
+               국어 점수 
                 <i class="fa-solid fa-asterisk red"></i>
             </label>
-            <input type="text" name="menuNameEng" 
-                            placeholder="(ex) kimchiZiigae" class="tool w-100"
-                            onblur="checkMenuNameEng();">
+            <input type="text" name="koreanScore" 
+                            placeholder="(ex) 95" class="tool w-100"
+                            onblur="checkKoreanScore();">
             <!-- <div class="success-feedback"></div> -->
-            <div class="fail-feedback">영어로 작성하세요</div>
+            <div class="fail-feedback">숫자로 작성하세요</div>
         </div>
         <div class="cell">
             <label>
-                메뉴유형 
+                영어 점수
                 <i class="fa-solid fa-asterisk red"></i>
             </label>
-            <select name="menuType" class="tool w-100"
-            oninput="checkMenuType();">
-            <option value="">선택하세요</option>
-            <option value="음료">음료</option>
-            <option value="한식">한식</option>
-            <option value="분식">분식</option>
-            <option value="양식">양식</option>
-            <option value="중식">중식</option>
-            <option value="디저트">디저트</option>
-
-        </select>
-            <div class="fail-feedback">반드시 선택하세요</div>
+            <input type="text" name="englishScore" 
+                                placeholder="(ex) 95" class="tool w-100"
+                                 onblur="checkEnglishScore();">
+            <div class="fail-feedback">숫자로 입력하세요</div>
         </div>
         <div class="cell">
             <label>
-                메뉴가격
+                수학 점수 
                 <i class="fa-solid fa-asterisk red"></i>
             </label>
-            <input type="number" name="menuPrice" class="tool w-100"
-                                        oninput="checkMenuPrice();">
-            <div class="fail-feedback">숫자로만 입력하세요</div>
+            <input type="number" name="mathScore" class="tool w-100"
+                                        oninput="checkMathScore();">
+            <div class="fail-feedback">숫자로 입력하세요</div>
         </div>
         <div class="cell">
-            <button class="btn positive w-100">
-                <i class="fa-solid fa-floppy-disk"></i>
-                메뉴 등록
+            <button class="btn w-100">
+                <i class="fa-solid fa-plus"></i>
+                학생 등록
             </button>
-        </div>
-        <div class="cell">
-            <a href="list">목록 보기</a>
         </div>
     </div>
     </form>

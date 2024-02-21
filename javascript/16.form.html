@@ -17,8 +17,6 @@
     <!-- font awesome 아이콘 CDN -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-
-      <!-- 강사님 풀이 [4] blur 이벤트 추가  -->
     <style>
         /* 
             입력창 피드백 디자인 
@@ -68,9 +66,11 @@
             inputTarget.classList.remove("success", "fail");
             if(isValid) {
                 inputTarget.classList.add("success");
+                return true;//성공했음을 알린다
             }
             else {
                 inputTarget.classList.add("fail");
+                return false;//실패했음을 알린다
             }
         }
 
@@ -83,6 +83,8 @@
 
             inputTarget.classList.remove("success", "fail");
             inputTarget.classList.add(isValid ? "success" : "fail");
+
+            return isValid;//결과 반환
         }
 
         function checkMemberPwRe() {
@@ -98,19 +100,34 @@
 
             if(memberPw.length == 0) {//글자수 0이면
                 target2.classList.add("fail2");
+                return false;
             }
             else if(memberPw == memberPw2) {//비밀번호와 확인이 일치하면
                 target2.classList.add("success");
+                return true;
             }
             else {//일치하지 않는다면
                 target2.classList.add("fail");
+                return false;
             }
+        }
+
+        //폼을 전송할 때 모든 항목을 검사해야 하는데..
+        //검사 코드를 다시 쓰는건 비효율적이다
+        //기존에 만든 함수를 호출해서 해결하는 방향으로 진행한다
+        function checkForm() {
+            var idValid = checkMemberId();
+            var pwValid = checkMemberPw();
+            var reValid = checkMemberPwRe();
+            return idValid && pwValid && reValid;
         }
     </script>
 </head>
 <body>
 
-    <form autocomplete="off" action="?" method="post">
+    <!-- form은 submit 이벤트가 존재하며 기본이벤트이므로 차단해야 한다 -->
+    <form autocomplete="off" action="https://www.google.com" 
+            method="get" onsubmit="return checkForm();">
     <div class="container w-500">
         <div class="cell center">
             <h1>회원가입</h1>

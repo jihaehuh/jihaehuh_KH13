@@ -21,7 +21,7 @@
 
     </style>
 
-    <!-- 강사님 풀이 [1] -->
+    <!-- 강사님 풀이 [2] 코드 최적화 -->
     <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
     <script type="text/javascript">
         function checkMemberId() { //아이디
@@ -36,7 +36,8 @@
             var isValid = regex.test(memberId);
 
             //출력
-            var resultTarget = document.querySelector(".id-result");
+            // var resultTarget = document.querySelector("#id-result");
+            var resultTarget = inputTarget.nextElementSibling;
             if(isValid) {
                 resultTarget.textContent = "멋진 아이디네요!";
                 resultTarget.style.color = "#00b894";
@@ -58,7 +59,9 @@
             var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
             var isValid = regex.test(memberPw);
             //출력
-            var resultTarget = document.querySelector(".pw-result");
+            // var resultTarget = document.querySelector("#pw-result");
+            var resultTarget=inputTarget.nextElementSibling;
+
             if(isValid) {//맞으면
                 resultTarget.textContent = "비밀번호가 올바른 형식입니다";
                 resultTarget.style.color = "#00b894";
@@ -82,11 +85,13 @@
             var memberPw2 = target2.value; //비밀번호 확인 
 
             //출력
-            var resultTarget = document.querySelector(".pw-re-result");
+            // var resultTarget = document.querySelector("#pw-re-reinput+div");
+            var resultTarget=target2.nextElementSibling;
+
             //비밀번호가 입력되지 않으면
             // [1]  if(memberPw=="") { //자바 스크립트는 모든 비교를 == 로 한다 
              //[2] 
-            if(memberPw. length == 0) {//글자 수가 0 이라면 (입력이 안됐다면)
+             if(memberPw. length == 0) {//글자 수가 0 이라면 (입력이 안됐다면)
             // [3] if(memberPw== false) {//문자열이 부정적인 값이라면
             // if(!memberPw) {// [4] 문자열이 부정적인 값이라면을 트렌드 하게 쓰는 방법
                 resultTarget.textContent = "";

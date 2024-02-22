@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <link rel="stylesheet" type="text/css" href="../css/test.css">
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        
+    </style>
+
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        //[1]풀이 버튼만 있기
+        // window.onload = function(){
+        //     // var smallButton = document.querySelector(".btn-sm");
+        //     // smallButton.addEventListener("click", function(){});
+
+        //     document.querySelector(".btn-sm")
+        //         .addEventListener("click", function(){
+        //             document.querySelector(".editor").style.fontSize = "12px";
+        //         });
+        //     document.querySelector(".btn-md")
+        //         .addEventListener("click", function(){
+        //             document.querySelector(".editor").style.fontSize = "16px";
+        //         });
+        //     document.querySelector(".btn-lg")
+        //         .addEventListener("click", function(){
+        //             document.querySelector(".editor").style.fontSize = "24px";
+        //         });
+        // };
+
+        // //[2]풀이 한번에 같은 이름으로 부르기 
+        // window.onload = function(){
+        //     var fontsizeButtons = document.querySelectorAll(".btn-fontsize");
+        //     for(var i=0; i < fontsizeButtons.length; i++) {
+        //         fontsizeButtons[i].addEventListener("click", function(){
+        //             //this == 클릭한 버튼
+        //             var fontsize = this.dataset.fontsize;
+        //             document.querySelector(".editor").style.fontSize = fontsize;
+        //         });
+        //     }
+        // };
+
+        //[3] 심화: +,- 버튼 구현하기
+        window.onload = function(){
+            var size = 16;    
+            changeFontSize(size);
+
+            document.querySelector(".btn-increase")
+                        .addEventListener("click", function(){
+                size++;   
+                changeFontSize(size); 
+            });
+            document.querySelector(".btn-decrease")
+                        .addEventListener("click", function(){
+                size--;    
+                changeFontSize(size);
+            });
+
+            function changeFontSize(size) {
+                var editor = document.querySelector(".editor");
+                editor.style.fontSize = size+"px";
+                var display = document.querySelector(".size-display");
+                display.textContent = size;
+            }
+        };
+
+
+    </script>
+</head>
+<body>
+
+    <div class="container w-500">
+        <div class="cell center">
+            <h1>글자 크기 변경 문제</h1>
+        </div>
+        <div class="cell center">
+            <!-- [1]풀이 버튼만 있기 -->
+            <!-- <button class="btn positive btn-sm">작게</button>
+            <button class="btn positive btn-md">보통</button>
+            <button class="btn positive btn-lg">크게</button> -->
+
+            <!-- [2]풀이 한번에 같은 이름으로 부르기 -->
+            <!-- <button class="btn positive btn-fontsize" data-fontsize="12px">작게</button>
+            <button class="btn positive btn-fontsize" data-fontsize="16px">보통</button>
+            <button class="btn positive btn-fontsize" data-fontsize="24px">크게</button> -->
+        
+
+            <!-- [3]심화 : +,- 버튼 구현하기  -->
+            <button class="btn positive btn-decrease">
+                <i class="fa-solid fa-minus"></i>
+            </button>
+            <span class="size-display mx-20"></span>
+            <button class="btn positive btn-increase">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        
+        
+        </div>  
+        <hr>
+        <div class="cell">
+            <textarea class="editor tool w-100" 
+                        style="min-height: 250px; font-size: 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat urna massa, id dictum nibh dignissim id. Mauris in lacinia massa, at eleifend metus. Nulla mollis dictum faucibus. Donec rhoncus tellus lacus, vel pellentesque sapien bibendum in. Nullam malesuada odio eget scelerisque scelerisque. Nam auctor nulla sit amet ipsum faucibus hendrerit. Curabitur accumsan at nisl eu auctor. Quisque gravida mollis neque, eget tempor felis maximus auctor. Suspendisse potenti. Sed placerat est nisi, vitae ullamcorper dui laoreet vitae. Phasellus aliquet cursus sollicitudin. Ut vestibulum nunc ex, a gravida leo vestibulum at. Nam porta quam risus, non lacinia arcu pretium at. Proin sodales, tortor sed egestas ultrices, odio urna suscipit est, nec sollicitudin ligula metus a lorem. In hac habitasse platea dictumst.</textarea>
+        </div>
+    </div>
+
+</body>
+</html>

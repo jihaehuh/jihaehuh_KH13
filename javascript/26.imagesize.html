@@ -28,30 +28,30 @@
     <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
     <script type="text/javascript">
 
-        // //[1]방법
-        // window.onload = function(){
-        //     //버튼을 클릭하면 버튼에 맞는 이미지 변환을 구현
-        //     var smallButton = document.querySelector(".btn-small");
-        //     smallButton.addEventListener("click", function(){
-        //         var image = document.querySelector(".dummy");
-        //         image.style.width = "150px";
-        //         image.style.height = "150px";
-        //     });
+        //[1]방법
+        window.onload = function(){
+            //버튼을 클릭하면 버튼에 맞는 이미지 변환을 구현
+            var smallButton = document.querySelector(".btn-small");
+            smallButton.addEventListener("click", function(){
+                var image = document.querySelector(".dummy");
+                image.style.width = "150px";
+                image.style.height = "150px";
+            });
 
-        //     var normalButton = document.querySelector(".btn-normal");
-        //     normalButton.addEventListener("click", function(){
-        //         var image = document.querySelector(".dummy");
-        //         image.style.width = "300px";
-        //         image.style.height = "300px";
-        //     });
+            var normalButton = document.querySelector(".btn-normal");
+            normalButton.addEventListener("click", function(){
+                var image = document.querySelector(".dummy");
+                image.style.width = "300px";
+                image.style.height = "300px";
+            });
 
-        //     var bigButton = document.querySelector(".btn-big");
-        //     bigButton.addEventListener("click", function(){
-        //         var image = document.querySelector(".dummy");
-        //         image.style.width = "450px";
-        //         image.style.height = "450px";
-        //     });
-        // };
+            var bigButton = document.querySelector(".btn-big");
+            bigButton.addEventListener("click", function(){
+                var image = document.querySelector(".dummy");
+                image.style.width = "450px";
+                image.style.height = "450px";
+            });
+        };
 
 
 

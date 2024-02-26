@@ -38,14 +38,7 @@
        $(".page").hide().first().show();
     //    $(".page").hide().eq(0).show();
     //     $(".page:gt(0)").hide();//권장하지 않음
-    });
-
-        //(추가) 첫번째 이전 버튼과 마지막 다음 버튼을 삭제 
-        
-        $(".btn-prev").first().remove();
-        $(".btn-next").last().remove();
-
-
+    
         //[2] 다음 버튼을 누르면 버튼이 있는 페이지는 숨기고 다음페이지를 표시
         $(".btn-next").click(function(){
             // $(this).parent(".page").hide().next(".page").show(); //페이지 바로 아래에
@@ -58,7 +51,7 @@
             $(this).parents(".page").hide().next(".page").show();
 
         });
-
+    });
     </script>
 </head>
 <body>
@@ -73,7 +66,7 @@
         </div>
         <div class="cell page">
             <h1>1페이지</h1>
-            <button class="btn-prev">이전</button>
+            <!-- <button class="btn-prev">이전</button> -->
             <button class="btn-next">다음</button>
         </div>  
         <div class="cell page">
@@ -94,7 +87,7 @@
         <div class="cell page">
             <h1>5페이지</h1>
             <button class="btn-prev">이전</button>
-            <button class="btn-next">다음</button>
+            <!-- <button class="btn-next">다음</button> -->
         </div> 
     </div>
 

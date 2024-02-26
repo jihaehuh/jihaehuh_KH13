@@ -764,3 +764,17 @@ textarea.tool.tool-fixed {
         { 
             display: block; 
         }
+
+        /* 진행바(progressbar) 디자인  */
+        .progressbar {
+            box-shadow: 0 0 1px 0 #ccc;
+
+        }
+        .progressbar > .guage {
+            width: 0%;
+            height: 5px;
+            background: rgb(131,58,180);
+            background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%);
+            transition: width 0.3s ease-out;
+            /* transition 은 초기값이 있어야 적용이 되서 width를 미리 지정해주어야한다  */
+        }

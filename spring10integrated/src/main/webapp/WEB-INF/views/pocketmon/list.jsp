@@ -29,4 +29,45 @@
 	</h2>  
 </c:forEach>  
 </div>
+<%-- 네비게이터 --%>
+<h2>
+	<%-- 이전이 있을 경우만 링크를 제공 --%>
+	<c:choose>
+		<c:when test="${beginBlock == 1}">&lt;이전</c:when>
+		<c:otherwise>
+			<a href="list?page=${beginBlock-1}&size=${size}&column=${param.column}&keyword=${param.keyword}">&lt;이전</a>
+		</c:otherwise>
+	</c:choose>
+	
+	<%-- for(int i=beginBlock; i <= endBlock; i++) { .. } --%>
+	<c:forEach var="i" begin="${beginBlock}" end="${Math.min(totalPage, endBlock)}" step="1">
+		<%-- 다른 페이지일 경우만 링크를 제공 --%>
+		<c:choose>
+			<c:when test="${page == i}">${i}</c:when>
+			<c:otherwise>
+				<a href="list?page=${i}&size=${size}&column=${param.column}&keyword=${param.keyword}">${i}</a>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+	
+	<%-- 다음이 있을 경우만 링크를 제공 --%>
+	<c:choose>
+		<c:when test="${endBlock >= totalPage}">다음&gt;</c:when>
+		<c:otherwise>
+			<a href="list?page=${endBlock+1}&size=${size}&column=${param.column}&keyword=${param.keyword}">다음&gt;</a> 
+		</c:otherwise>
+	</c:choose>
+</h2>
+
+
+<%-- 검색창 --%>
+<form action="list" method="get">
+	<select name="column">
+		<option value="board_title" ${param.column == 'board_title' ? 'selected' : ''}>제목</option>
+		<option value="board_writer" ${param.column == 'board_writer' ? 'selected' : ''}>작성자</option>
+		<option value="board_content" ${param.column == 'board_content' ? 'selected' : ''}>내용</option>
+	</select>
+	<input type="search" name="keyword" placeholder="검색어 입력" required value="${param.keyword}">
+	<button>검색</button>
+</form>
   <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>  

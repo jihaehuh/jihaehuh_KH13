@@ -713,67 +713,68 @@ textarea.tool.tool-fixed {
 }
 
 
- /* flex layout 디자인 */
- .flex-cell {
+/* flex layout 디자인 */        
+.flex-cell {
     display: flex;
 }
-.flex-cell >.width-fill {
+.flex-cell > .width-fill {
     flex-grow: 1;
 }
-/* 자동으로 1대1 비율로 나눠주는 것들 */
-.flex-cell.auto-width >* {   
+.flex-cell.auto-width > * {
     flex-grow: 1;
 }
 .flex-cell.vertical {
     flex-direction: column;
 }
-/* 가운데 정렬 */
-.flex-cell.middle{
+
+.flex-cell.middle {
     justify-content: center;
     align-items: center;
 }
 
- /* 
-            입력창 피드백 디자인 
-            - 입력창 뒤에 피드백 영역이 있다면 판정 결과에 따라 표시되도록 구현
-        */
-        .tool.success {
-            border-color: #00b894 !important;
-        }
-        .tool.fail,
-        .tool.fail2,
-        .tool.fail3 {
-            border-color: #d63031 !important;
-        }
-        .success-feedback {
-            color: #00b894;
-            display: none;
-        }
-        .fail-feedback, 
-        .fail2-feedback,
-        .fail3-feedback
-        {
-            color: #d63031;
-            display: none;
-        }
+/* 
+    입력창 피드백 디자인 
+    - 입력창 뒤에 피드백 영역이 있다면 판정 결과에 따라 표시되도록 구현
+*/
+.tool.success {
+    border-color: #00b894 !important;
+}
+.tool.fail,
+.tool.fail2,
+.tool.fail3 
+{
+    border-color: #d63031 !important;
+}
+.success-feedback {
+    color: #00b894;
+    display: none;
+}
+.fail-feedback, 
+.fail2-feedback,
+.fail3-feedback
+{
+    color: #d63031;
+    display: none;
+}
 
-        .tool.success ~ .success-feedback,
-        .tool.fail ~ .fail-feedback,
-        .tool.fail2 ~ .fail2-feedback,
-        .tool.fail3 ~ .fail3-feedback 
-        { 
-            display: block; 
-        }
- /* 진행바(progressbar) 디자인  */
-        .progressbar {
-            box-shadow: 0 0 1px 0 #ccc;
+.tool.success ~ .success-feedback,
+.tool.fail ~ .fail-feedback,
+.tool.fail2 ~ .fail2-feedback,
+.tool.fail3 ~ .fail3-feedback 
+{ 
+    display: block; 
+}
 
-        }
-        .progressbar > .guage {
-            width: 0%;
-            height: 5px;
-            background: rgb(131,58,180);
-            background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%);
-            transition: width 0.3s ease-out;
-            /* transition 은 초기값이 있어야 적용이 되서 width를 미리 지정해주어야한다  */
-        }
+/*
+    진행바(progressbar) 디자인
+*/
+.progressbar {
+    box-shadow: 0 0 1px 0 #ccc;
+}
+.progressbar > .guage {
+    width: 0%;
+    height: 5px;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    transition: width 0.1s ease-out;
+}

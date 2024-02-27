@@ -33,9 +33,16 @@
 
             $("[name=memberId]").blur(function(){
                 var regex = /^[a-z][a-z0-9]{7,19}$/;
-                if(regex.test($(this).val())) {//아이디 형식 검사를 통과했다면
+                var value = $(this).val();
+
+               if(regex.test(value)) {//아이디 형식 검사를 통과했다면
                     $.ajax({
-                        url : "http://localhost:8080/checkId?memberId="+$(this).val(),
+                        // url : "http://localhost:8080/checkId?memberId="+value,
+                        url : "http://localhost:8080/checkId",
+                        method : "post",//전송방식(get/post)
+                        data: {
+                            memberId : value
+                        },
                         success : function(response) {
                             //console.log(response);
                             if(response == "NNNNN") {

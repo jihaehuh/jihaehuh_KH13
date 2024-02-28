@@ -4,32 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
-<script>
-$(function(){
-	//(주의)
-	//- 아무리 같은 페이지라도 서로 다른 언어를 혼용하지말것
-	//- 자바스크립트에서 파라미터를 읽어 번호를 추출한다
-	var params = new URLSearchParams(location.search);
-	var boardNo = params.get("boardNo");
-	
-	//최초에 표시될 화면을 위해 화면이 로딩되자마자 서버로 비동기 통신 시도
-	$.ajax({
-			url : "/rest/board_like/check",
-			method : "post",
-			data : { boardNo : boardNo },
-			success: function(response) {
-				//response.state에 따라서 하트의 형태를 설정
-				$(".board-like").find(".fa-heart")
-					.removeClass("fa-solid fa-regular")
-					.addClass(response.state ? "fa-solid" : "fa-regular");
-				
-				//response.count에 따라서 좋아요 개수를 표시
-				$(".board-like").find(".count").text(response.count);
-			}
-	});
-	
-	//목표 : 하트를 클릭하면 좋아요 갱신 처리
-	$(".board-like").find(".fa-heart").click(function(){
+
+<c:if test="${sessionScope.loginId != null}">
+<script type="text/javascript">
+//좋아요 하트 클릭 이벤트
+
+		$(function(){
+			//(주의)
+			//- 아무리 같은 페이지라도 서로 다른 언어를 혼용하지말것
+			//- 자바스크립트에서 파라미터를 읽어 번호를 추출한다
+			var params = new URLSearchParams(location.search);
+			var boardNo = params.get("boardNo");
+
+		//목표 : 하트를 클릭하면 좋아요 갱신 처리(회원)
+		$(".board-like").find(".fa-heart").click(function(){
 			$.ajax({
 				url : "/rest/board_like/toggle",//같은 서버이므로 앞 경로 생략
 				data : { boardNo : boardNo },//data : {boardNo : ??}, //자바스크립트도 파라미터를 읽을 수 있는 방법이 있어요
@@ -46,11 +34,32 @@ $(function(){
 		});
 	});
 });
-
-
 </script>
-
-
+</c:if>
+<script type="text/javascript">
+		$(function(){
+			//(주의)
+			//- 아무리 같은 페이지라도 서로 다른 언어를 혼용하지말것
+			//- 자바스크립트에서 파라미터를 읽어 번호를 추출한다
+			var params = new URLSearchParams(location.search);
+			var boardNo = params.get("boardNo");
+			//최초에 표시될 화면을 위해 화면이 로딩되자마자 서버로 비동기 통신 시도(전체)
+		$.ajax({
+			url : "/rest/board_like/check",
+			method : "post",
+			data : { boardNo : boardNo },
+			success: function(response) {
+				//response.state에 따라서 하트의 형태를 설정
+				$(".board-like").find(".fa-heart")
+					.removeClass("fa-solid fa-regular")
+					.addClass(response.state ? "fa-solid" : "fa-regular");
+				
+				//response.count에 따라서 좋아요 개수를 표시
+				$(".board-like").find(".count").text(response.count);
+			}
+	});
+});
+</script>
 
 <h1>${boardDto.boardNo}번 글 보기</h1>
 

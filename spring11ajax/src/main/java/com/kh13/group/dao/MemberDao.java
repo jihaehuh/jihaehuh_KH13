@@ -159,7 +159,6 @@ public class MemberDao {
 			return jdbcTemplate.update(sql, data) > 0;
 		}
 	//닉네임 조회 
-
 		public MemberDto selectOneByMemberNick(String memberNick) {
 			String sql = "select * from member where member_nick = ?";
 			Object[] data = {memberNick};

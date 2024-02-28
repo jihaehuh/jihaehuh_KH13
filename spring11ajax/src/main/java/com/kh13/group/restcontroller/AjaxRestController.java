@@ -58,8 +58,8 @@ public class AjaxRestController {
 	}
 	@PostMapping("/checkMemberNick")
 	public boolean checkMemberNick(@RequestParam String memberNick) {
-		MemberDto dto = memberDao.selectOneByMemberNick(memberNick);
-		return dto == null;
+		MemberDto memberDto = memberDao.selectOneByMemberNick(memberNick);
+		return memberDto == null;
 	}
 	
 	

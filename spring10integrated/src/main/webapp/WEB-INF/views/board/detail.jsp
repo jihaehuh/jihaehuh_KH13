@@ -4,6 +4,53 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
+<script>
+$(function(){
+	//(주의)
+	//- 아무리 같은 페이지라도 서로 다른 언어를 혼용하지말것
+	//- 자바스크립트에서 파라미터를 읽어 번호를 추출한다
+	var params = new URLSearchParams(location.search);
+	var boardNo = params.get("boardNo");
+	
+	//최초에 표시될 화면을 위해 화면이 로딩되자마자 서버로 비동기 통신 시도
+	$.ajax({
+			url : "/rest/board_like/check",
+			method : "post",
+			data : { boardNo : boardNo },
+			success: function(response) {
+				//response.state에 따라서 하트의 형태를 설정
+				$(".board-like").find(".fa-heart")
+					.removeClass("fa-solid fa-regular")
+					.addClass(response.state ? "fa-solid" : "fa-regular");
+				
+				//response.count에 따라서 좋아요 개수를 표시
+				$(".board-like").find(".count").text(response.count);
+			}
+	});
+	
+	//목표 : 하트를 클릭하면 좋아요 갱신 처리
+	$(".board-like").find(".fa-heart").click(function(){
+			$.ajax({
+				url : "/rest/board_like/toggle",//같은 서버이므로 앞 경로 생략
+				data : { boardNo : boardNo },//data : {boardNo : ??}, //자바스크립트도 파라미터를 읽을 수 있는 방법이 있어요
+				success : function(response){
+				//console.log(response);
+				//response.state에 따라서 하트의 형태를 설정
+				$(".board-like").find(".fa-heart")
+						.removeClass("fa-solid fa-regular")
+						.addClass(response.state ? "fa-solid" : "fa-regular");
+				
+				//response.count에 따라서 좋아요 개수를 표시
+				$(".board-like").find(".count").text(response.count);
+			}
+		});
+	});
+});
+
+
+</script>
+
+
 
 <h1>${boardDto.boardNo}번 글 보기</h1>
 
@@ -34,33 +81,37 @@
 	</tr>
 	<tr height="200" valign="top">
 		<td>
-		<%-- HTML은 엔터와 스페이스바를 무시하기 때문에 textarea와 모양이 달라지기 때문에
-			-상용 에디터를 쓰면 알아서 글자를 보정해주기 때문에 문제가 없다
-			-기본textarea를 쓰면 문제가 발생한다
-			-<pre> 태그를 사용하면 글자를 있는 그대로 출력한다
-		 --%>
+			<%-- 
+				HTML은 엔터와 스페이스 등을 무시하기 때문에 textarea와 모양이 달라진다
+				- 상용 에디터를 쓰면 알아서 글자를 보정해주기 때문에 문제가 없다
+				- 기본 textarea를 쓰면 문제가 발생한다
+				- <pre>태그를 사용하면 글자를 있는 그대로 출력한다  
+			--%>
 			<pre>${boardDto.boardContent}</pre>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			조회수 ${boardDto.boardReadcount} 
-			댓글 ? 
-			<br>
+			댓글 ?
 			
+			<span class="board-like red">
+				<i class="fa-regular fa-heart"></i>
+				<span class="count">?</span>
+			</span> 
+			<br>
 			<fmt:formatDate value="${boardDto.boardWtime}" 
 										pattern="yyyy-MM-dd HH:mm:ss"/>
 			<br>
-			
 			${boardDto.boardWtimeDiff}
 		</td>
-		</tr>
-		<tr>
-			<td align ="right">
-				<a href="write">글쓰기</a>
-				<a href="write?boardTarget=${boardDto.boardNo}">답글쓰기</a>
-				
-				<%-- 
+	</tr>
+	<tr>
+		<td align="right">
+			<a href="write">글쓰기</a>
+			<a href="write?boardTarget=${boardDto.boardNo}">답글쓰기</a>
+			
+			<%-- 
 				수정과 삭제 링크는 회원이면서 본인글이거나 관리자일 경우만 출력 
 				- 본인글이란 로그인한 사용자 아이디와 게시글 작성자가 같은 경우
 				- 관리자란 로그인한 사용자 등급이 '관리자'인 경우

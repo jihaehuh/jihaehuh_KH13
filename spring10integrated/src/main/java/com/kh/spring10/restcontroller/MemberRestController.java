@@ -1,4 +1,4 @@
-package com.kh.spring10.restcontoller;
+package com.kh.spring10.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

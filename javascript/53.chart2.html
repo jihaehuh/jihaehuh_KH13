@@ -1,0 +1,30 @@
+<div>
+    <canvas class="custom-chart"></canvas>
+</div>
+
+<!--원래 자바스크립트를 위에 쓰고 HTML을 뒤에 쓰는데 바뀐 방법 : lazyLoading-->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.querySelector(".custom-chart");
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>

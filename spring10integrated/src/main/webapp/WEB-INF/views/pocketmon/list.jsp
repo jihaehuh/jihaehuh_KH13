@@ -9,7 +9,7 @@
 	<div class="cell">
 		<h1>
 			포켓몬 목록
-			<a class="btn positive">
+			<a class="btn positive" href="insert1">
 				<i class="fa-solid fa-plus"></i>
 				신규등록
 			</a>

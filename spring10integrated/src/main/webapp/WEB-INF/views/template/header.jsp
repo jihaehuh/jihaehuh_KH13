@@ -52,23 +52,54 @@
     </style>
     <script>
     	$(function(){
-    		var options = {
-                    //에디터 툴바(메뉴) 설정
-                    toolbar: [
-                        // [groupName, [list of button]]
-                        ['style', ['bold', 'italic', 'underline']],
-                        ['fontsize', ['fontname', 'fontsize']],
-                        ['color', ['forecolor', 'backcolor']],
-                        ['para', ['style', 'ul', 'ol', 'paragraph']],
-                        ['insert', ['picture', 'link', 'hr']],
-                    ],
-                    //기본높이 설정(단위 : px)
-                    height: 200,
-                    minHeight: 200,
-                    maxHeight: 300,
-                    //안내문구 설정
-                    //placeholder: "입력하세요",
-                };
+			var options = {
+             //에디터 툴바(메뉴) 설정
+             toolbar: [
+                 // [groupName, [list of button]]
+                 ['style', ['bold', 'italic', 'underline']],
+                 ['fontsize', ['fontname', 'fontsize']],
+                 ['color', ['forecolor', 'backcolor']],
+                 ['para', ['style', 'ul', 'ol', 'paragraph']],
+                 ['insert', ['picture', 'link', 'hr']],
+             ],
+             //기본높이 설정(단위 : px)
+             height: 200,
+             minHeight: 200,
+             maxHeight: 300,
+             //안내문구 설정
+             //placeholder: "입력하세요",
+             callbacks: {
+             	 onImageUpload: function (files) {
+             		var editor=this;
+                  
+                  //FromData 는 전송을 위한 데이터 저장소(자바의 Map과 동일)
+                  var formData = new FormData();
+                  // formData.append("이름","값");
+                  for(var i=0; i < files.length; i++){
+                      formData.append("attachList",files[i]);
+                  }
+                  
+                  $.ajax({
+                      url: "/rest/board_attach/upload",
+                      method:"post",
+                      data:formData,
+                      processData:false,
+                      contentType:false,
+                      success:function(response){
+                          // console.log(response);
+                          //response에는 업로드된 이미지들의 번호 배열이 있다
+                          if(response == null) return;
+
+                           for(var i =0; i < response.length; i++) {
+                               //response[i]는 이미지 번호 1개
+                              var tag= $("<img>").attr("src","/download?attachNo="+response[i]);
+                               $(editor).summernote("insertNode",tag[0]);
+                           }
+                       }
+                  	 });
+                   }
+                }
+             };
     		
     		$("[name=boardContent]").summernote(options);
     	});

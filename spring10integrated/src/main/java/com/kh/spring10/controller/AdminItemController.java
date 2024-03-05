@@ -48,7 +48,7 @@ public class AdminItemController {
 		itemDao.insert(itemDto);
 		
 //		if(attach.isEmpty() == false) {
-		if(!attach.isEmpty()) {
+		if(!attach.isEmpty()) { //첨부파일이 있다면
 //			System.out.println("파일명 = " + attach.getOriginalFilename());
 //			System.out.println("파일유형 = " + attach.getContentType());
 //			System.out.println("파일크기 = " + attach.getSize());

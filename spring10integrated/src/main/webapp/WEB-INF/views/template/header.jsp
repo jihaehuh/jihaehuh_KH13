@@ -30,7 +30,7 @@
 
     <!-- 내가 구현한 스타일 -->
     <link rel="stylesheet" type="text/css" href="/css/commons.css">
-    <!--<link rel="stylesheet" type="text/css" href="/css/test.css">  -->
+<!--     <link rel="stylesheet" type="text/css" href="/css/test.css"> -->
     <link rel="stylesheet" type="text/css" href="/css/layout.css">
 
     <!-- font awesome 아이콘 CDN -->
@@ -41,6 +41,38 @@
     
     <!--  jQuery CDN -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    
+    <!-- summernote cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <style>
+    .note-editor {
+    border:1px solid #6362e72 !important;
+    }
+    </style>
+    <script>
+    	$(function(){
+    		var options = {
+                    //에디터 툴바(메뉴) 설정
+                    toolbar: [
+                        // [groupName, [list of button]]
+                        ['style', ['bold', 'italic', 'underline']],
+                        ['fontsize', ['fontname', 'fontsize']],
+                        ['color', ['forecolor', 'backcolor']],
+                        ['para', ['style', 'ul', 'ol', 'paragraph']],
+                        ['insert', ['picture', 'link', 'hr']],
+                    ],
+                    //기본높이 설정(단위 : px)
+                    height: 200,
+                    minHeight: 200,
+                    maxHeight: 300,
+                    //안내문구 설정
+                    //placeholder: "입력하세요",
+                };
+    		
+    		$("[name=boardContent]").summernote(options);
+    	});
+    </script>
     
     <!-- 내가 만든 JS -->
     <script src="/js/commons.js"></script>
@@ -118,3 +150,5 @@
         <div class="section">
 <!--             <div class="aside"></div> -->
             <div class="article">
+
+		

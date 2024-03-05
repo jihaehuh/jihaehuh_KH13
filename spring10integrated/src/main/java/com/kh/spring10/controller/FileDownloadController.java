@@ -40,7 +40,7 @@ public class FileDownloadController {
 		//1. attachNo 로 파일 정보 (AttachDto)를 불러온다
 		AttachDto attachDto = attachDao.selectOne(attachNo);
 		
-		//2. attachDto 가 없으면 404cjfl
+		//2. attachDto 가 없으면 404처리
 		if(attachDto == null) {
 			//return ResponseEntity.status(404).build();
 			return ResponseEntity.notFound().build();

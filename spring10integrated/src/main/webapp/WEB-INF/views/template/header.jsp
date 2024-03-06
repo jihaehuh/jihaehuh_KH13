@@ -39,16 +39,20 @@
     <style>
     </style>
     
-    <!--  jQuery CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    
-    <!-- summernote cdn -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <style>
-    .note-editor {
-    border:1px solid #6362e72 !important;
-    }
+	  <!--  jQuery CDN -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+	
+	<!-- summernote cdn -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+		rel="stylesheet">
+	<script
+		src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+	<style>
+	.note-editor {
+		border: 1px solid #636e72 !important;
+	}
     </style>
     <script>
     	$(function(){
@@ -92,7 +96,10 @@
 
                            for(var i =0; i < response.length; i++) {
                                //response[i]는 이미지 번호 1개
-                              var tag= $("<img>").attr("src","/download?attachNo="+response[i]);
+                              var tag= $("<img>")
+	                              .attr("src","/download?attachNo="+response[i])
+	                              .addClass("server-img")
+                               	  .attr("data-key",response[i]);
                                $(editor).summernote("insertNode",tag[0]);
                            }
                        }

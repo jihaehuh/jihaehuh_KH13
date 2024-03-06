@@ -337,7 +337,9 @@
 		--%>
 		<c:if test="${sessionScope.loginId != null && (sessionScope.loginId == boardDto.boardWriter || sessionScope.loginLevel == '관리자')}">
 		<a class="btn negative" href="edit?boardNo=${boardDto.boardNo}">글수정</a>
-		<a class="btn negative" href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
+		<a class="btn negative link-confirm" 
+				data-message="정말 삭제하시겠습니까?" 
+				href="delete?boardNo=${boardDto.boardNo}">글삭제</a>
 		</c:if>
 		<a class="btn positive" href="list">글목록</a>
 	</div>
@@ -405,6 +407,3 @@
 </div>
 
 <jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
-
-
-

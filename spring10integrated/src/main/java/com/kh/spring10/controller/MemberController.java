@@ -17,9 +17,9 @@ import com.kh.spring10.dao.BuyDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.MemberDto;
 import com.kh.spring10.service.AttachService;
+import com.kh.spring10.service.EmailService;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.jsp.tagext.TryCatchFinally;
 
 @Controller
 @RequestMapping("/member")
@@ -36,6 +36,10 @@ public class MemberController {
 	
 	@Autowired
 	private BuyDao buyDao;
+	
+	@Autowired
+	private EmailService emailService;
+	
 	//회원가입
 	@GetMapping("/join")
 	public String join() {
@@ -44,12 +48,18 @@ public class MemberController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute MemberDto memberDto,
 								@RequestParam MultipartFile attach) throws IllegalStateException, IOException {
+		//회원정보 등록
 		memberDao.insert(memberDto);
 		
+		//첨부파일 등록
 		if(!attach.isEmpty()) {
 			int attachNo = attachService.save(attach);//파일저장+DB저장
 			memberDao.connect(memberDto.getMemberId(), attachNo);//연결
 		}
+		
+		//가입 환영 메일 발송
+		emailService.sendWelcomeMail(memberDto.getMemberEmail());
+		
 		return "redirect:joinFinish";
 	}
 	@RequestMapping("/joinFinish")
@@ -135,6 +145,7 @@ public class MemberController {
 		model.addAttribute("buyList", buyDao.selectList(loginId));
 		
 		//(추가) 현재 사용자의 작성 글 내역을 첨부
+		
 		
 		//4. 연결될 화면을 반환한다
 		return "/WEB-INF/views/member/mypage.jsp";
@@ -233,16 +244,16 @@ public class MemberController {
 		MemberDto findDto = memberDao.selectOne(loginId);
 		boolean isValid = findDto.getMemberPw().equals(memberPw);
 		
-		
 		if(isValid) {
-			//탈퇴 전에 프로필 번호를 찾아서 삭제 처리
+			//탈퇴 전에 프로필번호를 찾아서 삭제 처리
 			try {
-			int attachNo = memberDao.findAttachNo(loginId);
-			attachService.remove(attachNo); //파일 삭제 + DB삭제
+				int attachNo = memberDao.findAttachNo(loginId);
+				attachService.remove(attachNo);//파일삭제+DB삭제
 			}
-			catch(Exception e){
-			e.printStackTrace();
+			catch(Exception e) {
+				e.printStackTrace();
 			}
+			
 			memberDao.delete(loginId);//회원탈퇴
 			session.removeAttribute("loginId");//로그아웃
 			return "redirect:exitFinish";
@@ -261,26 +272,74 @@ public class MemberController {
 	@RequestMapping("/image")
 	public String image(HttpSession session) {
 		try {
-			String loginId =(String)session.getAttribute("loginId");
+			String loginId = (String)session.getAttribute("loginId");
 			int attachNo = memberDao.findAttachNo(loginId);
 			return "redirect:/download?attachNo="+attachNo;
 		}
-		catch (Exception e) {
-			return "redirect:/image/user.jpg";
+		catch(Exception e) {
+			return "redirect:/image/user.png";
 		}
 	}
 	
 	
+	//아이디 찾기
+	@GetMapping("/findId")
+	public String findId() {
+		return "/WEB-INF/views/member/findId.jsp";
+	}
 	
+	@PostMapping("/findId")
+	public String findId(@RequestParam String memberNick) {
+		boolean result = emailService.sendMemberId(memberNick);
+		if(result) {
+			return "redirect:findIdSuccess";
+		}
+		else {
+			return "redirect:findIdFail";
+		}
+	}
+	
+	@RequestMapping("/findIdSuccess")
+	public String findIdSuccess() {
+		return "/WEB-INF/views/member/findIdSuccess.jsp";
+	}
+	
+	@RequestMapping("/findIdFail")
+	public String findIdFail() {
+		return "/WEB-INF/views/member/findIdFail.jsp";
+	}
+	
+	
+	//비밀번호 찾기
+	@GetMapping("/findPw")
+	public String findPw() {
+		return "/WEB-INF/views/member/findPw.jsp";
+	}
+	
+	@PostMapping("/findPw")
+	public String findPw(@ModelAttribute MemberDto memberDto) {
+		MemberDto findDto = memberDao.selectOne(memberDto.getMemberId());
+		
+		//아이디가 있으면서 이메일까지 일치한다면 통과하는 것으로 판정
+		boolean isValid = findDto != null && 
+				findDto.getMemberEmail().equals(memberDto.getMemberEmail());
+		
+		if(isValid) {
+			emailService.sendTempPassword(findDto);
+			return "redirect:findPwSuccess";
+		}
+		else {
+			return "redirect:findPwFail";
+			//return "redirect:findPw?error";
+		}
+	}
+	
+	@RequestMapping("/findPwSuccess")
+	public String findPwSuccess() {
+		return "/WEB-INF/views/member/findPwSuccess.jsp";
+	}
+	@RequestMapping("/findPwFail")
+	public String findPwFail() {
+		return "/WEB-INF/views/member/findPwFail.jsp";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-

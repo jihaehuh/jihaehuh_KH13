@@ -1,4 +1,4 @@
-package com.kh.spring02;
+package com.kh.spring12;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

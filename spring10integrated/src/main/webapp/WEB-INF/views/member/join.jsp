@@ -82,7 +82,7 @@
 	        }
 	    });
 	    $("[name=memberPw]").on("blur", function(){
-	        var regex = /^[A-Za-z0-9!@#$]{6,15}$/;
+	        var regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$])[A-Za-z0-9!@#$]{6,15}$/;
 	        state.memberPwValid = regex.test($(this).val());
 	        $(this).removeClass("success fail")
 	                    .addClass(state.memberPwValid ? "success" : "fail");
@@ -131,27 +131,96 @@
 	                .addClass("fail");
 	        }
 	    });
+	    
+	    $("[name=memberEmail]").on("input", function(){
+	        //인증을 마쳤는데 추가 입력을 하는 경우 모든상태를 초기화 (이메일판정취소, 이메일피드백제거, 인증번호입력창제거)
+	        //입력발생하는시점에 이미 state가 true라면 이미 인증받은상태
+	            if(state.memberEmailValid){
+	                state.memberEmailValid = false;
+	                $(this).removeClass("success fail");
+	                $(".cert-wrapper").empty();
+	            }
+	        });
+	    
 	    $("[name=memberEmail]").blur(function(){
-	        var regex = /^[a-z0-9]{8,20}@[a-z0-9\.]{1,20}$/;
+	        var regex = /^[a-z0-9]{6,20}@[a-z0-9]{4,15}\.(co.kr|net|com|org)$/;
 	        var value = $(this).val();
-	        state.memberEmailValid = regex.test(value);
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberEmailValid ? "success" : "fail");
+	        var isValid = regex.test(value);
+	    //이메일 입력을 마쳤을때, 잘못 입력한 경우(isValid가 false인 경우) 상태를 갱신
+	        if(isValid == false) {
+	            state.memberEmailValid = false;
+	        }
+	        $(this).removeClass("success fail").addClass(isValid ? "success" : "fail");
+	        //뒤에 있는 보내기버튼을 활성화 또는 비활성화 
+	        $(this).next(".btn-send-cert").prop("disabled", !isValid).removeClass("positive negative")
+	                    .addClass(isValid ? "positive" : "negative");
 	    });
-	    $("[name=memberContact]").blur(function(){
-	        var regex = /^010[1-9][0-9]{7}$/;
-	        var value = $(this).val();
-	        state.memberContactValid = value.length == 0 || regex.test(value);
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberContactValid ? "success" : "fail");
-	    });
-	    $("[name=memberBirth]").blur(function(){
-	        var regex = /^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$/;
-	        var value = $(this).val();
-	        state.memberBirthValid = value.length == 0 || regex.test(value);
-	        $(this).removeClass("success fail")
-	                    .addClass(state.memberBirthValid ? "success" : "fail");
-	    });
+	    
+	  //인증메일 보내기 이벤트
+	      var memberEmail;
+	     $(".btn-send-cert").click(function(){
+	         var btn = this;
+	         $(btn).find("span").text("전송중");
+	         $(btn).find("i").removeClass("fa-regular fa-paper-plane").addClass("fa-solid fa-spinner fa-spin");
+	         $(btn).prop("disabled", true); //전송중일땐 전송버튼 못누르도록
+	         $(btn).addClass("negative");
+
+	         //인증번호 보낼 이메일 불러오기
+	         var inputEmail = $("[name=memberEmail]").val();
+	         if (inputEmail.length == 0) return;
+	         $.ajax({
+	             url: "http://localhost:8080/rest/member/sendCert",
+	             method: "post",
+	             data: {memberEmail : inputEmail},
+	             success: function(response) {
+	                 //인증번호입력창 템플릿 불러오기
+	                 var templateText = $("#cert-template").text();
+	                 var templateHtml = $.parseHTML(templateText);
+	                 //인증번호보내기 2번누르면 2개생성되는걸 방지하기위해 .empty()먼저 실행
+	                 $(".cert-wrapper").empty().append(templateHtml); 
+	                 //이메일 정보 저장
+	                 memberEmail = inputEmail;
+	             },
+	             error:function(){
+	                 alert("!시스템 오류! 잠시 후 이용 해 주세요.");
+	             },
+	             complete:function(){    //성공이든 실패든 실행이 끝났을 때
+	                 $(btn).find("span").text("보내기");
+	                 $(btn).find("i").removeClass("fa-solid fa-spinner fa-spin").addClass("fa-regular fa-paper-plane");
+	                 $(btn).prop("disabled", false); 
+	                 $(btn).removeClass("negative").addClass("positive");
+	             },
+	         });
+	     });
+	     
+	     //인증번호 확인버튼 이벤트
+	     $(document).on("click", ".btn-check-cert", function(){
+	         var number = $(".cert-input").val(); //인증번호
+	         //위에서이메일 보내기 버튼 누를때, 그 이메일주소를 변수에 저장해놓음. 지금불러와서 쓰기.
+	         if (memberEmail == undefined || number.length == 0) return;
+	         
+	         $.ajax({
+	             url:"http://localhost:8080/rest/member/checkCert",
+	             method: "post",
+	             data: {certEmail : memberEmail, certNumber : number},
+	             success: function(response){
+	                 //response는 true아니면 false이므로 상태를 갱신하도록 처리 
+	                 $(".cert-input").removeClass("success fail").addClass(response == true ? "success" : "fail");
+	                 if(response === true) {
+	                     $(".btn-check-cert").prop("disabled", true);
+	                     state.memberEmailValid = true;
+	                 }else {
+	                     state.memberEmailValid = false;
+	                 }
+	             },
+	             error: function(){
+	                 alert("확인 과정에서 오류가 발생했습니다.");
+	             },
+	             complete: function(){}
+	         });
+	     });
+
+		
 	
 	    //주소는 세 개의 입력창이 모두 입력되거나 안되거나 둘 중 하나
 	    $("[name=memberAddress2]").blur(function(){
@@ -180,6 +249,16 @@
 	    });
 	});
 </script>
+<script type="text/template" id="cert-template">
+        <div>
+            <input type="text" class="tool cert-input" 
+                                        placeholder="인증번호">
+            <button class="btn btn-check-cert">확인</button>
+            <div class="success-feedback">이메일 인증 완료</div>
+            <div class="fail-feedback">인증번호 불일치</div>
+        </div>
+</script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     $(function(){
@@ -309,11 +388,37 @@
 	<div class="cell page">
 		<div class="cell">
             <label>이메일<i class="fa-solid fa-asterisk red"></i></label>
-            <input type="email" name="memberEmail" 
-                                placeholder="test@kh.com" class="tool w-100">
-            <div class="fail-feedback">잘못된 이메일 형식입니다</div>
+            
+            <div class="flex-cell" style="flex-wrap:wrap;">
+	            <input type="email" name="memberEmail" 
+	                                placeholder="test@kh.com" class="tool width-fill">
+	            <button class="btn negative btn-send-cert">
+	            	<i class="fa-solid fa-paper-plane"></i>
+	            	<span>보내기</span>
+	            </button>
+	            <div class="fail-feedback w-100">잘못된 이메일 형식입니다</div>
+            </div>
         </div>
-
+        
+        <div class="cell cert-wrapper"></div>
+        
+        <div class="flex-cell">
+			<div class="w-100 left">
+				<button type="button" class="btn btn-prev">
+					<i class="fa-solid fa-chevron-left"></i>
+					이전
+				</button>
+			</div>
+			<div class="w-100 right">
+				<button type="button" class="btn btn-next">
+					다음
+					<i class="fa-solid fa-chevron-right"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="cell page">
         <div class="cell">
             <label>연락처</label>
             <input type="tel" name="memberContact" 
@@ -409,7 +514,6 @@
 			</div>
 		</div>
 	</div>
-	
 	
 </div>
 

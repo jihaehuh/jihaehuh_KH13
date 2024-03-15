@@ -1,0 +1,245 @@
+SELECT * FROM  apply;
+
+drop sequence apply_seq;
+create sequence apply_seq;
+
+
+SELECT apply_no, apply_address1, apply_vinyl, apply_hope_date, pick_pay 
+FROM (SELECT apply.apply_no, apply_address1, apply_vinyl, apply_hope_date, pick_pay 
+		from apply INNER JOIN pick ON apply.apply_no = pick.apply_no);
+
+
+select * from (select rownum rn, TMP.* from (select 
+											apply_no, apply_address1, apply_vinyl, apply_hope_date, pick_pay
+											from apply
+											connect by prior apply_no=pick_pay   apply.apply_no
+											start with pick_pay is null
+											order siblings by board_group desc, board_no asc
+									)TMP
+								) where rn between ? and ?;
+
+--신청자 테이블
+drop sequence apply_seq;
+CREATE TABLE apply (
+apply_no number PRIMARY KEY,
+member_id REFERENCES member(member_id) ON DELETE CASCADE,
+apply_area VARCHAR2(12) NOT NULL,
+apply_post VARCHAR2(6) NOT NULL,
+apply_address1 VARCHAR2(300) NOT NULL,
+apply_address2 VARCHAR2(300) NOT NULL,
+apply_say varchar2 (300),
+apply_way varchar2(12) not null,
+apply_weight number default 0 not null ,
+apply_vinyl number default 1 not null,
+apply_hope_date date,
+apply_cancel CHAR(1),
+apply_state VARCHAR2(12) DEFAULT '신청' NOT NULL,
+apply_date date default sysdate not null,
+CHECK (apply_way in ('전화하기', '세대호출')),
+CHECK (apply_cancel in ('Y','N')),
+CHECK (apply_vinyl >= 1),
+CHECK (apply_weight >= 0),
+CHECK (apply_state IN ('신청', '진행중', '신청완료', '접수거부'))
+);
+commit;
+ALTER TABLE apply --테이블 이름 
+DROP COLUMN apply_state; --테이블 컬럼명?
+ALTER TABLE apply --테이블 이름 
+ADD apply_state VARCHAR2(12) DEFAULT '신청' NOT NULL check (apply_state IN ('신청', '진행중', '신청완료', '접수거부', '수거완료')); -- 다시 넣을 정보 
+commit;
+
+
+-- 모든 상품의 가격을 0원으로 변경
+updatd product set price = 0;
+
+-- 모든 시각을 현재 시간으로 바꾸기 
+UPDATE apply SET apply_date = SYSDATE;
+
+
+
+
+
+UPDATE apply SET apply_date = SYSDATE;
+
+
+ALTER TABLE apply --테이블 이름 
+DROP COLUMN apply_date; --테이블 컬럼명?
+ALTER TABLE apply --테이블 이름 
+ADD apply_date date default Null; -- 다시 넣을 정보 
+commit;
+
+SELECT * from ATTACH a ;
+SELECT * from PICK_ATTACH pa  ;
+SELECT * from APPLY_ATTACH aa ;
+
+
+
+commit;
+
+select * from apply;
+
+insert into apply(APPLY_NO ,MEMBER_ID ,APPLY_AREA ,APPLY_POST, APPLY_ADDRESS1,APPLY_ADDRESS2,APPLY_WAY,APPLY_VINYL,APPLY_HOPE_DATE)
+	values(1,'testuser1','영등포구','02137','영등포구 이레빌딩','19층kh','전화하기',1,'2024-05-01');
+insert into apply(APPLY_NO ,MEMBER_ID ,APPLY_AREA ,APPLY_POST, APPLY_ADDRESS1,APPLY_ADDRESS2,APPLY_WAY,APPLY_VINYL,APPLY_HOPE_DATE)
+	values(2,'testuser2','서대문구','03709','연남동 ak플라자','1층','전화하기',1,'2024-05-08');
+insert into apply(APPLY_NO ,MEMBER_ID ,APPLY_AREA ,APPLY_POST, APPLY_ADDRESS1,APPLY_ADDRESS2,APPLY_WAY,APPLY_VINYL,APPLY_HOPE_DATE)
+	values(3,'testuser3','마포구','03901','농수산물 시장','1층','전화하기',1,'2024-05-15');
+insert into apply(APPLY_NO ,MEMBER_ID ,APPLY_AREA ,APPLY_POST, APPLY_ADDRESS1,APPLY_ADDRESS2,APPLY_WAY,APPLY_VINYL,APPLY_HOPE_DATE)
+	values(4,'testuser4','종로구','03098','통인 시장','1층','전화하기',1,'2024-05-22');
+
+
+insert into apply(APPLY_NO ,MEMBER_ID ,APPLY_AREA ,APPLY_POST, APPLY_ADDRESS1,APPLY_ADDRESS2,APPLY_WAY,APPLY_VINYL,APPLY_HOPE_DATE)
+    values(apply_seq.nextval,'testuser1','영등포구','02137','영등포구 이레빌딩','19층kh','전화하기',1,'2024-03-12');
+
+  
+  
+  SELECT  * from apply;
+DELETE FROM apply WHERE apply_no =25;
+
+
+
+--drop 없이 지우기 
+ALTER TABLE apply --테이블 이름 
+DROP COLUMN apply_date; --테이블 컬럼명?
+
+ALTER TABLE apply --테이블 이름 
+ADD apply_date DATE DEFAULT SYSDATE NOT NULL; -- 다시 넣을 정보 
+
+
+-- 배출이미지 테이블
+drop table apply_attach ;
+create table apply_attach(
+apply_no references apply(apply_no) on delete cascade,
+attach_no references attach(attach_no) on delete cascade,
+primary key (apply_no, attach_no)
+);
+select * from apply_attach;
+
+select * from MEMBER_GREEN mg ;
+commit;
+
+
+
+--수거 테이블
+
+
+
+drop sequence pick_seq;
+create sequence pick_seq;
+
+drop table pick;
+create sequence pick_seq;
+
+create table pick (
+pick_no number primary key,
+apply_no references apply(apply_no) on delete cascade,
+member_id references member(member_id) on delete cascade,
+pick_weight number default 0,
+pick_pay number default 0,
+pick_schedule varchar2(11),
+pick_state varchar2(12) default '수거대기' not null,
+pick_reject varchar2(300),
+check (pick_weight >= 0),
+check (pick_pay >= 0),
+check ((pick_weight is null and pick_pay is null) or (pick_weight is not null and pick_pay is not null)),
+check(pick_state in ('수거대기','수거접수', '수거거부', '수거완료'))
+);
+SELECT * from pick;
+
+
+-- 수거이미지 테이블
+drop table PICK_ATTACH ;
+create table pick_attach(
+pick_no references pick(pick_no) on delete cascade,
+attach_no references attach(attach_no) on delete cascade,
+primary key (pick_no, attach_no)
+);
+select * from PICK_ATTACH pa ;
+
+
+
+--회원 테이블
+
+
+drop sequence member_seq;
+create sequence member_seq;
+
+DROP TABLE MEMBER;
+
+CREATE TABLE MEMBER(
+member_id varchar2(20) PRIMARY KEY,
+member_pw varchar2(15)NOT NULL,
+member_nick varchar2(30) NOT NULL UNIQUE,
+member_contact char(11) NOT NULL,
+member_name varchar2(51)NOT NULL,
+member_type varchar2(12) DEFAULT '그린' NOT NULL,
+member_email varchar2(60) NOT NULL,
+member_birth char(10),
+check(regexp_like(member_id, '^[a-z][a-z0-9]{7,19}$')),
+check(regexp_like(member_pw, '^[A-Za-z0-9!@#$]{6,15}$')
+    and
+    regexp_like(member_pw, '[A-Z]+')
+    and
+    regexp_like(member_pw, '[a-z]+')
+    and
+    regexp_like(member_pw, '[0-9]+')
+    and
+    regexp_like(member_pw, '[!@#$]+')
+),
+check(regexp_like(member_nick, '^[가-힣][가-힣0-9]{1,9}$')),
+check(regexp_like(member_contact, '^010[1-9][0-9]{3}[0-9]{4}$')),
+check(regexp_like(member_birth, '^(19[0-9]{2}|20[0-9]{2})-(02-(0[1-9]|1[0-9]|2[0-8])|(0[469]|11)-(0[1-9]|1[0-9]|2[0-9]|30)|(0[13578]|1[02])-(0[1-9]|1[0-9]|2[0-9]|3[01]))$')),
+check(regexp_like(member_email, '@')),
+check(member_type in ('그린','피커','관리자'))
+);
+
+SELECT * FROM MEMBER;
+COMMIT;
+
+
+--그린 
+DROP TABLE member_green;
+--그린 테이블을 생성 합니다
+CREATE TABLE member_green(
+member_id REFERENCES member(member_id) ON DELETE CASCADE,
+member_green_post varchar2(6),
+member_green_address1 varchar2(300),
+member_green_address2 varchar2(300),
+member_green_ticket NUMBER,
+member_green_point NUMBER,
+
+check(member_green_ticket >= 0),
+check(member_green_point >= 0),
+check(regexp_like(member_green_post, '^[0-9]{5,6}$')),
+check((member_green_post is null and member_green_address1 is null and member_green_address2 is null)
+    or
+    (member_green_post is not null and member_green_address1 is not null and member_green_address2 is not null))
+);
+select * from MEMBER_GREEN mg ;
+
+--피커
+
+DROP TABLE member_pick;
+--피커 테이블을 생성 합니다
+CREATE TABLE member_pick(
+member_id REFERENCES member(member_id) ON DELETE CASCADE,
+member_pick_area NUMBER NOT null
+);
+
+SELECT * from MEMBER_PICK mp ;
+
+
+--포인트
+--포인트 상품 테이블
+
+drop sequence point_seq;
+CREATE sequence point_seq;
+CREATE TABLE point(
+point_no NUMBER PRIMARY KEY,
+point_name varchar2(60) NOT NULL,
+point_sell number default 0 not null check(point_sell >= 0),
+point_charge NUMBER DEFAULT 0 NOT NULL check(point_chaege >=0)
+);
+
+
+

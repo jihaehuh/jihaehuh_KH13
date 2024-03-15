@@ -26,24 +26,14 @@
             padding: 50px;
 
         }
+        .success-container {
+            border-radius: 30px;
+            border: 5px solid rgb(255, 128, 128);
+            box-shadow: 0px 4px 4px 2px rgb(255, 128, 128);
+            padding: 50px;
+        }
 
-
-        /* .num {
-                font-size: 20px;
-            }
-            .explain {
-                font-size: 20px;
-                font-weight: bold;
-            }
-            .table > thead > tr > th,
-            .table > thead > tr > td,
-            .table > tbody > tr > th,
-            .table > tbody > tr > td,
-            .table > tfoot > tr > th,
-            .table > tfoot > tr > td
-            {
-                padding: 0.75em;
-            } */
+        
     </style>
 
     <!-- jquery cdn -->
@@ -54,43 +44,81 @@
     <script src="commons.js"></script>
     <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
     <script type="text/javascript">
+        //신청완료
+        //내가 신청완료 했을경우 시작이니까 빨간색으로 테두리가 생겨야함
+
+        // 신청 완료
+        document.getElementById('apply-completed').style.border = '2px solid red';
+
+
+
+
+        //진행중
+        //만약 피커가 신청을 받아줬을때 빨간색 테두리가 생기면서 success-feedbck
+        //"수거 신청이 성공적으로 접수 되었습니다 "
+
+        //만약 피커가 신청을 거부했을때 빨간색 테두리가 생기면서 fail-feedbck
+        //"수거 신청이 거부 되었습니다 다시 신청해주세요"
+
+
+        //수거 완료
+        //수거가 완료되면 빨간색 테두리가 생기면서 수거 완료 시각이 뜨게 하기
+        //결제 창으로 넘어가게 하기 
+
+
+
+
+
+
+
+
 
     </script>
 </head>
 
 <body>
-    <br><br>
-    <div class="container apply-container w-800 p-20 ">
+    <div class="container apply-container w-750 p-20 mt-50" id="apply-completed">
+        
         <div class="cell list-box">
-            <div class="cell">
+            <div class="cell center">
                 <h2 style="text-align: center;">신청완료</h2>
+
                 <hr>
             </div>
             <div class="cell center">
-                <img class="dummy" src="https://picsum.photos/id/1001/500/500" style="width:300px; height:300px">
+                <img class="dummy" src="../css/image/pickreject.PNG" style="width:200px; height:200px">
             </div>
-
         </div>
     </div>
-    <br><br>
-    <br><br>
-    <br><br>
-    <div class="container apply-container w-600 p-20 ">
+
+    <div class="cell center">
+        <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
+    </div>
+
+    <div class="container apply-container w-750 p-20 ">
         <div class="cell list-box">
             <div class="cell">
-                <h2 style="text-align: center;">진행 중</h2>
+                <h2 style="text-align: center;">진행중</h2>
                 <hr>
             </div>
+            <div class="cell center">
+                <img class="dummy" src="../css/image/picking.png" style="width:200px; height:200px">
+            </div>
         </div>
+
     </div>
-    <br><br>
-    <br><br>
-    <br><br>
-    <div class="container apply-container w-600 p-20 ">
+    <div class="cell center">
+        <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
+    </div>
+
+    <div class="container apply-container w-750 p-20 ">
         <div class="cell list-box">
             <div class="cell">
                 <h2 style="text-align: center;">수거완료</h2>
                 <hr>
+            </div>
+            <div class="cell center">
+                <img class="dummy" src="../css/image/Picker.png" style="width:200px; height:200px">
             </div>
         </div>
     </div>

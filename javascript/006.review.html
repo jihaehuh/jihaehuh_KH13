@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/test.css"> -->
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .apply-container {
+            border-radius: 30px;
+            border: 2px solid gainsboro;
+            box-shadow: 0px 4px 4px 2px gainsboro;
+            padding: 50px;
+
+        }
+        .success-container {
+            border-radius: 30px;
+            border: 5px solid rgb(255, 128, 128);
+            box-shadow: 0px 4px 4px 2px rgb(255, 128, 128);
+            padding: 50px;
+        }
+
+        
+    </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- 내가 만든 스크립트 추가(jQuery를 사용했으니 jQuery CDN 아래 작성) -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script src="commons.js"></script>
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        //신청완료
+        //내가 신청완료 했을경우 시작이니까 빨간색으로 테두리가 생겨야함
+
+        // 신청 완료
+        document.getElementById('apply-completed').style.border = '2px solid red';
+
+
+
+
+        //진행중
+        //만약 피커가 신청을 받아줬을때 빨간색 테두리가 생기면서 success-feedbck
+        //"수거 신청이 성공적으로 접수 되었습니다 "
+
+        //만약 피커가 신청을 거부했을때 빨간색 테두리가 생기면서 fail-feedbck
+        //"수거 신청이 거부 되었습니다 다시 신청해주세요"
+
+
+        //수거 완료
+        //수거가 완료되면 빨간색 테두리가 생기면서 수거 완료 시각이 뜨게 하기
+        //결제 창으로 넘어가게 하기 
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <div class="container apply-container w-750 p-20 mt-50" id="apply-completed">
+        
+        <div class="cell list-box">
+            <div class="cell center">
+                <h2 style="text-align: center;">신청완료</h2>
+
+                <hr>
+            </div>
+            <div class="cell center">
+                <img class="dummy" src="../css/image/pickreject.PNG" style="width:200px; height:200px">
+            </div>
+        </div>
+    </div>
+
+    <div class="cell center">
+        <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
+    </div>
+
+    <div class="container apply-container w-750 p-20 ">
+        <div class="cell list-box">
+            <div class="cell">
+                <h2 style="text-align: center;">진행중</h2>
+                <hr>
+            </div>
+            <div class="cell center">
+                <img class="dummy" src="../css/image/picking.png" style="width:200px; height:200px">
+            </div>
+        </div>
+
+    </div>
+    <div class="cell center">
+        <i class="fa-solid fa-chevron-down" style="font-size: 80px;color:rgb(66,138,66)"></i><br>
+    </div>
+
+    <div class="container apply-container w-750 p-20 ">
+        <div class="cell list-box">
+            <div class="cell">
+                <h2 style="text-align: center;">수거완료</h2>
+                <hr>
+            </div>
+            <div class="cell center">
+                <img class="dummy" src="../css/image/Picker.png" style="width:200px; height:200px">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

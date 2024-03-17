@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript 예제</title>
+
+    <!-- 구글 폰트 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- 내가 구현한 스타일 -->
+    <link rel="stylesheet" type="text/css" href="../css/commons.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/test.css"> -->
+
+    <!-- font awesome 아이콘 CDN -->
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <style>
+            .detail-tool {
+                font-size: 20px;
+                padding: 0.5em 1em;
+                outline: none;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid #636e72;
+            }
+            
+            .apply-container {
+                border-radius: 10px;
+                border: 1px solid gainsboro;
+                box-shadow: 0px 4px 4px 2px gainsboro;
+            }
+            </style>
+
+    <!-- jquery cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <!-- 내가 만든 스크립트 추가(jQuery를 사용했으니 jQuery CDN 아래 작성) -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <script src="commons.js"></script>
+    <!-- javascript를 의도적으로 head 자리에 배치해서 가장 먼저 실행되도록 구현-->
+    <script type="text/javascript">
+        function cancel(num) {
+            window.location.href = "cancel?applyNo=" + num;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="cell center mt-30" >
+		<h1>
+			<span style="color: rgb(66,138,66)">${ApplyDto.memberId}</span> 님의 신청 정보
+		</h1>
+	</div>
+
+<div class="container apply-container w-600 px-50 pt-10 my-50">
+
+	<br>
+	<div class="cell">
+
+		<h2>주소</h2>
+		<input class="detail-tool w-100" value="${ApplyDto.applyPost}" readonly> <input
+			class="detail-tool w-100" value="${ApplyDto.applyAddress1}" readonly> <input
+			class=" detail-tool w-100" value="${ApplyDto.applyAddress2}" readonly>
+	</div>
+	<div class="cell">
+        <h2>예상무게</h2>
+		<input class="detail-tool w-100" value="${ApplyDto.applyWeight}" readonly>
+	</div>
+	<br>
+    <br>
+    <div class="cell">
+        <h2>봉투개수</h2>
+        <input class="detail-tool w-100" value="${ApplyDto.applyVinyl}" readonly>
+    </div>
+    <br>
+	<div class="cell">
+		<h2>수거 희망 날짜</h2>
+		<input class="detail-tool w-100" value="${ApplyDto.applyHopeDate}" readonly>
+	</div>
+	<br>
+	<div class="cell">
+		<h2>남기신 말</h2>
+		<input class="detail-tool w-100" value="${ApplyDto.applySay}" readonly>
+	</div>
+    <br>
+    <div class="cell">
+		<h2>출입 방법</h2>
+		<input class="detail-tool w-100" value="${ApplyDto.applyWay}" readonly>
+	</div>
+	<br>
+	<br>
+	<div class="cell right">
+		<button class="btn negative" onclick="cancel('${ApplyDto.applyNo}')">취소하기</button>
+	</div>
+
+</div>
+
+</body>
+
+</html>

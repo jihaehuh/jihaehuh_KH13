@@ -4,6 +4,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/WEB-INF/views/template/header.jsp"></jsp:include>
 
+	<style>
+        /* 줄바꿈을 허용하지 않아야 반응형 처리가 가능 */
+        .list-group-item{
+            white-space: nowrap;
+        }
+    </style>
+
 <div class="container w-1200" align="left">
 <div class="cell" align="left">
 		<h1>${sessionScope.loginId}님의 회원 정보</h1><br>

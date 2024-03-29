@@ -18,13 +18,12 @@ public class MenuTest02 {
 	@Autowired
 	private MenuDao menuDao;
 	
-	//목록 
-		//-개수
-		@Test
-		public void test() {
-			List<MenuDto> list =menuDao.selectList();
-			
-			log.debug("결과 수 : {}",list.size());
-		}
+	//목록
+	//-개수
+	@Test
+	public void test() {
+		List<MenuDto> list =menuDao.selectList();
+		log.debug("결과수 : {}", list.size());
+	}
 
 }

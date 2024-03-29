@@ -13,11 +13,11 @@ public class MenuDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//등록 
-	public void insert(MenuDto menuDto) {
-		sqlSession.insert("menu.add",menuDto );
-	}
-	//목록
+		//등록 
+		public void insert(MenuDto menuDto) {
+			sqlSession.insert("menu.add",menuDto );
+		}
+		//목록
 		public List<MenuDto> selectList() {
 			return sqlSession.selectList("menu.list");
 		}

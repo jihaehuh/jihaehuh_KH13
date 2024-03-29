@@ -26,6 +26,7 @@ public class MenuTest01 {
 			menuDto.setMenuType("한식");
 			menuDto.setMenuPrice(10000);
 			
+			menuDao.insert(menuDto);
 			log.debug("등록 완료");
 		}
 

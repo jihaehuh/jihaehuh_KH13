@@ -36,6 +36,7 @@
     where 
     	menu_no = #{menuNo}
     </update>
+    
     <!-- 삭제  -->
     <delete id="del">
 	delete menu where menu_no =#{menuNo}

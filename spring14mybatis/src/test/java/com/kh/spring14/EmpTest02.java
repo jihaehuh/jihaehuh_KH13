@@ -25,7 +25,5 @@ public class EmpTest02 {
 		List<EmpDto>list = empDao.selectList();
 		log.debug("결과 수 : {}",list.size());
 	}
-//	for(EmpDto empDto : list) {
-//		log.debug();
-//	}
+
 }

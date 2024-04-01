@@ -146,7 +146,7 @@
      		- 넘어오는 데이터의 이름은 ????(orderList) 으로 설정
      		-List.of("member_id asc", "member_nick desc", ...)
      		
-     	
+     	    
      	 -->
      	 <choose>
 			<when test="orderList != null and orderList.size() > 0">

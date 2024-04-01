@@ -49,14 +49,101 @@
      <select id="complex" resultType="MemberDto">
      select * from member
 		<where>
+		<!-- 아이디 -->
      	<if test="memberId != null"><!-- <if test ="아이디가 있으면"> -->
      		and member_id like #{memberId} || '%'	<!-- 	 아이디 검색 구문 (일치 = /시작 like / 유사 instr 중에 골라서 하기 ) -->
      	</if>
+     	<!-- 닉네임 -->
      	<if test="memberNick != null"><!-- <if test ="닉네임이 있으면"> -->
      		and instr(member_nick, #{memberNick}) > 0<!-- 닉네임 검색 구문 -->
      	</if>
+     	<!-- 연락처(일치 검사)  -->
+     	<if test="memberContact != null">
+     	 	and member_contact =#{memberContact}
+     	</if>
+     	<!-- 포인트 (구간 검사) min point/max point-->
+     	<choose>
+     		<when test="minPoint!=null and maxPoint!=null"><!--<when test="둘다 있으면"></when>  -->
+     			and member_point between #{minPoint} and #{maxPoint}
+     		</when>
+     		<when test="minPoint != null"> <!-- <when test="최소값이 있으면"></when> -->
+     			<!-- XML에서 불가능한 글자를 사용할 경우 
+     				CDATA 영역을 만들어 해결 
+     				 <![CDATA[ 구문 자리 ]]>
+     				 정말 필요할때 : 부등호를 사용할때 만 사용하도록 하기 
+     			 -->
+     			 <![CDATA[
+     			and member_point >= #{minPoint}
+     			 ]]>
+     		</when>
+     		<when test="maxPoint != null"> <!--<when test="최대값이 있으면 "></when> -->
+     			<![CDATA[
+     			and member_point <= #{maxPoint}
+     			 ]]>
+     		</when>
+     	</choose>
+     	
+     	<!-- (Q) YYYY-MM-DD 형식의 날짜로 
+     	가입일 검색 (member_join) 
+     	가입일은 Date 형식 검색은 String 형식 
+     	to_date 또는 to_char 가 필요함 (이유: 날짜만 뽑아야해서)
+     	-->
+     	<if test="memberJoin != null">
+     	and to_char(member_join,'YYYY-MM-DD') = #{memberJoin}
+     	</if>
+     	
+     	<!-- (Q) YYYY-MM-DD 형식의 날짜 2개로
+     	 로그인 일자 검색 (minLoginDate , maxLoginDate) 
+     	 * minLoginDate 는 0시0분0초 로 설정 
+     	 * maxLoginDate 는 23시 59분 59초로 설정 해야한다 
+     	 -->
+     	<choose>
+     	<when test="minLoginDate != null and maxLoginDate">
+     	<!-- and member_login between 시작일 0시 0분 0초 and 종료일 23시59분59초  -->
+     	<!--  문자열을 날짜 형식으로 바꿀때 to date 사용 -->
+     		and member_login is not null 
+			and member_login between
+     		to_date(#{minLoginDate} || ' ' || '00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+     		and 
+     		to_date(#{maxLoginDate} || ' ' || '23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+     	</when>
+     	<when test="minLoginDate != null">  <!-- 최대 일이 있으면   -->
+     		<![CDATA[
+				and member_login is not null
+				and member_login >=
+				to_date(#{minLoginDate} || ' ' || '00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+			]]>
+     	</when>
+     	<when test="maxLoginDate != null"> <!-- 최대 일이 없으면   -->
+     		<![CDATA[
+				and member_login is not null
+				and member_login <= 
+				to_date(#{maxLoginDate} || ' ' || '23:59:59', 'YYYY-MM-DD HH24:MI:SS')
+			]]>
+     	</when>
+     	</choose>
+     	<!-- 회원 등급 -여러개 선택 가능하도록 구현 (memberLevelList) --> 
+     	<if test="memberLevelList != null and memberLevelList.size() > 0">
+     		and member_level in <!-- ('일반회원','우수회원','관리자')  -->  
+     		<!--('일반회원','우수회원','관리자') 이 부분을 반복문으로 만들고자함  
+     		( - 첫시작시 1회만 추가 
+     		)- 마지막 1회만 추가 
+     		, 매 반복 
+     		 -->
+     		 <foreach collection="memberLevelList" item="memberLevel"
+     		 				open="(" separator="," close=")">
+     		 #{memberLevel}3
+     		 </foreach>
+     	
+     	</if>
+     	
+     	
+     	
      	</where>
      </select>
+     
+     
+    
     
     
     

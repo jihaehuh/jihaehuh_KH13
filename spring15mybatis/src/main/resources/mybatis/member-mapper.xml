@@ -10,10 +10,12 @@
     	- 복합 검색
     	- 계층형 검색
      -->
+     <!-- 목록   -->
     <select id="list" resultType="MemberDto">  <!-- 그 이름을 resultType에 써주기  -->
-    	select * from member   <!-- 이 구문을 조회 하면 memberDto 가 나온다  -->
+    	select * from member<!--  order by member_id asc --> <!-- 이 구문을 조회 하면 memberDto 가 나온다  -->
     </select>
     
+    <!-- 검색  -->
     <select id="search" resultType="MemberDto">
     	<!--홀더는 물음 표 개수   
     		- 물음표가 들어가는 곳은 값이고(int, string ..  등등 동적 배치 사용)
@@ -25,5 +27,41 @@
     	select * from member where instr(${column}, #{keyword}) > 0
     	order by ${column} asc, member_id asc
     </select>
+    
+    
+    
+    <!-- column, keyword 유무에 따라 목록 또는 검색을 실행  
+    		mybatis 조건 식에는 && 대신 and  ,|| 대신 or 사용 
+    -->
+    <select id="listOrSearch" resultType="MemberDto" >
+    	select * from member
+    	<if test ="column != null and keyword != null">   <!-- 컬럼과 키워드가 널이 아닐때  -->
+    	where instr(${column}, #{keyword}) > 0
+    	order by ${column} asc, member_id asc
+    	</if>
+    </select>
+    
+    <!-- 
+    	복잡한 검색 
+    	- 테이블의 각 항목별로 특징에 맞게 검색하도록 구현 
+    	- 유사검색(아이디), 일치검색, 구간검색 중 적절한 것을 선택  
+     -->
+     <select id="complex" resultType="MemberDto">
+     select * from member
+		<where>
+     	<if test="memberId != null"><!-- <if test ="아이디가 있으면"> -->
+     		and member_id like #{memberId} || '%'	<!-- 	 아이디 검색 구문 (일치 = /시작 like / 유사 instr 중에 골라서 하기 ) -->
+     	</if>
+     	<if test="memberNick != null"><!-- <if test ="닉네임이 있으면"> -->
+     		and instr(member_nick, #{memberNick}) > 0<!-- 닉네임 검색 구문 -->
+     	</if>
+     	</where>
+     </select>
+    
+    
+    
+    
+    
+    
     
 </mapper>

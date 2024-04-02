@@ -4,6 +4,6 @@
 <!--  true / false 나오게 하는 것은 셰션스콥 이용  -->
 
 
-<h2> <a href="#">회원가입 </a></h2>
-<h2> <a href="#">로그인 </a></h2>
-<h2> <a href="#">로그아웃 </a></h2>
+<h2> <a href="join">회원가입 </a></h2>
+<h2> <a href="login">로그인 </a></h2>
+<h2> <a href="logout">로그아웃 </a></h2>

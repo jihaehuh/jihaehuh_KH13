@@ -32,7 +32,7 @@ public class MemberController {
 	//회원에 대한 복합 검색 페이지
 	@RequestMapping("/complex")
 	public String complex(@ModelAttribute MemberComplexVO vo, Model model) {
-		model.addAttribute("vo",vo);
+		model.addAttribute("vo",vo);//jsp에서 vo 로 부르기로 함 
 		model.addAttribute("list",memberDao.selectList(vo));
 		return "/WEB-INF/views/complex.jsp";
 	}

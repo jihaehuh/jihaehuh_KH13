@@ -132,9 +132,10 @@ public class MemberController {
 	//- 그리고 화면에 정보를 표시해야 한다
 	@RequestMapping("/mypage")
 	public String mypage(HttpSession session, Model model) {
+		
 		//1. 세션에 저장된 아이디를 꺼낸다
 		String loginId = (String) session.getAttribute("loginId");
-
+//		System.out.println("마이페이지 실행!"+ loginId);  //Jmeter로 사용자 아이디가 제대로 찍히는지 확인 
 		//2. 아이디에 맞는 정보를 조회한다
 		MemberDto memberDto = memberDao.selectOne(loginId);
 		

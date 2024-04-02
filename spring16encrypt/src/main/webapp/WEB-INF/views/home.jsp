@@ -1,0 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<h1>현재 로그인 상태 :${sessionScope.loginId != null}</h1>
+<!--  true / false 나오게 하는 것은 셰션스콥 이용  -->
+
+
+<h2> <a href="#">회원가입 </a></h2>
+<h2> <a href="#">로그인 </a></h2>
+<h2> <a href="#">로그아웃 </a></h2>

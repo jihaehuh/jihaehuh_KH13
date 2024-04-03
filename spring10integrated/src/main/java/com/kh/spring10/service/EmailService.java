@@ -71,11 +71,15 @@ public class EmailService {
 										.build().toUriString());
 		
 		//이미지
-		Element image = document.getElementById("back-img");
-		image.attr("src","/image/back.jpg");//주소에는 static 안들어감 
+//		Element image = document.getElementById("back-img");
+//		image.attr("src","/image/back.jpg");//주소에는 static 안들어감 
 		//- 하지만 왜 안들어가죠...? 
 		//이유: 코드가 잘못된것이 아니라 우리끼리 접속 가능한 주소로 해서 구글입장에서는 막아버리는거지... 
-		
+		Element image = document.getElementById("back-img");
+		image.attr("src", ServletUriComponentsBuilder
+								.fromCurrentContextPath()
+								.path("/image/bg.jpg")
+								.build().toUriString());
 		
 	
 		//마임 메세지 생성

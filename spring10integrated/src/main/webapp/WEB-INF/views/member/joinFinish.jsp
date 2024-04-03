@@ -8,4 +8,4 @@
 	저희 홈페이지에 가입해주셔서 대단히 감사합니다
 </p>
 
-<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/template/footer.jsp"></jsp:include>include>

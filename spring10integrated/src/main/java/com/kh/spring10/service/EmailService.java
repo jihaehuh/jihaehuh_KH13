@@ -1,17 +1,28 @@
 package com.kh.spring10.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Random;
+import java.util.Scanner;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring10.dao.CertDao;
 import com.kh.spring10.dao.MemberDao;
 import com.kh.spring10.dto.CertDto;
 import com.kh.spring10.dto.MemberDto;
+
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 
 @Service
 public class EmailService {
@@ -31,6 +42,38 @@ public class EmailService {
 		
 		sender.send(message);
 	}
+	
+	public void sendWelcomeMail(MemberDto memberDto) throws IOException, MessagingException {
+		//리소스 불러오기
+		ClassPathResource resource = new ClassPathResource("templates/welcome-template.html");
+		File target = resource.getFile();
+		
+		StringBuffer buffer = new StringBuffer();
+		Scanner sc = new  Scanner(target);
+		while(sc.hasNextLine()) {
+			buffer.append(sc.nextLine());
+		}
+		sc.close();
+		
+		Document document = Jsoup.parse(buffer.toString());
+		Element who = document.getElementById("who");
+		who.text(memberDto.getMemberNick());
+		
+		Element link = document.getElementById("login-link");
+		link.attr("href","로그인페이지주소");
+		
+		//마임 메세지 생성
+		MimeMessage message = sender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message,false,"UTF-8");
+		
+		helper.setTo(memberDto.getMemberEmail());
+		helper.setSubject("[KH정보교육원 ] 가입을 환영합니다");
+		helper.setText(document.toString(),true);
+		
+		sender.send(message);
+		
+	}
+	
 	
 	//아이디 발송
 	public boolean sendMemberId(String memberNick) {

@@ -127,51 +127,41 @@ public class MemberDao {
 		};
 		return jdbcTemplate.update(sql, data) > 0;
 	}
-	//프로필 이미지 연결 
-	public void connect (String memberId, int attachNo) {
-		String sql ="insert into member_attach(member_id, attach_no) values(?,?)";
-		Object[]data = {memberId, attachNo};
-		jdbcTemplate.update(sql,data);
+	
+	//프로필 이미지 연결
+	public void connect(String memberId, int attachNo) {
+		String sql = "insert into member_attach(member_id, attach_no) "
+						+ "values(?, ?)";
+		Object[] data = {memberId, attachNo};
+		jdbcTemplate.update(sql, data);
 	}
 
 	public int findAttachNo(String memberId) {
-		String sql ="select attach_no from member_attach where member_id = ?";
-		Object[]data = {memberId};
-		
-		return jdbcTemplate.queryForObject(sql, int.class,data);
+		String sql = "select attach_no from member_attach where member_id = ?";
+		Object[] data = {memberId};
+		return jdbcTemplate.queryForObject(sql, int.class, data);
 	}
 	
 	//포인트 충전/차감
-		public boolean plusMemberPoint(String memberId, int point) {
-			String sql = "update member "
-							+ "set member_point = member_point + ? "
-							+ "where member_id = ?";
-			Object[] data = {point, memberId};
-			return jdbcTemplate.update(sql, data) > 0;
-		}
-		public boolean minusMemberPoint(String memberId, int point) {
-			String sql = "update member "
-							+ "set member_point = member_point - ? "
-							+ "where member_id = ?";
-			Object[] data = {point, memberId};
-			return jdbcTemplate.update(sql, data) > 0;
-		}
+	public boolean plusMemberPoint(String memberId, int point) {
+		String sql = "update member "
+						+ "set member_point = member_point + ? "
+						+ "where member_id = ?";
+		Object[] data = {point, memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
+	public boolean minusMemberPoint(String memberId, int point) {
+		String sql = "update member "
+						+ "set member_point = member_point - ? "
+						+ "where member_id = ?";
+		Object[] data = {point, memberId};
+		return jdbcTemplate.update(sql, data) > 0;
+	}
 
-		//닉네임 조회 
-
-		public MemberDto selectOneByMemberNick(String memberNick) {
-			String sql = "select * from member where member_nick = ?";
-			Object[] data = {memberNick};
-			List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
-			return list.isEmpty() ? null : list.get(0);
-		}
-	
-
-	
+	public MemberDto selectOneByMemberNick(String memberNick) {
+		String sql = "select * from member where member_nick = ?";
+		Object[] data = {memberNick};
+		List<MemberDto> list = jdbcTemplate.query(sql, mapper, data);
+		return list.isEmpty() ? null : list.get(0);
+	}
 }
-
-
-
-
-
-

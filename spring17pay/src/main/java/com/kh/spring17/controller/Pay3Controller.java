@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,13 +20,14 @@ import com.kh.spring17.vo.KakaoPayApproveRequestVO;
 import com.kh.spring17.vo.KakaoPayApproveResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
 import com.kh.spring17.vo.KakaoPayReadyResponseVO;
+import com.kh.spring17.vo.PurchaseListVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/pay2")  //공용주소 
+@RequestMapping("/pay3")  //공용주소 
 public class Pay3Controller {
 
 	@Autowired
@@ -38,33 +40,40 @@ public class Pay3Controller {
 	public String purchase(Model model) {
 		model.addAttribute("list", productDao.selectList());
 //		return "/WEB-INF/views/pay1/purchase.jsp";
-		return "pay2/purchase";
+		return "pay3/purchase";
 	}
 	@PostMapping("/purchase")
-	public String purchase(@RequestParam int no, HttpSession session) throws URISyntaxException {
+	public String purchase(
+			/* @RequestParam int no, */ HttpSession session ,@ModelAttribute PurchaseListVO vo) throws URISyntaxException {
 		//상품명과 가격을 알기 위해 DB조회
-		ProductDto productDto = productDao.selectOne(no);
-		//만약 productDto 가 null이라면 예외 발생 혹은 중단 
+//		ProductDto productDto = productDao.selectOne(no);
+		log.debug("size={}",vo.getPurchase().size());
+		log.debug("vo={}",vo);
+		return null;
+
 		
-		KakaoPayReadyRequestVO requestVO =
-				KakaoPayReadyRequestVO.builder()
-					.partnerOrderId(UUID.randomUUID().toString())
-					.partnerUserId("testuser1")
-					.itemName(productDto.getName()) //위에서 불러온 DB를 이용해서 값 불러오기
-					.totalAmount(productDto.getPrice())
-				.build();
-		
-		KakaoPayReadyResponseVO responseVO = kakaoPayService.ready(requestVO);
-		
-		//세션에 Flash Attribute를 추가
-				session.setAttribute("partner_order_id", requestVO.getPartnerOrderId());
-				session.setAttribute("partner_user_id", requestVO.getPartnerUserId());
-				session.setAttribute("tid", responseVO.getTid());
-				
-				return "redirect:"+responseVO.getNextRedirectPcUrl();
-		
-		//session 에 flash attribute를 추가 
-//		return "redirect: 구매페이지";
+//		
+//		//만약 productDto 가 null이라면 예외 발생 혹은 중단 
+//		
+//		KakaoPayReadyRequestVO requestVO =
+//				KakaoPayReadyRequestVO.builder()
+//					.partnerOrderId(UUID.randomUUID().toString())
+//					.partnerUserId("testuser1")
+//					.itemName(productDto.getName()) //위에서 불러온 DB를 이용해서 값 불러오기
+//					.totalAmount(productDto.getPrice())
+//				.build();
+//		
+//		KakaoPayReadyResponseVO responseVO = kakaoPayService.ready(requestVO);
+//		
+//		//세션에 Flash Attribute를 추가
+//				session.setAttribute("partner_order_id", requestVO.getPartnerOrderId());
+//				session.setAttribute("partner_user_id", requestVO.getPartnerUserId());
+//				session.setAttribute("tid", responseVO.getTid());
+//				
+//				return "redirect:"+responseVO.getNextRedirectPcUrl();
+//		
+//		//session 에 flash attribute를 추가 
+////		return "redirect: 구매페이지";
 	}
 	@GetMapping("/purchase/success")
 	public String success(HttpSession session, @RequestParam String pg_token) throws URISyntaxException{

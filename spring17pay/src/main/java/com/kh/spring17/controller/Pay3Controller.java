@@ -2,6 +2,7 @@ package com.kh.spring17.controller;
 
 
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import com.kh.spring17.dto.ProductDto;
 import com.kh.spring17.service.KakaoPayService;
 import com.kh.spring17.vo.KakaoPayApproveRequestVO;
 import com.kh.spring17.vo.KakaoPayApproveResponseVO;
+import com.kh.spring17.vo.KakaoPayOrderRequestVO;
+import com.kh.spring17.vo.KakaoPayOrderResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
 import com.kh.spring17.vo.KakaoPayReadyResponseVO;
 import com.kh.spring17.vo.PurchaseListVO;
@@ -224,6 +227,37 @@ public class Pay3Controller {
 		
 		return "pay3/fail";
 	}
+	
+	//결제 목록 - 카카오페이 아니고 payment
+    @RequestMapping("/list")
+    public String list(Model model) {
+    	model.addAttribute("list", paymentDao.paymentList());
+        return "pay3/list";
+    }
+    
+    @RequestMapping("/detail")
+    public String detail(@RequestParam int paymentNo, Model model) throws URISyntaxException {
+    
+    	//forward  와 redirect의 차이점 
+    	//- 전화 고객센터 전화를 걸었을때 잠시만 기다려주세요 - forward
+    	//- 여기가 아니니까 다른곳으로 전화주세요 - redirect 
+    	List<PaymentDetailDto> detailList = paymentDao.paymentDetailList(paymentNo);
+    	model.addAttribute("detailList",detailList);
+    	
+    	
+    	
+    	//카카오 페이의 상세 조회 내역 첨부 
+    	PaymentDto paymentDto = paymentDao.selectOne(paymentNo);
+    	model.addAttribute("paymentDto", paymentDto);
+    	KakaoPayOrderRequestVO requestVO =
+    			  KakaoPayOrderRequestVO.builder()
+                  .tid(paymentDto.getPaymentTid()).build();
+    	KakaoPayOrderResponseVO responseVO =
+    			kakaoPayService.order(requestVO);
+    	
+    	model.addAttribute("responseVO",responseVO);
+    	return "pay3/detail";
+    }
 	
 	
 	

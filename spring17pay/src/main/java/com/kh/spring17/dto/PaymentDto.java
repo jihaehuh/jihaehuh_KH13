@@ -16,4 +16,5 @@ public class PaymentDto {
 	private int paymentRemain;
 	private String memberId;
 	private String paymentTid;
+	
 }

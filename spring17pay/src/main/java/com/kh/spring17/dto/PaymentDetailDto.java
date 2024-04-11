@@ -17,4 +17,8 @@ public class PaymentDetailDto {
 	private int paymentDetailPrice;
 	private String paymentDetailStatus;
 	private int paymentNo;
+	
+	public int getTotalPrice() {
+		return this.paymentDetailPrice * this.paymentDetailQty;
+	}
 }

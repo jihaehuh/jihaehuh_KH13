@@ -21,6 +21,8 @@ import com.kh.spring17.dto.PaymentDto;
 import com.kh.spring17.dto.ProductDto;
 import com.kh.spring17.vo.KakaoPayApproveRequestVO;
 import com.kh.spring17.vo.KakaoPayApproveResponseVO;
+import com.kh.spring17.vo.KakaoPayCancelRequestVO;
+import com.kh.spring17.vo.KakaoPayCancelResponseVO;
 import com.kh.spring17.vo.KakaoPayOrderRequestVO;
 import com.kh.spring17.vo.KakaoPayOrderResponseVO;
 import com.kh.spring17.vo.KakaoPayReadyRequestVO;
@@ -146,4 +148,19 @@ public class KakaoPayService {
 										uri, entity, KakaoPayOrderResponseVO.class);
 				
 	}
+				
+				//취소 메소드
+				public KakaoPayCancelResponseVO cancel(KakaoPayCancelRequestVO requestVO) throws URISyntaxException {
+					URI uri = new URI("https://open-api.kakaopay.com/online/v1/payment/cancel");
+					
+					Map<String, String> body = new HashMap<>();
+					body.put("cid", kakaoPayProperties.getCid());
+					body.put("tid", requestVO.getTid());
+					body.put("cancel_amount", String.valueOf(requestVO.getCancelAmount()));
+					body.put("cancel_tax_free_amount", "0");
+					
+					HttpEntity entity = new HttpEntity(body, header);
+					
+					return template.postForObject(uri, entity, KakaoPayCancelResponseVO.class);
+				}
 }

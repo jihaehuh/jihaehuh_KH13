@@ -7,6 +7,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import com.kh.spring18.websocket.BasicWebSocketServer;
+import com.kh.spring18.websocket.ChatbotWebSocketServer;
 import com.kh.spring18.websocket.SimpleWebSocketServer;
 
 /**
@@ -25,6 +26,9 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
     
     @Autowired
     private SimpleWebSocketServer simpleWebSocketServer;
+    
+    @Autowired
+    private ChatbotWebSocketServer chatbotWebSocketServer;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
@@ -33,7 +37,8 @@ public class WebSocketServerConfiguration implements WebSocketConfigurer{
     	//- (중요) 절대로 다른 주소와 겹치면 안된다
     	registry.addHandler(basicWebSocketServer, "/ws/basic")
 //    	registry.addHandler(simpleWebSocketServer, "/ws/simple"); //따로 써도 되고 이어서 써도 된다 (이어서 쓰려면 ; 조심하기 )
-    					.addHandler(simpleWebSocketServer, "/ws/simple");
+    					.addHandler(simpleWebSocketServer, "/ws/simple")
+    					.addHandler(chatbotWebSocketServer,"/ws/chatbot");
     }
     
     

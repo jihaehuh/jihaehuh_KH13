@@ -335,4 +335,4 @@ public class Pay3Controller {
     	paymentDao.paymentDetailCancelAll(paymentNo);
     	return "redirect:detail?paymentNo="+paymentNo;
     }
-	}
+}

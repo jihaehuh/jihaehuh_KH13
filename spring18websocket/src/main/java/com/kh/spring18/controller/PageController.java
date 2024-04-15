@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.spring18.dao.MemberDao;
+import com.kh.spring18.dto.MemberDto;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -19,9 +20,9 @@ public class PageController {
 	private MemberDao memberDao;
 	
 	@PostMapping("/login")
-	public String login(@ModelAttribute MemberDao memberDto, 
+	public String login(@ModelAttribute MemberDto memberDto, 
 																HttpSession session) {
-		MemberDao findDto = memberDao.selectOneByMemberPw(memberDto);
+		MemberDto findDto = memberDao.selectOneByMemberPw(memberDto);
 		if(findDto != null) {//로그인 성공
 			session.setAttribute("loginId", findDto.getMemberId());
 			session.setAttribute("loginLevel", findDto.getMemberLevel());

@@ -34,14 +34,15 @@ $(function(){
 		//시간 제어 라이브러리인 moment를 사용하여 시간 형식을 변경
 		//var time = moment(obj.time).fromNow();//현재시간 기준
 		//var time = moment(obj.time).format("HH:mm");//형식 지정
-		var time = moment(obj.time).format("a h:mm");//형식 지정
-		var area = $("<div>").append(obj.memberId)
-										.append("("+obj.memberLevel+")")
+		var time = moment(obj.message_time).format("a h:mm");//형식 지정
+		var area = $("<div>").append(obj.message_sender)
+										.append("("+obj.message_sender_level+")")
 										.append("<br>")
-										.append(obj.content)
+										.append(obj.message_content)
 										.append("<br>")
 										.append(time);
-		$(".chat-wrapper").append(area);
+		//$(".chat-wrapper").append(area); //추가를 아래쪽에
+        $(".chat-wrapper").prepend(area); //추가를 위쪽에
 	};
 
 	//전송버튼을 누르면 입력한 메세지가 있는 경우 서버에 전송

@@ -12,6 +12,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
 	@Autowired
 	private MemberInterceptor memberInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//권한을 줬다가 풀었다가 하는 것을 AOP라고 함 

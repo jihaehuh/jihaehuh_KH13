@@ -61,6 +61,7 @@ public class MemberRestController {
 	//refresh token으로 로그인하는 매핑
 	//- header에 있는 Authorization이라는 항목을 읽어 해석한 뒤 결과를 반환
 	//- 토큰이 만료되었다면(잘못된토큰/시간지남/...) 401 반환
+	@PostMapping("/refresh")
 	public ResponseEntity<MemberLoginVO> refresh(
 			@RequestHeader("Authorization") String refreshToken) {
 		try {
